@@ -1,0 +1,972 @@
+{
+  "exam_type": "CET-4 Listening",
+  "test_set": "202506set2",
+  "questions": [
+    {
+      "question_no": 1,
+      "category": "社会生活",
+      "subcategory": "体育赛事与社区活动",
+      "start_time": "02:07,366",
+      "end_time": "02:28,700",
+      "audio_script": "What does the news report say about Vaklav Bersa and Joanna Stevens?",
+      "options": [
+        "A) They are young teenagers from Atlanta.",
+        "B) They won this year's 7 Mile Bridge Run.",
+        "C) They completed the race in less than 40 minutes.",
+        "D) They are both students at Marathon High School."
+      ],
+      "answer": "B",
+      "key_sentence": "A Florida teenager and an Atlanta woman won the overall men's and women's divisions Saturday at the annual 7 Mile Bridge Run.",
+      "explanation": "细节理解题。新闻起始段落指出，一名佛罗里达少年和一位亚特兰大女性在周六举行的年度七英里桥跑比赛中，分别摘得了男、女组别的桂冠 [cite: 2, 46-47]。因此B项符合文意 [cite: 324]。",
+      "passage_name": "news report 1"
+    },
+    {
+      "question_no": 2,
+      "category": "社会生活",
+      "subcategory": "体育赛事与社区活动",
+      "start_time": "02:28,700",
+      "end_time": "02:48,233",
+      "audio_script": "What do we learn about the April contest?",
+      "options": [
+        "A) It drew competitors from more than 40 countries.",
+        "B) It is watched live online by fans all over the world.",
+        "C) It closed the city of Big Pine Key to traffic for three hours.",
+        "D) It is one of the most popular running events in the southeastern U.S."
+      ],
+      "answer": "D",
+      "key_sentence": "The April contest is one of the most popular running events in the southeastern United States.",
+      "explanation": "事实认定题。文章末尾明确提到，这项在四月份举办的赛事是美国东南部地区极具人气的跑步活动之一 [cite: 3, 53]。故选D [cite: 324]。",
+      "passage_name": "news report 1"
+    },
+    {
+      "question_no": 3,
+      "category": "科普科技",
+      "subcategory": "航天科技与职业发展",
+      "start_time": "04:03,000",
+      "end_time": "04:22,800",
+      "audio_script": "What do we learn from the news report about Tim Peak?",
+      "options": [
+        "A) He was once a full-time ambassador.",
+        "B) He was soon to retire from the army.",
+        "C) He became an astronaut in 2015.",
+        "D) He used to be a helicopter pilot."
+      ],
+      "answer": "D",
+      "key_sentence": "The former British Army Air Corps helicopter pilot was selected as a European Space Agency astronaut in 2009.",
+      "explanation": "人物背景题。文中介绍蒂姆·皮克时提到，他曾是英国陆军航空兵团的直升机驾驶员，后于2009年入选欧洲航天局 [cite: 4, 58]。因此D项正确 [cite: 324]。",
+      "passage_name": "news report 2"
+    },
+    {
+      "question_no": 4,
+      "category": "科普科技",
+      "subcategory": "航天科技与职业发展",
+      "start_time": "04:22,800",
+      "end_time": "04:44,066",
+      "audio_script": "What does Tim Peak say about his work with the European Space Agency?",
+      "options": [
+        "A) It has been unbelievably exciting and rewarding.",
+        "B) It has been extraordinarily tough and demanding.",
+        "C) It has contributed a great deal to human flights to space.",
+        "D) It has given him exceptional privilege as an ambassador."
+      ],
+      "answer": "A",
+      "key_sentence": "It has been incredibly exciting and rewarding.",
+      "explanation": "细节概括题。在新闻后半部分，皮克在回顾其在航天局的职业生涯时，评价这段经历极其令人振奋且充满意义 [cite: 5, 59]。A项是对原文incredibly exciting and rewarding的同义转述 [cite: 324]。",
+      "passage_name": "news report 2"
+    },
+    {
+      "question_no": 5,
+      "category": "社会生活",
+      "subcategory": "社会趣闻与生活百态",
+      "start_time": "06:06,466",
+      "end_time": "06:30,833",
+      "audio_script": "What do we learn about the five cats seen in the Asda store?",
+      "options": [
+        "A) They are known for their loyalty to their owners.",
+        "B) They are brought in by the store's customers.",
+        "C) They are regular visitors to the store.",
+        "D) They are pets kept by the store staff."
+      ],
+      "answer": "C",
+      "key_sentence": "There are now at least five different cats who come almost on a daily basis.",
+      "explanation": "归纳推断题。文中提到，目前有五只不同的猫几乎每天都会光顾该超市，甚至已经把这里当成了家 [cite: 7, 70]。C项“定期光顾”符合逻辑 [cite: 324]。",
+      "passage_name": "news report 3"
+    },
+    {
+      "question_no": 6,
+      "category": "社会生活",
+      "subcategory": "社会趣闻与生活百态",
+      "start_time": "06:30,833",
+      "end_time": "06:53,266",
+      "audio_script": "What did some customers think when they saw the first cat routinely appear in the store?",
+      "options": [
+        "A) It might be a nuisance to the loyal shoppers.",
+        "B) It might have been abandoned by its owner.",
+        "C) It might be 12 months old.",
+        "D) It might have got lost."
+      ],
+      "answer": "D",
+      "key_sentence": "Local newspapers reported that puzzled customers posted on Facebook groups to try to find out if the cat was lost.",
+      "explanation": "细节考查题。根据报道，当第一只猫频繁出现时，感到不解的顾客在社交平台上发帖询问，试图确认这只猫是否走失了 [cite: 7, 73]。因此选D [cite: 324]。",
+      "passage_name": "news report 3"
+    },
+    {
+      "question_no": 7,
+      "category": "社会生活",
+      "subcategory": "社会趣闻与生活百态",
+      "start_time": "06:53,266",
+      "end_time": "07:12,166",
+      "audio_script": "What are customers asked not to do?",
+      "options": [
+        "A) Feed the cats.",
+        "B) Remove any store signs.",
+        "C) Sit in the shop aisles.",
+        "D) Bring in pets with them."
+      ],
+      "answer": "A",
+      "key_sentence": "staff have been forced to put up signs, asking their customers not to feed them.",
+      "explanation": "细节定位题。报道结尾说明，由于猫咪出现的频率太高，超市员工不得不张贴告示，明确要求顾客不要给这些猫喂食 [cite: 8, 67]。故答案为A [cite: 324]。",
+      "passage_name": "news report 3"
+    },
+    {
+      "question_no": 8,
+      "category": "校园生活",
+      "subcategory": "校园生活与租房决策",
+      "start_time": "09:24,466",
+      "end_time": "09:47,800",
+      "audio_script": "What has the woman been thinking of doing next semester?",
+      "options": [
+        "A) Sharing her room with friends.",
+        "B) Cutting down her living expenses.",
+        "C) Living off campus.",
+        "D) Moving to the city center."
+      ],
+      "answer": "C",
+      "key_sentence": "I've been thinking about moving off campus next semester.",
+      "explanation": "意图理解题。对话开篇，女性说话者直接表达了她计划在下学期搬出校外居住的想法 [cite: 10, 88]。对应选项C [cite: 324]。",
+      "passage_name": "conversation 1"
+    },
+    {
+      "question_no": 9,
+      "category": "校园生活",
+      "subcategory": "校园生活与租房决策",
+      "start_time": "09:47,800",
+      "end_time": "10:07,633",
+      "audio_script": "What does the man suggest the woman take into consideration?",
+      "options": [
+        "A) The facilities available.",
+        "B) Various costs involved.",
+        "C) Changes in living conditions.",
+        "D) The distance to her home."
+      ],
+      "answer": "B",
+      "key_sentence": "Rents in big cities are high, and then there's the cost of electricity and gas.",
+      "explanation": "推断建议题。男方在谈话中提醒女方，除了高昂的房租，还必须考虑电费、燃气费等各种日常开销 [cite: 11, 85]。这说明他建议女方综合考虑各项支出 [cite: 324]。",
+      "passage_name": "conversation 1"
+    },
+    {
+      "question_no": 10,
+      "category": "校园生活",
+      "subcategory": "校园生活与租房决策",
+      "start_time": "10:07,633",
+      "end_time": "10:26,800",
+      "audio_script": "What does the woman say she did during high school?",
+      "options": [
+        "A) Went through much trouble.",
+        "B) Commuted to save money.",
+        "C) Studied on the bus.",
+        "D) Lived on campus."
+      ],
+      "answer": "C",
+      "key_sentence": "After all, I did that during high school and my commute was even longer then.",
+      "explanation": "事实细节题。当对方担忧通勤影响学习时，女性回应称自己高中时通勤时间更长，且当时她习惯在公交车上学习 [cite: 12, 92]。故选C [cite: 324]。",
+      "passage_name": "conversation 1"
+    },
+    {
+      "question_no": 11,
+      "category": "校园生活",
+      "subcategory": "校园生活与租房决策",
+      "start_time": "10:26,800",
+      "end_time": "10:46,500",
+      "audio_script": "What does the man say he'll do at the end of the conversation?",
+      "options": [
+        "A) Discuss the matter with the woman's mother.",
+        "B) Make a decision within a few days.",
+        "C) Try his best to persuade his wife.",
+        "D) Weigh the benefits against the disadvantages."
+      ],
+      "answer": "A",
+      "key_sentence": "I'm not convinced that the benefits are greater than the disadvantages, but I'll discuss this with your mother.",
+      "explanation": "行动预测题。对话接近尾声时，男性说话者明确表示，他虽然持保留意见，但会就此话题与女生的母亲进行商讨 [cite: 13, 94]。选A [cite: 324]。",
+      "passage_name": "conversation 1"
+    },
+    {
+      "question_no": 12,
+      "category": "社会生活",
+      "subcategory": "日常生活与礼品购物",
+      "start_time": "12:38,500",
+      "end_time": "12:59,000",
+      "audio_script": "What is the woman doing?",
+      "options": [
+        "A) Interviewing the man.",
+        "B) Looking for Lawrence.",
+        "C) Choosing a present for her nephew.",
+        "D) Helping the man with his shopping."
+      ],
+      "answer": "C",
+      "key_sentence": "I'm looking for a present for my nephew, Lawrence.",
+      "explanation": "目的判断题。女性在进入商店后表明了来意：她正在为侄子劳伦斯挑选一份礼物 [cite: 14, 107]。C项符合描述 [cite: 324]。",
+      "passage_name": "conversation 2"
+    },
+    {
+      "question_no": 13,
+      "category": "社会生活",
+      "subcategory": "日常生活与礼品购物",
+      "start_time": "12:59,000",
+      "end_time": "13:19,100",
+      "audio_script": "How does the man describe Bobo Man the action figure?",
+      "options": [
+        "A) Quite educational.",
+        "B) Incredibly popular.",
+        "C) Driven by batteries.",
+        "D) Obviously childish."
+      ],
+      "answer": "B",
+      "key_sentence": "For that age group, our biggest seller this year has been this action figure.",
+      "explanation": "事实细节题。店员在推荐“波波侠”玩偶时提到，它是今年同龄段最畅销的单品，极其受孩子们欢迎 [cite: 14, 102]。选B [cite: 324]。",
+      "passage_name": "conversation 2"
+    },
+    {
+      "question_no": 14,
+      "category": "社会生活",
+      "subcategory": "日常生活与礼品购物",
+      "start_time": "13:19,100",
+      "end_time": "13:39,300",
+      "audio_script": "What kind of game does the woman think would be good for Lawrence?",
+      "options": [
+        "A) One he loves for helping exercise his mind.",
+        "B) One he can play together with his sister.",
+        "C) One he finds interesting and challenging.",
+        "D) One he can play either alone or in a group."
+      ],
+      "answer": "B",
+      "key_sentence": "Lawrence has a sister who is slightly older, so maybe a game that they can play together would be good.",
+      "explanation": "需求细节题。女性提到侄子有一个稍年长的姐姐，因此认为如果能买到一个姐弟俩可以共同参与的游戏会更合适 [cite: 15, 104]。故选B [cite: 324]。",
+      "passage_name": "conversation 2"
+    },
+    {
+      "question_no": 15,
+      "category": "社会生活",
+      "subcategory": "日常生活与礼品购物",
+      "start_time": "13:39,300",
+      "end_time": "14:02,200",
+      "audio_script": "What do we learn from the conversation about the game battleships?",
+      "options": [
+        "A) It has been enjoyed by kids for decades.",
+        "B) It always reminds people of times of war.",
+        "C) It has been played both indoors and outdoors.",
+        "D) It distinguishes itself as one of the oldest games."
+      ],
+      "answer": "A",
+      "key_sentence": "And kids enjoy it just as much today as you and I did when we were young.",
+      "explanation": "综合推断题。男士提到该游戏自30年代便存在，且女性回忆起童年也玩过。双方一致认为这款经典游戏几十年来一直深受各代儿童喜爱 [cite: 16, 113]。对应A [cite: 324]。",
+      "passage_name": "conversation 2"
+    },
+    {
+      "question_no": 16,
+      "category": "人文心理",
+      "subcategory": "行为科学与消费心理",
+      "start_time": "16:15,900",
+      "end_time": "16:38,800",
+      "audio_script": "What do we learn from the passage about the paradox of choice?",
+      "options": [
+        "A) A display of a variety of products increases consumers' interest.",
+        "B) Too many choices decrease one's desire to buy.",
+        "C) Fewer choices lead to lower customer satisfaction.",
+        "D) Customers given more choices are more likely to get confused."
+      ],
+      "answer": "B",
+      "key_sentence": "But here's the paradox of choice: if a person is presented with too many choices, they are actually less likely to buy.",
+      "explanation": "主旨理解题。短文阐述了“选择悖论”：即选项过多反而会抑制购买欲望，导致消费者更难做出决定并完成购买 [cite: 19, 120]。故选B [cite: 324]。",
+      "passage_name": "passage 1"
+    },
+    {
+      "question_no": 17,
+      "category": "人文心理",
+      "subcategory": "行为科学与消费心理",
+      "start_time": "16:38,800",
+      "end_time": "17:00,466",
+      "audio_script": "What did the psychologists want to find out in their 2012 study about jams?",
+      "options": [
+        "A) What kind of display results in more sales.",
+        "B) What kind of display creates more interest.",
+        "C) What kind of display attracts a greater crowd of customers.",
+        "D) What kind of display leads to greater customer satisfaction."
+      ],
+      "answer": "A",
+      "key_sentence": "Guess which display table led to more sales?",
+      "explanation": "研究目的题。文中提到的2012年实验通过对比两种规模不同的果酱展示台，旨在探究哪一种陈列方式能够带来更高的实际成交量 [cite: 19, 123]。选A [cite: 324]。",
+      "passage_name": "passage 1"
+    },
+    {
+      "question_no": 18,
+      "category": "人文心理",
+      "subcategory": "行为科学与消费心理",
+      "start_time": "17:00,466",
+      "end_time": "17:21,366",
+      "audio_script": "What is the finding of an extensive study published in 2015?",
+      "options": [
+        "A) There are situations where customers buy nothing.",
+        "B) There are tricks to increase customer satisfaction.",
+        "C) There are ways to predict customer preferences.",
+        "D) There are rules that motivate customers to buy."
+      ],
+      "answer": "D",
+      "key_sentence": "They found four rules that motivate consumers to buy.",
+      "explanation": "事实识别题。2015年的一项大规模调查总结出了能够激发消费者购买行为的四项核心准则 [cite: 20-21, 130]。选项D与原文描述一致 [cite: 324]。",
+      "passage_name": "passage 1"
+    },
+    {
+      "question_no": 19,
+      "category": "社会生活",
+      "subcategory": "社会责任与身心健康",
+      "start_time": "19:16,466",
+      "end_time": "19:38,833",
+      "audio_script": "What do many Americans think of volunteering?",
+      "options": [
+        "A) Stressful.",
+        "B) Burdensome.",
+        "C) Worthwhile.",
+        "D) Energy-boosting."
+      ],
+      "answer": "C",
+      "key_sentence": "According to one survey, only 26% of Americans volunteered, despite reports that many Americans view volunteering as worthwhile.",
+      "explanation": "态度观点题。尽管实际参与比例较低，但调查显示，绝大多数美国人依然认为参与志愿服务是非常有价值且值得做的 [cite: 22-23, 137]。故选C [cite: 324]。",
+      "passage_name": "passage 2"
+    },
+    {
+      "question_no": 20,
+      "category": "社会生活",
+      "subcategory": "社会责任与身心健康",
+      "start_time": "19:38,833",
+      "end_time": "20:00,633",
+      "audio_script": "How could companies ensure both employees and employers benefit from volunteering?",
+      "options": [
+        "A) By linking it with employees' salary.",
+        "B) By taking it as the New Year resolution.",
+        "C) By improving work schedules.",
+        "D) By making it part of the job."
+      ],
+      "answer": "D",
+      "key_sentence": "Most people cite time and conflicting work schedules as major barriers, but employees and employers would actually benefit if companies made employee volunteering part of the job.",
+      "explanation": "策略细节题。文章认为，如果企业能将志愿服务融入日常工作职能中，就能解决时间冲突问题，让劳资双方均能从中获益 [cite: 23, 140]。对应D [cite: 324]。",
+      "passage_name": "passage 2"
+    },
+    {
+      "question_no": 21,
+      "category": "社会生活",
+      "subcategory": "社会责任与身心健康",
+      "start_time": "20:00,633",
+      "end_time": "20:22,166",
+      "audio_script": "What did 75 percent of employees say about volunteering in a survey?",
+      "options": [
+        "A) It was very important to their well-being.",
+        "B) It had taken little of their spare time.",
+        "C) It was an outlet for their personal fulfillment.",
+        "D) It helped improve their working environment."
+      ],
+      "answer": "A",
+      "key_sentence": "75% said volunteering was critical to their well-being.",
+      "explanation": "数据细节题。调查报告指出，有75%的员工认为志愿活动对提升个人整体幸福感（well-being）具有至关重要的作用 [cite: 24, 135]。选项A是对原文的准确归纳 [cite: 324]。",
+      "passage_name": "passage 2"
+    },
+    {
+      "question_no": 22,
+      "category": "经济环保",
+      "subcategory": "环境保护与商业创新",
+      "start_time": "22:17,433",
+      "end_time": "22:40,800",
+      "audio_script": "What do we learn about the UK's retail sector food waste?",
+      "options": [
+        "A) It amounts to 2,000 tons daily.",
+        "B) It mostly comes from supermarkets.",
+        "C) It is estimated at 11% of the UK's total food supply.",
+        "D) It has a lot to do with independent luxury food suppliers."
+      ],
+      "answer": "B",
+      "key_sentence": "The vast majority of the UK's 200,000 tonnes of retail sectors annual food waste comes from supermarkets.",
+      "explanation": "数据来源题。文章开篇数据表明，英国零售领域每年巨大的食品浪费总量中，大部分责任在于大型超市 [cite: 25, 145]。故B项正确 [cite: 324]。",
+      "passage_name": "passage 3"
+    },
+    {
+      "question_no": 23,
+      "category": "经济环保",
+      "subcategory": "环境保护与商业创新",
+      "start_time": "22:40,800",
+      "end_time": "23:00,800",
+      "audio_script": "What does Sophie Andre's business do in London?",
+      "options": [
+        "A) It rents bicycles to deliver food.",
+        "B) It sells sought-after coffee beans.",
+        "C) It delivers luxury hand-made food.",
+        "D) It recycles waste food from the city."
+      ],
+      "answer": "C",
+      "key_sentence": "In 2016 she moved to London and began by setting up a business delivering luxury hand-made food across the city.",
+      "explanation": "业务细节题。索菲·安德烈在伦敦开办的企业主营业务是在全市范围内配送高端的手工制作食品 [cite: 26, 150]。C项与描述一致 [cite: 324]。",
+      "passage_name": "passage 3"
+    },
+    {
+      "question_no": 24,
+      "category": "经济环保",
+      "subcategory": "环境保护与商业创新",
+      "start_time": "23:00,800",
+      "end_time": "23:22,900",
+      "audio_script": "In what way does Sophie Andre's business differ from many food waste projects?",
+      "options": [
+        "A) It pays special attention to the size and shape of its products.",
+        "B) It tries to escape the constraints of the current food system.",
+        "C) It cooperates closely with local producers.",
+        "D) It aims to provide high-quality products."
+      ],
+      "answer": "D",
+      "key_sentence": "Unlike many food waste projects that have sprung up in recent years, the idea is not simply to redistribute waste food, but to provide a high-quality product.",
+      "explanation": "比较辨析题。不同于传统的食品再分配公益项目，该企业的核心理念是利用废弃食材创造并提供高水准、高品质的食品 [cite: 27, 155]。因此选D [cite: 324]。",
+      "passage_name": "passage 3"
+    },
+    {
+      "question_no": 25,
+      "category": "经济环保",
+      "subcategory": "环境保护与商业创新",
+      "start_time": "23:22,900",
+      "end_time": "23:45,366",
+      "audio_script": "Why will suppliers always have a certain amount of surplus?",
+      "options": [
+        "A) To ensure a regular supply.",
+        "B) To maintain a unique menu.",
+        "C) To make up for the waste products.",
+        "D) To meet customers' urgent demand."
+      ],
+      "answer": "A",
+      "key_sentence": "Perhaps unlike other waste food, the supply is regular. Suppliers will always have a certain amount of surplus.",
+      "explanation": "推断因果题。文中最后解释，供应商保持一定结余是为了确保供应的稳定性，从而使菜单也能保持相对固定 [cite: 28, 156]。选A符合逻辑 [cite: 324]。",
+      "passage_name": "passage 3"
+    }
+  ],
+  "passages": [
+    {
+      "id": 0,
+      "name": "news report 1",
+      "start": 41.866,
+      "questions": [
+        {
+          "question_no": 1,
+          "category": "社会生活",
+          "subcategory": "体育赛事与社区活动",
+          "start_time": "02:07,366",
+          "end_time": "02:28,700",
+          "audio_script": "What does the news report say about Vaklav Bersa and Joanna Stevens?",
+          "options": [
+            "A) They are young teenagers from Atlanta.",
+            "B) They won this year's 7 Mile Bridge Run.",
+            "C) They completed the race in less than 40 minutes.",
+            "D) They are both students at Marathon High School."
+          ],
+          "answer": "B",
+          "key_sentence": "A Florida teenager and an Atlanta woman won the overall men's and women's divisions Saturday at the annual 7 Mile Bridge Run.",
+          "explanation": "细节理解题。新闻起始段落指出，一名佛罗里达少年和一位亚特兰大女性在周六举行的年度七英里桥跑比赛中，分别摘得了男、女组别的桂冠 [cite: 2, 46-47]。因此B项符合文意 [cite: 324]。",
+          "passage_name": "news report 1"
+        },
+        {
+          "question_no": 2,
+          "category": "社会生活",
+          "subcategory": "体育赛事与社区活动",
+          "start_time": "02:28,700",
+          "end_time": "02:48,233",
+          "audio_script": "What do we learn about the April contest?",
+          "options": [
+            "A) It drew competitors from more than 40 countries.",
+            "B) It is watched live online by fans all over the world.",
+            "C) It closed the city of Big Pine Key to traffic for three hours.",
+            "D) It is one of the most popular running events in the southeastern U.S."
+          ],
+          "answer": "D",
+          "key_sentence": "The April contest is one of the most popular running events in the southeastern United States.",
+          "explanation": "事实认定题。文章末尾明确提到，这项在四月份举办的赛事是美国东南部地区极具人气的跑步活动之一 [cite: 3, 53]。故选D [cite: 324]。",
+          "passage_name": "news report 1"
+        }
+      ],
+      "audio_file": "https://cdn.jsdelivr.net/gh/gaozhiyan/cet4-audios@main/exam/exam-202506-set2-passage-0.wav?v=v2"
+    },
+    {
+      "id": 1,
+      "name": "news report 2",
+      "start": 168.233,
+      "questions": [
+        {
+          "question_no": 3,
+          "category": "科普科技",
+          "subcategory": "航天科技与职业发展",
+          "start_time": "04:03,000",
+          "end_time": "04:22,800",
+          "audio_script": "What do we learn from the news report about Tim Peak?",
+          "options": [
+            "A) He was once a full-time ambassador.",
+            "B) He was soon to retire from the army.",
+            "C) He became an astronaut in 2015.",
+            "D) He used to be a helicopter pilot."
+          ],
+          "answer": "D",
+          "key_sentence": "The former British Army Air Corps helicopter pilot was selected as a European Space Agency astronaut in 2009.",
+          "explanation": "人物背景题。文中介绍蒂姆·皮克时提到，他曾是英国陆军航空兵团的直升机驾驶员，后于2009年入选欧洲航天局 [cite: 4, 58]。因此D项正确 [cite: 324]。",
+          "passage_name": "news report 2"
+        },
+        {
+          "question_no": 4,
+          "category": "科普科技",
+          "subcategory": "航天科技与职业发展",
+          "start_time": "04:22,800",
+          "end_time": "04:44,066",
+          "audio_script": "What does Tim Peak say about his work with the European Space Agency?",
+          "options": [
+            "A) It has been unbelievably exciting and rewarding.",
+            "B) It has been extraordinarily tough and demanding.",
+            "C) It has contributed a great deal to human flights to space.",
+            "D) It has given him exceptional privilege as an ambassador."
+          ],
+          "answer": "A",
+          "key_sentence": "It has been incredibly exciting and rewarding.",
+          "explanation": "细节概括题。在新闻后半部分，皮克在回顾其在航天局的职业生涯时，评价这段经历极其令人振奋且充满意义 [cite: 5, 59]。A项是对原文incredibly exciting and rewarding的同义转述 [cite: 324]。",
+          "passage_name": "news report 2"
+        }
+      ],
+      "audio_file": "https://cdn.jsdelivr.net/gh/gaozhiyan/cet4-audios@main/exam/exam-202506-set2-passage-1.wav?v=v2"
+    },
+    {
+      "id": 2,
+      "name": "news report 3",
+      "start": 284.066,
+      "questions": [
+        {
+          "question_no": 5,
+          "category": "社会生活",
+          "subcategory": "社会趣闻与生活百态",
+          "start_time": "06:06,466",
+          "end_time": "06:30,833",
+          "audio_script": "What do we learn about the five cats seen in the Asda store?",
+          "options": [
+            "A) They are known for their loyalty to their owners.",
+            "B) They are brought in by the store's customers.",
+            "C) They are regular visitors to the store.",
+            "D) They are pets kept by the store staff."
+          ],
+          "answer": "C",
+          "key_sentence": "There are now at least five different cats who come almost on a daily basis.",
+          "explanation": "归纳推断题。文中提到，目前有五只不同的猫几乎每天都会光顾该超市，甚至已经把这里当成了家 [cite: 7, 70]。C项“定期光顾”符合逻辑 [cite: 324]。",
+          "passage_name": "news report 3"
+        },
+        {
+          "question_no": 6,
+          "category": "社会生活",
+          "subcategory": "社会趣闻与生活百态",
+          "start_time": "06:30,833",
+          "end_time": "06:53,266",
+          "audio_script": "What did some customers think when they saw the first cat routinely appear in the store?",
+          "options": [
+            "A) It might be a nuisance to the loyal shoppers.",
+            "B) It might have been abandoned by its owner.",
+            "C) It might be 12 months old.",
+            "D) It might have got lost."
+          ],
+          "answer": "D",
+          "key_sentence": "Local newspapers reported that puzzled customers posted on Facebook groups to try to find out if the cat was lost.",
+          "explanation": "细节考查题。根据报道，当第一只猫频繁出现时，感到不解的顾客在社交平台上发帖询问，试图确认这只猫是否走失了 [cite: 7, 73]。因此选D [cite: 324]。",
+          "passage_name": "news report 3"
+        },
+        {
+          "question_no": 7,
+          "category": "社会生活",
+          "subcategory": "社会趣闻与生活百态",
+          "start_time": "06:53,266",
+          "end_time": "07:12,166",
+          "audio_script": "What are customers asked not to do?",
+          "options": [
+            "A) Feed the cats.",
+            "B) Remove any store signs.",
+            "C) Sit in the shop aisles.",
+            "D) Bring in pets with them."
+          ],
+          "answer": "A",
+          "key_sentence": "staff have been forced to put up signs, asking their customers not to feed them.",
+          "explanation": "细节定位题。报道结尾说明，由于猫咪出现的频率太高，超市员工不得不张贴告示，明确要求顾客不要给这些猫喂食 [cite: 8, 67]。故答案为A [cite: 324]。",
+          "passage_name": "news report 3"
+        }
+      ],
+      "audio_file": "https://cdn.jsdelivr.net/gh/gaozhiyan/cet4-audios@main/exam/exam-202506-set2-passage-2.wav?v=v2"
+    },
+    {
+      "id": 3,
+      "name": "conversation 1",
+      "start": 463.866,
+      "questions": [
+        {
+          "question_no": 8,
+          "category": "校园生活",
+          "subcategory": "校园生活与租房决策",
+          "start_time": "09:24,466",
+          "end_time": "09:47,800",
+          "audio_script": "What has the woman been thinking of doing next semester?",
+          "options": [
+            "A) Sharing her room with friends.",
+            "B) Cutting down her living expenses.",
+            "C) Living off campus.",
+            "D) Moving to the city center."
+          ],
+          "answer": "C",
+          "key_sentence": "I've been thinking about moving off campus next semester.",
+          "explanation": "意图理解题。对话开篇，女性说话者直接表达了她计划在下学期搬出校外居住的想法 [cite: 10, 88]。对应选项C [cite: 324]。",
+          "passage_name": "conversation 1"
+        },
+        {
+          "question_no": 9,
+          "category": "校园生活",
+          "subcategory": "校园生活与租房决策",
+          "start_time": "09:47,800",
+          "end_time": "10:07,633",
+          "audio_script": "What does the man suggest the woman take into consideration?",
+          "options": [
+            "A) The facilities available.",
+            "B) Various costs involved.",
+            "C) Changes in living conditions.",
+            "D) The distance to her home."
+          ],
+          "answer": "B",
+          "key_sentence": "Rents in big cities are high, and then there's the cost of electricity and gas.",
+          "explanation": "推断建议题。男方在谈话中提醒女方，除了高昂的房租，还必须考虑电费、燃气费等各种日常开销 [cite: 11, 85]。这说明他建议女方综合考虑各项支出 [cite: 324]。",
+          "passage_name": "conversation 1"
+        },
+        {
+          "question_no": 10,
+          "category": "校园生活",
+          "subcategory": "校园生活与租房决策",
+          "start_time": "10:07,633",
+          "end_time": "10:26,800",
+          "audio_script": "What does the woman say she did during high school?",
+          "options": [
+            "A) Went through much trouble.",
+            "B) Commuted to save money.",
+            "C) Studied on the bus.",
+            "D) Lived on campus."
+          ],
+          "answer": "C",
+          "key_sentence": "After all, I did that during high school and my commute was even longer then.",
+          "explanation": "事实细节题。当对方担忧通勤影响学习时，女性回应称自己高中时通勤时间更长，且当时她习惯在公交车上学习 [cite: 12, 92]。故选C [cite: 324]。",
+          "passage_name": "conversation 1"
+        },
+        {
+          "question_no": 11,
+          "category": "校园生活",
+          "subcategory": "校园生活与租房决策",
+          "start_time": "10:26,800",
+          "end_time": "10:46,500",
+          "audio_script": "What does the man say he'll do at the end of the conversation?",
+          "options": [
+            "A) Discuss the matter with the woman's mother.",
+            "B) Make a decision within a few days.",
+            "C) Try his best to persuade his wife.",
+            "D) Weigh the benefits against the disadvantages."
+          ],
+          "answer": "A",
+          "key_sentence": "I'm not convinced that the benefits are greater than the disadvantages, but I'll discuss this with your mother.",
+          "explanation": "行动预测题。对话接近尾声时，男性说话者明确表示，他虽然持保留意见，但会就此话题与女生的母亲进行商讨 [cite: 13, 94]。选A [cite: 324]。",
+          "passage_name": "conversation 1"
+        }
+      ],
+      "audio_file": "https://cdn.jsdelivr.net/gh/gaozhiyan/cet4-audios@main/exam/exam-202506-set2-passage-3.wav?v=v2"
+    },
+    {
+      "id": 4,
+      "name": "conversation 2",
+      "start": 646.5,
+      "questions": [
+        {
+          "question_no": 12,
+          "category": "社会生活",
+          "subcategory": "日常生活与礼品购物",
+          "start_time": "12:38,500",
+          "end_time": "12:59,000",
+          "audio_script": "What is the woman doing?",
+          "options": [
+            "A) Interviewing the man.",
+            "B) Looking for Lawrence.",
+            "C) Choosing a present for her nephew.",
+            "D) Helping the man with his shopping."
+          ],
+          "answer": "C",
+          "key_sentence": "I'm looking for a present for my nephew, Lawrence.",
+          "explanation": "目的判断题。女性在进入商店后表明了来意：她正在为侄子劳伦斯挑选一份礼物 [cite: 14, 107]。C项符合描述 [cite: 324]。",
+          "passage_name": "conversation 2"
+        },
+        {
+          "question_no": 13,
+          "category": "社会生活",
+          "subcategory": "日常生活与礼品购物",
+          "start_time": "12:59,000",
+          "end_time": "13:19,100",
+          "audio_script": "How does the man describe Bobo Man the action figure?",
+          "options": [
+            "A) Quite educational.",
+            "B) Incredibly popular.",
+            "C) Driven by batteries.",
+            "D) Obviously childish."
+          ],
+          "answer": "B",
+          "key_sentence": "For that age group, our biggest seller this year has been this action figure.",
+          "explanation": "事实细节题。店员在推荐“波波侠”玩偶时提到，它是今年同龄段最畅销的单品，极其受孩子们欢迎 [cite: 14, 102]。选B [cite: 324]。",
+          "passage_name": "conversation 2"
+        },
+        {
+          "question_no": 14,
+          "category": "社会生活",
+          "subcategory": "日常生活与礼品购物",
+          "start_time": "13:19,100",
+          "end_time": "13:39,300",
+          "audio_script": "What kind of game does the woman think would be good for Lawrence?",
+          "options": [
+            "A) One he loves for helping exercise his mind.",
+            "B) One he can play together with his sister.",
+            "C) One he finds interesting and challenging.",
+            "D) One he can play either alone or in a group."
+          ],
+          "answer": "B",
+          "key_sentence": "Lawrence has a sister who is slightly older, so maybe a game that they can play together would be good.",
+          "explanation": "需求细节题。女性提到侄子有一个稍年长的姐姐，因此认为如果能买到一个姐弟俩可以共同参与的游戏会更合适 [cite: 15, 104]。故选B [cite: 324]。",
+          "passage_name": "conversation 2"
+        },
+        {
+          "question_no": 15,
+          "category": "社会生活",
+          "subcategory": "日常生活与礼品购物",
+          "start_time": "13:39,300",
+          "end_time": "14:02,200",
+          "audio_script": "What do we learn from the conversation about the game battleships?",
+          "options": [
+            "A) It has been enjoyed by kids for decades.",
+            "B) It always reminds people of times of war.",
+            "C) It has been played both indoors and outdoors.",
+            "D) It distinguishes itself as one of the oldest games."
+          ],
+          "answer": "A",
+          "key_sentence": "And kids enjoy it just as much today as you and I did when we were young.",
+          "explanation": "综合推断题。男士提到该游戏自30年代便存在，且女性回忆起童年也玩过。双方一致认为这款经典游戏几十年来一直深受各代儿童喜爱 [cite: 16, 113]。对应A [cite: 324]。",
+          "passage_name": "conversation 2"
+        }
+      ],
+      "audio_file": "https://cdn.jsdelivr.net/gh/gaozhiyan/cet4-audios@main/exam/exam-202506-set2-passage-4.wav?v=v2"
+    },
+    {
+      "id": 5,
+      "name": "passage 1",
+      "start": 871.3,
+      "questions": [
+        {
+          "question_no": 16,
+          "category": "人文心理",
+          "subcategory": "行为科学与消费心理",
+          "start_time": "16:15,900",
+          "end_time": "16:38,800",
+          "audio_script": "What do we learn from the passage about the paradox of choice?",
+          "options": [
+            "A) A display of a variety of products increases consumers' interest.",
+            "B) Too many choices decrease one's desire to buy.",
+            "C) Fewer choices lead to lower customer satisfaction.",
+            "D) Customers given more choices are more likely to get confused."
+          ],
+          "answer": "B",
+          "key_sentence": "But here's the paradox of choice: if a person is presented with too many choices, they are actually less likely to buy.",
+          "explanation": "主旨理解题。短文阐述了“选择悖论”：即选项过多反而会抑制购买欲望，导致消费者更难做出决定并完成购买 [cite: 19, 120]。故选B [cite: 324]。",
+          "passage_name": "passage 1"
+        },
+        {
+          "question_no": 17,
+          "category": "人文心理",
+          "subcategory": "行为科学与消费心理",
+          "start_time": "16:38,800",
+          "end_time": "17:00,466",
+          "audio_script": "What did the psychologists want to find out in their 2012 study about jams?",
+          "options": [
+            "A) What kind of display results in more sales.",
+            "B) What kind of display creates more interest.",
+            "C) What kind of display attracts a greater crowd of customers.",
+            "D) What kind of display leads to greater customer satisfaction."
+          ],
+          "answer": "A",
+          "key_sentence": "Guess which display table led to more sales?",
+          "explanation": "研究目的题。文中提到的2012年实验通过对比两种规模不同的果酱展示台，旨在探究哪一种陈列方式能够带来更高的实际成交量 [cite: 19, 123]。选A [cite: 324]。",
+          "passage_name": "passage 1"
+        },
+        {
+          "question_no": 18,
+          "category": "人文心理",
+          "subcategory": "行为科学与消费心理",
+          "start_time": "17:00,466",
+          "end_time": "17:21,366",
+          "audio_script": "What is the finding of an extensive study published in 2015?",
+          "options": [
+            "A) There are situations where customers buy nothing.",
+            "B) There are tricks to increase customer satisfaction.",
+            "C) There are ways to predict customer preferences.",
+            "D) There are rules that motivate customers to buy."
+          ],
+          "answer": "D",
+          "key_sentence": "They found four rules that motivate consumers to buy.",
+          "explanation": "事实识别题。2015年的一项大规模调查总结出了能够激发消费者购买行为的四项核心准则 [cite: 20-21, 130]。选项D与原文描述一致 [cite: 324]。",
+          "passage_name": "passage 1"
+        }
+      ],
+      "audio_file": "https://cdn.jsdelivr.net/gh/gaozhiyan/cet4-audios@main/exam/exam-202506-set2-passage-5.wav?v=v2"
+    },
+    {
+      "id": 6,
+      "name": "passage 2",
+      "start": 1041.366,
+      "questions": [
+        {
+          "question_no": 19,
+          "category": "社会生活",
+          "subcategory": "社会责任与身心健康",
+          "start_time": "19:16,466",
+          "end_time": "19:38,833",
+          "audio_script": "What do many Americans think of volunteering?",
+          "options": [
+            "A) Stressful.",
+            "B) Burdensome.",
+            "C) Worthwhile.",
+            "D) Energy-boosting."
+          ],
+          "answer": "C",
+          "key_sentence": "According to one survey, only 26% of Americans volunteered, despite reports that many Americans view volunteering as worthwhile.",
+          "explanation": "态度观点题。尽管实际参与比例较低，但调查显示，绝大多数美国人依然认为参与志愿服务是非常有价值且值得做的 [cite: 22-23, 137]。故选C [cite: 324]。",
+          "passage_name": "passage 2"
+        },
+        {
+          "question_no": 20,
+          "category": "社会生活",
+          "subcategory": "社会责任与身心健康",
+          "start_time": "19:38,833",
+          "end_time": "20:00,633",
+          "audio_script": "How could companies ensure both employees and employers benefit from volunteering?",
+          "options": [
+            "A) By linking it with employees' salary.",
+            "B) By taking it as the New Year resolution.",
+            "C) By improving work schedules.",
+            "D) By making it part of the job."
+          ],
+          "answer": "D",
+          "key_sentence": "Most people cite time and conflicting work schedules as major barriers, but employees and employers would actually benefit if companies made employee volunteering part of the job.",
+          "explanation": "策略细节题。文章认为，如果企业能将志愿服务融入日常工作职能中，就能解决时间冲突问题，让劳资双方均能从中获益 [cite: 23, 140]。对应D [cite: 324]。",
+          "passage_name": "passage 2"
+        },
+        {
+          "question_no": 21,
+          "category": "社会生活",
+          "subcategory": "社会责任与身心健康",
+          "start_time": "20:00,633",
+          "end_time": "20:22,166",
+          "audio_script": "What did 75 percent of employees say about volunteering in a survey?",
+          "options": [
+            "A) It was very important to their well-being.",
+            "B) It had taken little of their spare time.",
+            "C) It was an outlet for their personal fulfillment.",
+            "D) It helped improve their working environment."
+          ],
+          "answer": "A",
+          "key_sentence": "75% said volunteering was critical to their well-being.",
+          "explanation": "数据细节题。调查报告指出，有75%的员工认为志愿活动对提升个人整体幸福感（well-being）具有至关重要的作用 [cite: 24, 135]。选项A是对原文的准确归纳 [cite: 324]。",
+          "passage_name": "passage 2"
+        }
+      ],
+      "audio_file": "https://cdn.jsdelivr.net/gh/gaozhiyan/cet4-audios@main/exam/exam-202506-set2-passage-6.wav?v=v2"
+    },
+    {
+      "id": 7,
+      "name": "passage 3",
+      "start": 1222.166,
+      "questions": [
+        {
+          "question_no": 22,
+          "category": "经济环保",
+          "subcategory": "环境保护与商业创新",
+          "start_time": "22:17,433",
+          "end_time": "22:40,800",
+          "audio_script": "What do we learn about the UK's retail sector food waste?",
+          "options": [
+            "A) It amounts to 2,000 tons daily.",
+            "B) It mostly comes from supermarkets.",
+            "C) It is estimated at 11% of the UK's total food supply.",
+            "D) It has a lot to do with independent luxury food suppliers."
+          ],
+          "answer": "B",
+          "key_sentence": "The vast majority of the UK's 200,000 tonnes of retail sectors annual food waste comes from supermarkets.",
+          "explanation": "数据来源题。文章开篇数据表明，英国零售领域每年巨大的食品浪费总量中，大部分责任在于大型超市 [cite: 25, 145]。故B项正确 [cite: 324]。",
+          "passage_name": "passage 3"
+        },
+        {
+          "question_no": 23,
+          "category": "经济环保",
+          "subcategory": "环境保护与商业创新",
+          "start_time": "22:40,800",
+          "end_time": "23:00,800",
+          "audio_script": "What does Sophie Andre's business do in London?",
+          "options": [
+            "A) It rents bicycles to deliver food.",
+            "B) It sells sought-after coffee beans.",
+            "C) It delivers luxury hand-made food.",
+            "D) It recycles waste food from the city."
+          ],
+          "answer": "C",
+          "key_sentence": "In 2016 she moved to London and began by setting up a business delivering luxury hand-made food across the city.",
+          "explanation": "业务细节题。索菲·安德烈在伦敦开办的企业主营业务是在全市范围内配送高端的手工制作食品 [cite: 26, 150]。C项与描述一致 [cite: 324]。",
+          "passage_name": "passage 3"
+        },
+        {
+          "question_no": 24,
+          "category": "经济环保",
+          "subcategory": "环境保护与商业创新",
+          "start_time": "23:00,800",
+          "end_time": "23:22,900",
+          "audio_script": "In what way does Sophie Andre's business differ from many food waste projects?",
+          "options": [
+            "A) It pays special attention to the size and shape of its products.",
+            "B) It tries to escape the constraints of the current food system.",
+            "C) It cooperates closely with local producers.",
+            "D) It aims to provide high-quality products."
+          ],
+          "answer": "D",
+          "key_sentence": "Unlike many food waste projects that have sprung up in recent years, the idea is not simply to redistribute waste food, but to provide a high-quality product.",
+          "explanation": "比较辨析题。不同于传统的食品再分配公益项目，该企业的核心理念是利用废弃食材创造并提供高水准、高品质的食品 [cite: 27, 155]。因此选D [cite: 324]。",
+          "passage_name": "passage 3"
+        },
+        {
+          "question_no": 25,
+          "category": "经济环保",
+          "subcategory": "环境保护与商业创新",
+          "start_time": "23:22,900",
+          "end_time": "23:45,366",
+          "audio_script": "Why will suppliers always have a certain amount of surplus?",
+          "options": [
+            "A) To ensure a regular supply.",
+            "B) To maintain a unique menu.",
+            "C) To make up for the waste products.",
+            "D) To meet customers' urgent demand."
+          ],
+          "answer": "A",
+          "key_sentence": "Perhaps unlike other waste food, the supply is regular. Suppliers will always have a certain amount of surplus.",
+          "explanation": "推断因果题。文中最后解释，供应商保持一定结余是为了确保供应的稳定性，从而使菜单也能保持相对固定 [cite: 28, 156]。选A符合逻辑 [cite: 324]。",
+          "passage_name": "passage 3"
+        }
+      ],
+      "audio_file": "https://cdn.jsdelivr.net/gh/gaozhiyan/cet4-audios@main/exam/exam-202506-set2-passage-7.wav?v=v2"
+    }
+  ]
+}
