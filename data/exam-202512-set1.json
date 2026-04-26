@@ -1,0 +1,814 @@
+{
+  "exam_type": "CET-4 Listening",
+  "test_set": "202512set1",
+  "questions": [
+    {
+      "question_no": 1,
+      "category": "社会生活",
+      "subcategory": "动物趣闻与动物保护",
+      "passage_name": "news report 1",
+      "options": [
+        "A) At the gate of a grade school in Kent.",
+        "B) Under the engine cover of a man's car.",
+        "C) Inside the car of David King's neighbour.",
+        "D) Outside the office of a charity foundation."
+      ],
+      "answer": "B",
+      "key_sentence": "The black cat was found curled up under the engine cover of David King's car when he decided to do an oil check after dropping his grandson off at school in Kent.",
+      "explanation": "新闻报道开头明确指出，大卫·金送孙子上学后决定检查一下汽车机油时，发现那只黑猫蜷缩在他的汽车引擎盖下。"
+    },
+    {
+      "question_no": 2,
+      "category": "社会生活",
+      "subcategory": "动物趣闻与动物保护",
+      "passage_name": "news report 1",
+      "options": [
+        "A) It got reunited with its owner.",
+        "B) It was injured during the rescue.",
+        "C) It was placed in the care of a UK charity.",
+        "D) It became a pet of Mr. King's grandson."
+      ],
+      "answer": "A",
+      "key_sentence": "Following a rescue by UK charity Cats Protection, the 4-year-old cat was later reunited with its owner, Mr. King's neighbour.",
+      "explanation": "新闻报道最后提到，在英国慈善机构“猫咪保护”的救援下，这只4岁的猫后来与它的主人（金先生的邻居）团聚了。"
+    },
+    {
+      "question_no": 3,
+      "category": "体育休闲",
+      "subcategory": "体育赛事与特殊奥运",
+      "passage_name": "news report 2",
+      "options": [
+        "A) The reunion of this year's Olympic gold medalists.",
+        "B) The opening of the Special Olympics Spring Games.",
+        "C) The first important political event in the next five years.",
+        "D) The 100th anniversary celebration of Methodist University."
+      ],
+      "answer": "B",
+      "key_sentence": "In less than a month, the Special Olympic Spring Games will make a return to Fayetteville.",
+      "explanation": "文章开头提到，不到一个月后，特殊奥林匹克春季运动会将重返费耶特维尔。"
+    },
+    {
+      "question_no": 4,
+      "category": "体育休闲",
+      "subcategory": "体育赛事与特殊奥运",
+      "passage_name": "news report 2",
+      "options": [
+        "A) Volunteers visit the Games' website to sign up.",
+        "B) Children play in a fun tent and enjoy themselves fully.",
+        "C) Organizers devote their time and energy to the Games.",
+        "D) Athletes with special needs triumph in the Games."
+      ],
+      "answer": "D",
+      "key_sentence": "Kowalczyk said it's rewarding to see athletes with special needs triumph in the games.",
+      "explanation": "文章引用了活动组织者本杰明·科瓦尔奇克的话，他说看到有特殊需求的运动员在比赛中获胜是非常有意义的。"
+    },
+    {
+      "question_no": 5,
+      "category": "商业经济",
+      "subcategory": "商业纠纷与处理",
+      "passage_name": "news report 3",
+      "options": [
+        "A) Compensate for the Swiss manufacturer's loss.",
+        "B) Change the wrapping of its commodities.",
+        "C) Destroy its imitation chocolate rabbits.",
+        "D) Defend itself in the country's commercial court."
+      ],
+      "answer": "C",
+      "key_sentence": "A German supermarket has been ordered to destroy its chocolate rabbits after it lost a court battle with the Swiss chocolate manufacturer.",
+      "explanation": "文章开头指出，一家德国超市在输掉与瑞士巧克力制造商的官司后，被勒令销毁其巧克力兔子。"
+    },
+    {
+      "question_no": 6,
+      "category": "商业经济",
+      "subcategory": "商业纠纷与处理",
+      "passage_name": "news report 3",
+      "options": [
+        "A) It could be reused in other products.",
+        "B) It could be resold cheaper to avoid waste.",
+        "C) It could be reshaped into animals other than rabbits.",
+        "D) It could be rewrapped and sold by the budget supermarket."
+      ],
+      "answer": "A",
+      "key_sentence": "It ordered that all the imitation rabbits be destroyed, but suggested the chocolate needn't be wasted. It could be melted for use in other products.",
+      "explanation": "文章提到，法院下令销毁仿制兔子，但建议不必浪费巧克力，可以融化后用于其他产品。"
+    },
+    {
+      "question_no": 7,
+      "category": "商业经济",
+      "subcategory": "商业纠纷与处理",
+      "passage_name": "news report 3",
+      "options": [
+        "A) To be fair to the German supermarkets.",
+        "B) To protect chocolate retailers' interests.",
+        "C) To prevent consumers' possible confusion.",
+        "D) To boost the growth of the chocolate industry."
+      ],
+      "answer": "C",
+      "key_sentence": "It said even though there are some differences between the two products, there was still the possibility of confusion for consumers.",
+      "explanation": "文章解释了瑞士最高法院推翻商事法院裁决的原因：尽管两种产品存在一些差异，但仍有可能导致消费者混淆。"
+    },
+    {
+      "question_no": 8,
+      "category": "社会生活",
+      "subcategory": "动物保护与饮食习惯",
+      "passage_name": "conversation 1",
+      "options": [
+        "A) Pass a book to him.",
+        "B) Make a vegetable dish.",
+        "C) Return the handbook to him.",
+        "D) Meet his sister's boyfriend."
+      ],
+      "answer": "A",
+      "key_sentence": "Can you please hand me that book over there?",
+      "explanation": "对话一开始，男士就请求女士把那本书递给他，因为书里有制作冬季豆类沙拉的说明。"
+    },
+    {
+      "question_no": 9,
+      "category": "社会生活",
+      "subcategory": "动物保护与饮食习惯",
+      "passage_name": "conversation 1",
+      "options": [
+        "A) It doesn't sound practical for her.",
+        "B) It would do harm to one's muscles.",
+        "C) It would reduce one's protein intake.",
+        "D) It doesn't seem to be a balanced diet."
+      ],
+      "answer": "D",
+      "key_sentence": "That doesn't sound like a very balanced diet.",
+      "explanation": "当男士提到，他姐姐的男朋友是素食主义者，只吃蔬菜不吃肉时，女士评论说，听起来这样的饮食不是非常均衡。"
+    },
+    {
+      "question_no": 10,
+      "category": "社会生活",
+      "subcategory": "动物保护与饮食习惯",
+      "passage_name": "conversation 1",
+      "options": [
+        "A) To improve his health.",
+        "B) To protect animal rights.",
+        "C) To stick to his religious belief.",
+        "D) To follow a trendy lifestyle."
+      ],
+      "answer": "B",
+      "key_sentence": "He's an animal activist. He's always been very sensitive and sympathizes with animals.",
+      "explanation": "男士解释说，他姐姐的男朋友之所以是素食主义者，是因为他是一名动物活动家，非常同情动物，致力于保护动物权益。"
+    },
+    {
+      "question_no": 11,
+      "category": "社会生活",
+      "subcategory": "动物保护与饮食习惯",
+      "passage_name": "conversation 1",
+      "options": [
+        "A) The torture and distress dolphins suffer in parks.",
+        "B) The urgency of joining an animal rights group.",
+        "C) The gloomy environments animals are kept in.",
+        "D) The necessity of having zoos and eating meat."
+      ],
+      "answer": "D",
+      "key_sentence": "Not all zoos and animal parks have the most favorable conditions, but without them, it just wouldn't be feasible to learn about animals and their environments.",
+      "explanation": "对话结束时，女士表示如果没有动物园，就无法了解动物及其生活环境，而且她无法放弃吃肉，比如在观看棒球比赛时吃热狗，男士诚实地说他也同意。这表明两人都认为动物园和吃肉都有其必要性。"
+    },
+    {
+      "question_no": 12,
+      "category": "医疗健康",
+      "subcategory": "睡眠与健康研究",
+      "passage_name": "conversation 2",
+      "options": [
+        "A) The part about not eating on board the plane.",
+        "B) The part about air travel in the past.",
+        "C) The part about getting over jetlag.",
+        "D) The part about avoiding sleeping on the plane."
+      ],
+      "answer": "C",
+      "key_sentence": "The part about overcoming jet lag was interesting.",
+      "explanation": "女生询问男士有没有看昨晚关于航空旅行的电视节目，男士提到他看了，并特别指出克服时差反应的部分很有趣。"
+    },
+    {
+      "question_no": 13,
+      "category": "医疗健康",
+      "subcategory": "睡眠与健康研究",
+      "passage_name": "conversation 2",
+      "options": [
+        "A) Try following the advice given by the expert on the show.",
+        "B) Concentrate on reading articles recommended by experts.",
+        "C) Have meals as usual to stay away from hunger.",
+        "D) Take a nap to adjust to a new time zone."
+      ],
+      "answer": "A",
+      "key_sentence": "So I guess I'll give it a try next time I fly a long distance.",
+      "explanation": "男士说，节目中的专家引用了研究来论证她的建议（不吃东西、不睡觉），所以他打算下次长途飞行时尝试一下。"
+    },
+    {
+      "question_no": 14,
+      "category": "医疗健康",
+      "subcategory": "睡眠与健康研究",
+      "passage_name": "conversation 2",
+      "options": [
+        "A) She has been well treated when traveling.",
+        "B) She does not have to worry about jetlag.",
+        "C) She can spend a lot of time vacationing.",
+        "D) She does not have any problem flying."
+      ],
+      "answer": "B",
+      "key_sentence": "So I guess I'm lucky that I can still adjust to different time zones well.",
+      "explanation": "女士提到，专家说四十岁后时差问题通常会更严重，而她觉得自己很幸运，因为她现在仍然能很好地适应不同的时区，这也意味着她不必担心时差问题。"
+    },
+    {
+      "question_no": 15,
+      "category": "医疗健康",
+      "subcategory": "睡眠与健康研究",
+      "passage_name": "conversation 2",
+      "options": [
+        "A) It affects twenty-five percent of people.",
+        "B) It has long been ignored by many experts.",
+        "C) It impacts female travelers more seriously.",
+        "D) It has caused heavy losses to many airlines."
+      ],
+      "answer": "A",
+      "key_sentence": "Actually, it was a quarter of people.",
+      "explanation": "对话最后，男士说有20%的人害怕飞行，女士纠正说是四分之一（即25%），并强调这是一个广泛存在的问题。"
+    },
+    {
+      "question_no": 16,
+      "category": "职场生活",
+      "subcategory": "职业规划与发展",
+      "passage_name": "passage 1",
+      "options": [
+        "A) Learning from skilled designers.",
+        "B) Joining a 6-month training camp.",
+        "C) Obtaining real-world experience.",
+        "D) Anticipating actual challenges."
+      ],
+      "answer": "C",
+      "key_sentence": "The most common question I'm asked always centers around how to get started in user experience design, to which my response is always that nothing can substitute real-world experience.",
+      "explanation": "文章开头提到，说话者最常被问到的问题是如何开始用户体验设计，他的回答总是没有什么能替代实战经验。"
+    },
+    {
+      "question_no": 17,
+      "category": "职场生活",
+      "subcategory": "职业规划与发展",
+      "passage_name": "passage 1",
+      "options": [
+        "A) Core skills.",
+        "B) Higher education.",
+        "C) Capability.",
+        "D) Adaptability."
+      ],
+      "answer": "D",
+      "key_sentence": "Being effective requires adaptability-something you don't really learn in school, much less in a 6-month training camp.",
+      "explanation": "文章提到，要高效工作需要有适应性，这是在学校里学不到的，更不用说在短期训练营了。"
+    },
+    {
+      "question_no": 18,
+      "category": "职场生活",
+      "subcategory": "职业规划与发展",
+      "passage_name": "passage 1",
+      "options": [
+        "A) Face challenges.",
+        "B) Start anywhere.",
+        "C) Pursue roles in teams.",
+        "D) Follow their own path."
+      ],
+      "answer": "B",
+      "key_sentence": "You can start anywhere as long as you know your end goal and you commit to actively pursuing opportunities to learn and grow along the way.",
+      "explanation": "文章最后提到，只要你知道自己的最终目标，并致力于在这个过程中学习和成长，你可以从任何地方开始起步。"
+    },
+    {
+      "question_no": 19,
+      "category": "校园生活",
+      "subcategory": "教育教学与管理",
+      "passage_name": "passage 2",
+      "options": [
+        "A) To allow students more freedom in their academic work.",
+        "B) To enable teachers to interact more with their students.",
+        "C) To engage students more in their learning.",
+        "D) To respond actively to students' requests."
+      ],
+      "answer": "C",
+      "key_sentence": "When planning for this year, our principal asked what needed to change to engage students more in their learning.",
+      "explanation": "文章开头提到，校长询问需要做出什么改变，才能让学生更多投入到学习中。"
+    },
+    {
+      "question_no": 20,
+      "category": "校园生活",
+      "subcategory": "教育教学与管理",
+      "passage_name": "passage 2",
+      "options": [
+        "A) Rearranging most traditional chairs and desks.",
+        "B) Adopting a variety of different seating options.",
+        "C) Shifting from traditional teaching to task-based learning.",
+        "D) Using new furniture to create a comfortable environment."
+      ],
+      "answer": "B",
+      "key_sentence": "For us, flexible seating has meant removing most of the traditional chairs and desks and introducing a variety of different seating options to promote student engagement.",
+      "explanation": "文章解释说，对我们而言，灵活座位意味着移除大部分传统桌椅，并且给学生提供不同的座位选择来提高学生的参与度。"
+    },
+    {
+      "question_no": 21,
+      "category": "校园生活",
+      "subcategory": "教育教学与管理",
+      "passage_name": "passage 2",
+      "options": [
+        "A) A change to teachers' opinion of their students.",
+        "B) A harmonious relationship among its students.",
+        "C) A strengthened effect of its discipline.",
+        "D) A win for all people involved."
+      ],
+      "answer": "D",
+      "key_sentence": "It is a win for all concerned.",
+      "explanation": "文章最后一句总结道，这种灵活座位的做法对于所有相关的人来说都是双赢的。"
+    },
+    {
+      "question_no": 22,
+      "category": "校园生活",
+      "subcategory": "教育政策与家庭影响",
+      "passage_name": "passage 3",
+      "options": [
+        "A) They arrived late for their first day of school.",
+        "B) They weren't informed of the school's updated rules.",
+        "C) They answered their headteacher's email in an impolite way.",
+        "D) They didn't wear the shoes required by the school's new policy."
+      ],
+      "answer": "D",
+      "key_sentence": "Dozens of British students arriving for their first day of school on Tuesday were sent home over their shoes.",
+      "explanation": "文章开头提到，数十名学生在开学第一天被送回家，原因是学校校服政策发生改变，学校要求穿学生特定的黑色鞋子，而他们没有穿。"
+    },
+    {
+      "question_no": 23,
+      "category": "校园生活",
+      "subcategory": "教育政策与家庭影响",
+      "passage_name": "passage 3",
+      "options": [
+        "A) Panic.",
+        "B) Anger.",
+        "C) Disputes.",
+        "D) Riots."
+      ],
+      "answer": "A",
+      "key_sentence": "The price of school uniforms can spark panic among families struggling with a high cost of living.",
+      "explanation": "文章提到，对于那些在高生活成本下挣扎的家庭来说，校服的价格可能会引发恐慌。"
+    },
+    {
+      "question_no": 24,
+      "category": "校园生活",
+      "subcategory": "教育政策与家庭影响",
+      "passage_name": "passage 3",
+      "options": [
+        "A) They rendered the school unique in the district.",
+        "B) They enhanced the positive image of the school.",
+        "C) They improved student behavior and performance.",
+        "D) They strengthened the school's discipline and order."
+      ],
+      "answer": "C",
+      "key_sentence": "Harris held that strengthened rules around school uniforms improved student outcomes and behavior.",
+      "explanation": "校长哈里斯坚持认为，学校加强校服规定管理提高了学生的成绩，改善了他们的行为。"
+    },
+    {
+      "question_no": 25,
+      "category": "校园生活",
+      "subcategory": "教育政策与家庭影响",
+      "passage_name": "passage 3",
+      "options": [
+        "A) Tighten her monthly budget.",
+        "B) Turn to her parents for help.",
+        "C) Borrow £65 from her friend.",
+        "D) Postpone paying her other bills."
+      ],
+      "answer": "B",
+      "key_sentence": "Lucinda May, mom of a Tavern student said that she had to ask her parents for £65 to buy her child the correct pair of shoes.",
+      "explanation": "文章最后提到，一位名叫露辛达·梅的母亲不得不向她的父母索要65英镑，才能给孩子买符合要求的鞋子。"
+    }
+  ],
+  "passages": [
+    {
+      "id": 1,
+      "name": "news report 1",
+      "audio_file": "/audio/exam/202512set1/exam-202512-set1-passage-0.mp3",
+      "questions": [
+        {
+          "question_no": 1,
+          "category": "社会生活",
+          "subcategory": "动物趣闻与动物保护",
+          "passage_name": "news report 1",
+          "options": [
+            "A) At the gate of a grade school in Kent.",
+            "B) Under the engine cover of a man's car.",
+            "C) Inside the car of David King's neighbour.",
+            "D) Outside the office of a charity foundation."
+          ],
+          "answer": "B",
+          "key_sentence": "The black cat was found curled up under the engine cover of David King's car when he decided to do an oil check after dropping his grandson off at school in Kent.",
+          "explanation": "新闻报道开头明确指出，大卫·金送孙子上学后决定检查一下汽车机油时，发现那只黑猫蜷缩在他的汽车引擎盖下。"
+        },
+        {
+          "question_no": 2,
+          "category": "社会生活",
+          "subcategory": "动物趣闻与动物保护",
+          "passage_name": "news report 1",
+          "options": [
+            "A) It got reunited with its owner.",
+            "B) It was injured during the rescue.",
+            "C) It was placed in the care of a UK charity.",
+            "D) It became a pet of Mr. King's grandson."
+          ],
+          "answer": "A",
+          "key_sentence": "Following a rescue by UK charity Cats Protection, the 4-year-old cat was later reunited with its owner, Mr. King's neighbour.",
+          "explanation": "新闻报道最后提到，在英国慈善机构“猫咪保护”的救援下，这只4岁的猫后来与它的主人（金先生的邻居）团聚了。"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "news report 2",
+      "audio_file": "/audio/exam/202512set1/exam-202512-set1-passage-1.mp3",
+      "questions": [
+        {
+          "question_no": 3,
+          "category": "体育休闲",
+          "subcategory": "体育赛事与特殊奥运",
+          "passage_name": "news report 2",
+          "options": [
+            "A) The reunion of this year's Olympic gold medalists.",
+            "B) The opening of the Special Olympics Spring Games.",
+            "C) The first important political event in the next five years.",
+            "D) The 100th anniversary celebration of Methodist University."
+          ],
+          "answer": "B",
+          "key_sentence": "In less than a month, the Special Olympic Spring Games will make a return to Fayetteville.",
+          "explanation": "文章开头提到，不到一个月后，特殊奥林匹克春季运动会将重返费耶特维尔。"
+        },
+        {
+          "question_no": 4,
+          "category": "体育休闲",
+          "subcategory": "体育赛事与特殊奥运",
+          "passage_name": "news report 2",
+          "options": [
+            "A) Volunteers visit the Games' website to sign up.",
+            "B) Children play in a fun tent and enjoy themselves fully.",
+            "C) Organizers devote their time and energy to the Games.",
+            "D) Athletes with special needs triumph in the Games."
+          ],
+          "answer": "D",
+          "key_sentence": "Kowalczyk said it's rewarding to see athletes with special needs triumph in the games.",
+          "explanation": "文章引用了活动组织者本杰明·科瓦尔奇克的话，他说看到有特殊需求的运动员在比赛中获胜是非常有意义的。"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "news report 3",
+      "audio_file": "/audio/exam/202512set1/exam-202512-set1-passage-2.mp3",
+      "questions": [
+        {
+          "question_no": 5,
+          "category": "商业经济",
+          "subcategory": "商业纠纷与处理",
+          "passage_name": "news report 3",
+          "options": [
+            "A) Compensate for the Swiss manufacturer's loss.",
+            "B) Change the wrapping of its commodities.",
+            "C) Destroy its imitation chocolate rabbits.",
+            "D) Defend itself in the country's commercial court."
+          ],
+          "answer": "C",
+          "key_sentence": "A German supermarket has been ordered to destroy its chocolate rabbits after it lost a court battle with the Swiss chocolate manufacturer.",
+          "explanation": "文章开头指出，一家德国超市在输掉与瑞士巧克力制造商的官司后，被勒令销毁其巧克力兔子。"
+        },
+        {
+          "question_no": 6,
+          "category": "商业经济",
+          "subcategory": "商业纠纷与处理",
+          "passage_name": "news report 3",
+          "options": [
+            "A) It could be reused in other products.",
+            "B) It could be resold cheaper to avoid waste.",
+            "C) It could be reshaped into animals other than rabbits.",
+            "D) It could be rewrapped and sold by the budget supermarket."
+          ],
+          "answer": "A",
+          "key_sentence": "It ordered that all the imitation rabbits be destroyed, but suggested the chocolate needn't be wasted. It could be melted for use in other products.",
+          "explanation": "文章提到，法院下令销毁仿制兔子，但建议不必浪费巧克力，可以融化后用于其他产品。"
+        },
+        {
+          "question_no": 7,
+          "category": "商业经济",
+          "subcategory": "商业纠纷与处理",
+          "passage_name": "news report 3",
+          "options": [
+            "A) To be fair to the German supermarkets.",
+            "B) To protect chocolate retailers' interests.",
+            "C) To prevent consumers' possible confusion.",
+            "D) To boost the growth of the chocolate industry."
+          ],
+          "answer": "C",
+          "key_sentence": "It said even though there are some differences between the two products, there was still the possibility of confusion for consumers.",
+          "explanation": "文章解释了瑞士最高法院推翻商事法院裁决的原因：尽管两种产品存在一些差异，但仍有可能导致消费者混淆。"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "conversation 1",
+      "audio_file": "/audio/exam/202512set1/exam-202512-set1-passage-3.mp3",
+      "questions": [
+        {
+          "question_no": 8,
+          "category": "社会生活",
+          "subcategory": "动物保护与饮食习惯",
+          "passage_name": "conversation 1",
+          "options": [
+            "A) Pass a book to him.",
+            "B) Make a vegetable dish.",
+            "C) Return the handbook to him.",
+            "D) Meet his sister's boyfriend."
+          ],
+          "answer": "A",
+          "key_sentence": "Can you please hand me that book over there?",
+          "explanation": "对话一开始，男士就请求女士把那本书递给他，因为书里有制作冬季豆类沙拉的说明。"
+        },
+        {
+          "question_no": 9,
+          "category": "社会生活",
+          "subcategory": "动物保护与饮食习惯",
+          "passage_name": "conversation 1",
+          "options": [
+            "A) It doesn't sound practical for her.",
+            "B) It would do harm to one's muscles.",
+            "C) It would reduce one's protein intake.",
+            "D) It doesn't seem to be a balanced diet."
+          ],
+          "answer": "D",
+          "key_sentence": "That doesn't sound like a very balanced diet.",
+          "explanation": "当男士提到，他姐姐的男朋友是素食主义者，只吃蔬菜不吃肉时，女士评论说，听起来这样的饮食不是非常均衡。"
+        },
+        {
+          "question_no": 10,
+          "category": "社会生活",
+          "subcategory": "动物保护与饮食习惯",
+          "passage_name": "conversation 1",
+          "options": [
+            "A) To improve his health.",
+            "B) To protect animal rights.",
+            "C) To stick to his religious belief.",
+            "D) To follow a trendy lifestyle."
+          ],
+          "answer": "B",
+          "key_sentence": "He's an animal activist. He's always been very sensitive and sympathizes with animals.",
+          "explanation": "男士解释说，他姐姐的男朋友之所以是素食主义者，是因为他是一名动物活动家，非常同情动物，致力于保护动物权益。"
+        },
+        {
+          "question_no": 11,
+          "category": "社会生活",
+          "subcategory": "动物保护与饮食习惯",
+          "passage_name": "conversation 1",
+          "options": [
+            "A) The torture and distress dolphins suffer in parks.",
+            "B) The urgency of joining an animal rights group.",
+            "C) The gloomy environments animals are kept in.",
+            "D) The necessity of having zoos and eating meat."
+          ],
+          "answer": "D",
+          "key_sentence": "Not all zoos and animal parks have the most favorable conditions, but without them, it just wouldn't be feasible to learn about animals and their environments.",
+          "explanation": "对话结束时，女士表示如果没有动物园，就无法了解动物及其生活环境，而且她无法放弃吃肉，比如在观看棒球比赛时吃热狗，男士诚实地说他也同意。这表明两人都认为动物园和吃肉都有其必要性。"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "conversation 2",
+      "audio_file": "/audio/exam/202512set1/exam-202512-set1-passage-4.mp3",
+      "questions": [
+        {
+          "question_no": 12,
+          "category": "医疗健康",
+          "subcategory": "睡眠与健康研究",
+          "passage_name": "conversation 2",
+          "options": [
+            "A) The part about not eating on board the plane.",
+            "B) The part about air travel in the past.",
+            "C) The part about getting over jetlag.",
+            "D) The part about avoiding sleeping on the plane."
+          ],
+          "answer": "C",
+          "key_sentence": "The part about overcoming jet lag was interesting.",
+          "explanation": "女生询问男士有没有看昨晚关于航空旅行的电视节目，男士提到他看了，并特别指出克服时差反应的部分很有趣。"
+        },
+        {
+          "question_no": 13,
+          "category": "医疗健康",
+          "subcategory": "睡眠与健康研究",
+          "passage_name": "conversation 2",
+          "options": [
+            "A) Try following the advice given by the expert on the show.",
+            "B) Concentrate on reading articles recommended by experts.",
+            "C) Have meals as usual to stay away from hunger.",
+            "D) Take a nap to adjust to a new time zone."
+          ],
+          "answer": "A",
+          "key_sentence": "So I guess I'll give it a try next time I fly a long distance.",
+          "explanation": "男士说，节目中的专家引用了研究来论证她的建议（不吃东西、不睡觉），所以他打算下次长途飞行时尝试一下。"
+        },
+        {
+          "question_no": 14,
+          "category": "医疗健康",
+          "subcategory": "睡眠与健康研究",
+          "passage_name": "conversation 2",
+          "options": [
+            "A) She has been well treated when traveling.",
+            "B) She does not have to worry about jetlag.",
+            "C) She can spend a lot of time vacationing.",
+            "D) She does not have any problem flying."
+          ],
+          "answer": "B",
+          "key_sentence": "So I guess I'm lucky that I can still adjust to different time zones well.",
+          "explanation": "女士提到，专家说四十岁后时差问题通常会更严重，而她觉得自己很幸运，因为她现在仍然能很好地适应不同的时区，这也意味着她不必担心时差问题。"
+        },
+        {
+          "question_no": 15,
+          "category": "医疗健康",
+          "subcategory": "睡眠与健康研究",
+          "passage_name": "conversation 2",
+          "options": [
+            "A) It affects twenty-five percent of people.",
+            "B) It has long been ignored by many experts.",
+            "C) It impacts female travelers more seriously.",
+            "D) It has caused heavy losses to many airlines."
+          ],
+          "answer": "A",
+          "key_sentence": "Actually, it was a quarter of people.",
+          "explanation": "对话最后，男士说有20%的人害怕飞行，女士纠正说是四分之一（即25%），并强调这是一个广泛存在的问题。"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "passage 1",
+      "audio_file": "/audio/exam/202512set1/exam-202512-set1-passage-5.mp3",
+      "questions": [
+        {
+          "question_no": 16,
+          "category": "职场生活",
+          "subcategory": "职业规划与发展",
+          "passage_name": "passage 1",
+          "options": [
+            "A) Learning from skilled designers.",
+            "B) Joining a 6-month training camp.",
+            "C) Obtaining real-world experience.",
+            "D) Anticipating actual challenges."
+          ],
+          "answer": "C",
+          "key_sentence": "The most common question I'm asked always centers around how to get started in user experience design, to which my response is always that nothing can substitute real-world experience.",
+          "explanation": "文章开头提到，说话者最常被问到的问题是如何开始用户体验设计，他的回答总是没有什么能替代实战经验。"
+        },
+        {
+          "question_no": 17,
+          "category": "职场生活",
+          "subcategory": "职业规划与发展",
+          "passage_name": "passage 1",
+          "options": [
+            "A) Core skills.",
+            "B) Higher education.",
+            "C) Capability.",
+            "D) Adaptability."
+          ],
+          "answer": "D",
+          "key_sentence": "Being effective requires adaptability-something you don't really learn in school, much less in a 6-month training camp.",
+          "explanation": "文章提到，要高效工作需要有适应性，这是在学校里学不到的，更不用说在短期训练营了。"
+        },
+        {
+          "question_no": 18,
+          "category": "职场生活",
+          "subcategory": "职业规划与发展",
+          "passage_name": "passage 1",
+          "options": [
+            "A) Face challenges.",
+            "B) Start anywhere.",
+            "C) Pursue roles in teams.",
+            "D) Follow their own path."
+          ],
+          "answer": "B",
+          "key_sentence": "You can start anywhere as long as you know your end goal and you commit to actively pursuing opportunities to learn and grow along the way.",
+          "explanation": "文章最后提到，只要你知道自己的最终目标，并致力于在这个过程中学习和成长，你可以从任何地方开始起步。"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "passage 2",
+      "audio_file": "/audio/exam/202512set1/exam-202512-set1-passage-6.mp3",
+      "questions": [
+        {
+          "question_no": 19,
+          "category": "校园生活",
+          "subcategory": "教育教学与管理",
+          "passage_name": "passage 2",
+          "options": [
+            "A) To allow students more freedom in their academic work.",
+            "B) To enable teachers to interact more with their students.",
+            "C) To engage students more in their learning.",
+            "D) To respond actively to students' requests."
+          ],
+          "answer": "C",
+          "key_sentence": "When planning for this year, our principal asked what needed to change to engage students more in their learning.",
+          "explanation": "文章开头提到，校长询问需要做出什么改变，才能让学生更多投入到学习中。"
+        },
+        {
+          "question_no": 20,
+          "category": "校园生活",
+          "subcategory": "教育教学与管理",
+          "passage_name": "passage 2",
+          "options": [
+            "A) Rearranging most traditional chairs and desks.",
+            "B) Adopting a variety of different seating options.",
+            "C) Shifting from traditional teaching to task-based learning.",
+            "D) Using new furniture to create a comfortable environment."
+          ],
+          "answer": "B",
+          "key_sentence": "For us, flexible seating has meant removing most of the traditional chairs and desks and introducing a variety of different seating options to promote student engagement.",
+          "explanation": "文章解释说，对我们而言，灵活座位意味着移除大部分传统桌椅，并且给学生提供不同的座位选择来提高学生的参与度。"
+        },
+        {
+          "question_no": 21,
+          "category": "校园生活",
+          "subcategory": "教育教学与管理",
+          "passage_name": "passage 2",
+          "options": [
+            "A) A change to teachers' opinion of their students.",
+            "B) A harmonious relationship among its students.",
+            "C) A strengthened effect of its discipline.",
+            "D) A win for all people involved."
+          ],
+          "answer": "D",
+          "key_sentence": "It is a win for all concerned.",
+          "explanation": "文章最后一句总结道，这种灵活座位的做法对于所有相关的人来说都是双赢的。"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "name": "passage 3",
+      "audio_file": "/audio/exam/202512set1/exam-202512-set1-passage-7.mp3",
+      "questions": [
+        {
+          "question_no": 22,
+          "category": "校园生活",
+          "subcategory": "教育政策与家庭影响",
+          "passage_name": "passage 3",
+          "options": [
+            "A) They arrived late for their first day of school.",
+            "B) They weren't informed of the school's updated rules.",
+            "C) They answered their headteacher's email in an impolite way.",
+            "D) They didn't wear the shoes required by the school's new policy."
+          ],
+          "answer": "D",
+          "key_sentence": "Dozens of British students arriving for their first day of school on Tuesday were sent home over their shoes.",
+          "explanation": "文章开头提到，数十名学生在开学第一天被送回家，原因是学校校服政策发生改变，学校要求穿学生特定的黑色鞋子，而他们没有穿。"
+        },
+        {
+          "question_no": 23,
+          "category": "校园生活",
+          "subcategory": "教育政策与家庭影响",
+          "passage_name": "passage 3",
+          "options": [
+            "A) Panic.",
+            "B) Anger.",
+            "C) Disputes.",
+            "D) Riots."
+          ],
+          "answer": "A",
+          "key_sentence": "The price of school uniforms can spark panic among families struggling with a high cost of living.",
+          "explanation": "文章提到，对于那些在高生活成本下挣扎的家庭来说，校服的价格可能会引发恐慌。"
+        },
+        {
+          "question_no": 24,
+          "category": "校园生活",
+          "subcategory": "教育政策与家庭影响",
+          "passage_name": "passage 3",
+          "options": [
+            "A) They rendered the school unique in the district.",
+            "B) They enhanced the positive image of the school.",
+            "C) They improved student behavior and performance.",
+            "D) They strengthened the school's discipline and order."
+          ],
+          "answer": "C",
+          "key_sentence": "Harris held that strengthened rules around school uniforms improved student outcomes and behavior.",
+          "explanation": "校长哈里斯坚持认为，学校加强校服规定管理提高了学生的成绩，改善了他们的行为。"
+        },
+        {
+          "question_no": 25,
+          "category": "校园生活",
+          "subcategory": "教育政策与家庭影响",
+          "passage_name": "passage 3",
+          "options": [
+            "A) Tighten her monthly budget.",
+            "B) Turn to her parents for help.",
+            "C) Borrow £65 from her friend.",
+            "D) Postpone paying her other bills."
+          ],
+          "answer": "B",
+          "key_sentence": "Lucinda May, mom of a Tavern student said that she had to ask her parents for £65 to buy her child the correct pair of shoes.",
+          "explanation": "文章最后提到，一位名叫露辛达·梅的母亲不得不向她的父母索要65英镑，才能给孩子买符合要求的鞋子。"
+        }
+      ]
+    }
+  ]
+}
