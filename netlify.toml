@@ -2,8 +2,3 @@
   command = "echo 'No build command needed for static site'"
   publish = "."
 
-[[plugins]]
-  package = "@netlify/plugin-nextjs"
-  
-  [plugins.inputs]
-    disabled = true
