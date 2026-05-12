@@ -1,0 +1,589 @@
+{
+  "exam_type": "CET-4 Listening",
+  "test_set": "202406set2",
+  "questions": [
+    {
+      "question_no": 1,
+      "category": "社会生活",
+      "subcategory": "突发事件与航空安全",
+      "passage_name": "news report 1",
+      "options": [
+        "A) It hit a bird shortly after takeoff.",
+        "B) Its crew members went on strike.",
+        "C) It narrowly escaped a plane crash when turning around.",
+        "D) Its captain got slightly injured during the forced landing."
+      ],
+      "answer": "A",
+      "key_sentence": "A JetBlue Airlines flight from West Palm Beach to New York City was forced to turn around and land Sunday morning after the plane struck a bird.",
+      "explanation": "根据新闻开篇的报道，这架隶属捷蓝航空、原计划飞往纽约的客机在升空后不久意外遭遇鸟击，因此不得不立刻返航并实施紧急降落。"
+    },
+    {
+      "question_no": 2,
+      "category": "社会生活",
+      "subcategory": "突发事件与航空安全",
+      "passage_name": "news report 1",
+      "options": [
+        "A) Panic.",
+        "B) Nervous.",
+        "C) Relieved.",
+        "D) Contented."
+      ],
+      "answer": "C",
+      "key_sentence": "There was total quiet, and then there was relief when the plane came to a stop.",
+      "explanation": "报道引用了机上乘客的描述，指出当飞机最终安全停稳在跑道上时，原本安静的机舱内大家都感到了极大的宽慰与放松（relief对应选项中的relieved）。"
+    },
+    {
+      "question_no": 3,
+      "category": "社会生活",
+      "subcategory": "动物趣闻与动物园",
+      "passage_name": "news report 2",
+      "options": [
+        "A) He is now kept in a secure area.",
+        "B) He has escaped the zoo once again.",
+        "C) He has been caught a second time.",
+        "D) He finally disappeared six days ago."
+      ],
+      "answer": "B",
+      "key_sentence": "But it seems the animal is no fan of the zoo, because yet again he is out on the loose.",
+      "explanation": "播报中指出，这条危险的蛇似乎并不喜欢待在动物园里，因为它在被捕获后再次成功越狱，逃之夭夭。"
+    },
+    {
+      "question_no": 4,
+      "category": "社会生活",
+      "subcategory": "动物趣闻与动物园",
+      "passage_name": "news report 2",
+      "options": [
+        "A) Squeezed.",
+        "B) Threatened.",
+        "C) Disappointed.",
+        "D) Frustrated."
+      ],
+      "answer": "D",
+      "key_sentence": "The snake is a relative newcomer to the zoo but has already been frustrating its staff.",
+      "explanation": "虽然这条蛇刚来到动物园不久，但它接连的逃跑行为已经让负责看管它的员工们深感头疼和无奈（frustrating 对应选项的 frustrated）。"
+    },
+    {
+      "question_no": 5,
+      "category": "社会生活",
+      "subcategory": "交通出行与安全",
+      "passage_name": "news report 3",
+      "options": [
+        "A) It is condemned as a crazy idea.",
+        "B) It is enriching the city's night life.",
+        "C) It is questioned by local residents.",
+        "D) It is giving rise to safety concerns."
+      ],
+      "answer": "D",
+      "key_sentence": "But they're leading to safety concerns, mainly at night when some riders don't follow the rules of the road.",
+      "explanation": "新闻中明确指出，尽管电动自行车在市区越来越受欢迎，但部分骑行者不遵守交通规则的行为，尤其是夜间骑行，已经引起了公众对其安全隐患的忧虑。"
+    },
+    {
+      "question_no": 6,
+      "category": "社会生活",
+      "subcategory": "交通出行与安全",
+      "passage_name": "news report 3",
+      "options": [
+        "A) Avoid entering one-way streets.",
+        "B) Ensure the safety of pedestrians.",
+        "C) Follow all the traffic rules drivers do.",
+        "D) Give way to automobiles at all times."
+      ],
+      "answer": "C",
+      "key_sentence": "Electric bike riders have to follow all the same rules as you would if you were in an automobile.",
+      "explanation": "报道强调，选择骑电动自行车的人不能无视交通法规，他们被要求和机动车驾驶员一样，严格遵守所有相应的道路交通规则。"
+    },
+    {
+      "question_no": 7,
+      "category": "社会生活",
+      "subcategory": "交通出行与安全",
+      "passage_name": "news report 3",
+      "options": [
+        "A) To ease the city's busy traffic.",
+        "B) To bring new life into the city.",
+        "C) To add a new means of transport.",
+        "D) To reduce the city's air pollution."
+      ],
+      "answer": "B",
+      "key_sentence": "City Council Member Anna Cumber was instrumental in introducing the electric bikes to Jacksonville as a way to bring new life into downtown.",
+      "explanation": "市议员 Anna Cumber 积极推动引进电动自行车项目，其初衷是希望借此方式为市中心区域注入新鲜的活力与生机。"
+    },
+    {
+      "question_no": 8,
+      "category": "家庭生活",
+      "subcategory": "亲子教育与财商培养",
+      "passage_name": "conversation 1",
+      "options": [
+        "A) Take it seriously.",
+        "B) Discuss it regularly.",
+        "C) Make it sound scary.",
+        "D) Talk about it openly."
+      ],
+      "answer": "B",
+      "key_sentence": "You should make money a regular topic of discussion.",
+      "explanation": "针对如何培养孩子的理财观念，女士给出的核心建议是将“金钱”作为日常交流中经常谈论的话题，让孩子们习惯于在讨论中学习。"
+    },
+    {
+      "question_no": 9,
+      "category": "家庭生活",
+      "subcategory": "亲子教育与财商培养",
+      "passage_name": "conversation 1",
+      "options": [
+        "A) By shopping around for the best deals.",
+        "B) By making abstract sums relevant.",
+        "C) By citing concrete examples.",
+        "D) By visiting discount stores."
+      ],
+      "answer": "C",
+      "key_sentence": "It's also essential to make money real for children through practical examples.",
+      "explanation": "女士认为，仅仅谈论抽象的数字是不够的，父母需要借助日常生活中的具体实例，才能让孩子们对金钱的价值产生切实的感知。"
+    },
+    {
+      "question_no": 10,
+      "category": "家庭生活",
+      "subcategory": "亲子教育与财商培养",
+      "passage_name": "conversation 1",
+      "options": [
+        "A) Paying their kids to help with housework.",
+        "B) Setting kids a good example by sharing chores.",
+        "C) Giving kids pocket money according to their needs.",
+        "D) Urging kids to deposit some of their gift money."
+      ],
+      "answer": "A",
+      "key_sentence": "We also give our kids pocket money, and the amount they get is linked to chores, such as putting the bins out and emptying the dishwasher.",
+      "explanation": "在探讨零花钱的发放方式时，双方都提到了一种共同的做法：即将零花钱的金额与孩子们承担的家务劳动（如倒垃圾、清理洗碗机等）直接挂钩。"
+    },
+    {
+      "question_no": 11,
+      "category": "家庭生活",
+      "subcategory": "亲子教育与财商培养",
+      "passage_name": "conversation 1",
+      "options": [
+        "A) The importance of cutting down family expenses.",
+        "B) The need to learn important lessons from her elders.",
+        "C) The delight in seeing their savings grow.",
+        "D) The necessity of saving into a pension."
+      ],
+      "answer": "D",
+      "key_sentence": "I am always talking to my elder daughter about the importance of saving into a pension.",
+      "explanation": "对话临近结束时，女士透露她常常会与大女儿交流，向她强调为退休养老而提前进行储蓄是非常必要的。"
+    },
+    {
+      "question_no": 12,
+      "category": "教育访谈",
+      "subcategory": "图书出版与教育改革",
+      "passage_name": "conversation 2",
+      "options": [
+        "A) He is a successful businessman.",
+        "B) He reviews books on political affairs.",
+        "C) He has published a new bestseller.",
+        "D) He has worked in several banks."
+      ],
+      "answer": "C",
+      "key_sentence": "Welcome to Books in Review. Our guest today is John Banks, the author of the bestselling new book, Rewarding Success.",
+      "explanation": "节目一开场，主持人便隆重介绍了今天的受访嘉宾 John Banks，并特别提及他最近刚出版了一本颇受欢迎的畅销书籍。"
+    },
+    {
+      "question_no": 13,
+      "category": "教育访谈",
+      "subcategory": "图书出版与教育改革",
+      "passage_name": "conversation 2",
+      "options": [
+        "A) The man's ideas about education.",
+        "B) The man's academic background.",
+        "C) The man's attempts at drawing public attention.",
+        "D) The man's proposals to solve economic problems."
+      ],
+      "answer": "A",
+      "key_sentence": "But your ideas about education are the most controversial.",
+      "explanation": "女士在访谈中向嘉宾直言，在他的这本新书里，有关教育领域的观点和见解是引发大众讨论和争议最多的部分。"
+    },
+    {
+      "question_no": 14,
+      "category": "教育访谈",
+      "subcategory": "图书出版与教育改革",
+      "passage_name": "conversation 2",
+      "options": [
+        "A) To reduce students' financial burden.",
+        "B) To motivate all students to be successful.",
+        "C) To give students incentive to excel in economics.",
+        "D) To provide remedies for students' poor performance."
+      ],
+      "answer": "B",
+      "key_sentence": "A lot of people think I'm trying to punish students who aren't doing well, when actually my goal is to give all students more incentive to succeed.",
+      "explanation": "面对外界的误解，男士澄清道，他提出这一方案的根本目的并非为了惩罚后进生，而是希望通过这种方式为全体学生提供争取好成绩的激励机制。"
+    },
+    {
+      "question_no": 15,
+      "category": "教育访谈",
+      "subcategory": "图书出版与教育改革",
+      "passage_name": "conversation 2",
+      "options": [
+        "A) Improving school budgeting.",
+        "B) Increasing tuition fees.",
+        "C) Seeking donations.",
+        "D) Raising taxes."
+      ],
+      "answer": "D",
+      "key_sentence": "Well, by increasing taxes or moving money from other areas of the budget into education.",
+      "explanation": "关于如何落实对学生的现金奖励资金来源，男士给出的建议措施之一是提高税收，或者从预算的其他领域调拨资金投入到教育中。"
+    },
+    {
+      "question_no": 16,
+      "category": "心理健康",
+      "subcategory": "社交沟通与生活态度",
+      "passage_name": "passage 1",
+      "options": [
+        "A) To show his sympathy towards people always being busy.",
+        "B) To prevent people from complaining about being \"busy\".",
+        "C) To call on busy people to take care of themselves.",
+        "D) To help busy people to sort out their priorities."
+      ],
+      "answer": "B",
+      "key_sentence": "So I'm launching a campaign to stop people complaining about being \"busy.\"",
+      "explanation": "演讲者在独白中宣告，他正在积极推行一项倡议，旨在呼吁大众停止把“我太忙了”作为日常的口头禅或抱怨的话题。"
+    },
+    {
+      "question_no": 17,
+      "category": "心理健康",
+      "subcategory": "社交沟通与生活态度",
+      "passage_name": "passage 1",
+      "options": [
+        "A) Avoid saying we are busy.",
+        "B) Reflect on their true purpose.",
+        "C) Describe our schedule in detail.",
+        "D) Respond as most busy people do."
+      ],
+      "answer": "A",
+      "key_sentence": "So the next time someone asks you how you are, maybe respond differently.",
+      "explanation": "为了改变把“忙”挂在嘴边的现状，演讲者建议听众在以后面对他人的问候时，尝试用其他的话语来回应，尽量不去强调自己很忙。"
+    },
+    {
+      "question_no": 18,
+      "category": "心理健康",
+      "subcategory": "社交沟通与生活态度",
+      "passage_name": "passage 1",
+      "options": [
+        "A) To show their achievements resulted from great efforts.",
+        "B) To prove they stand out as accomplished professionals.",
+        "C) To cover up their failure to achieve some purpose.",
+        "D) To tell others a complete lie about their inability."
+      ],
+      "answer": "C",
+      "key_sentence": "In my experience, the \"I'm busy\" response is really covering up the fact that they're not actually accomplishing their real purpose.",
+      "explanation": "演讲者根据自己的观察得出结论：很多人嘴上总是挂着“忙”字，其本质不过是在为自己没能达成真正想要的目标而寻找的一块遮羞布。"
+    },
+    {
+      "question_no": 19,
+      "category": "体育休闲",
+      "subcategory": "极限运动与身心挑战",
+      "passage_name": "passage 2",
+      "options": [
+        "A) They will help one reduce fear.",
+        "B) They should become so popular.",
+        "C) They will be less challenging after a time.",
+        "D) They should cover so many different types."
+      ],
+      "answer": "A",
+      "key_sentence": "It may sound strange to say that their main function is to reduce fear.",
+      "explanation": "文章探讨了极限运动的潜在益处，指出虽然听起来有些反常，但这类运动发挥的核心作用其实是帮助参与者克服和降低内心的恐惧感。"
+    },
+    {
+      "question_no": 20,
+      "category": "体育休闲",
+      "subcategory": "极限运动与身心挑战",
+      "passage_name": "passage 2",
+      "options": [
+        "A) To break one's ultimate limits.",
+        "B) To stop being extremely afraid.",
+        "C) To avoid dangerous mistakes.",
+        "D) To enjoy the sports to the full."
+      ],
+      "answer": "C",
+      "key_sentence": "You'll be pushed to your limits, and if you aren't focused you'll make dangerous mistakes.",
+      "explanation": "参与极限运动时，人的身体往往会被逼向极限。文章强调，此时必须保持高度集中的注意力，否则极易导致严重的失误甚至带来危险。"
+    },
+    {
+      "question_no": 21,
+      "category": "体育休闲",
+      "subcategory": "极限运动与身心挑战",
+      "passage_name": "passage 2",
+      "options": [
+        "A) By allowing our motivation to be at an all-time high.",
+        "B) By stopping us hurting the same muscles repeatedly.",
+        "C) By burning as many as 300 calories per hour.",
+        "D) By enabling us to get an all-over workout."
+      ],
+      "answer": "D",
+      "key_sentence": "With extreme sports, you'll be working entirely different muscles, and that means you get an all-over workout.",
+      "explanation": "与普通的健身方式不同，极限运动能够调动身体许多平时不易用到的肌肉群，从而让参与者获得一次覆盖全身的综合性锻炼。"
+    },
+    {
+      "question_no": 22,
+      "category": "职场生活",
+      "subcategory": "团队协作与冲突管理",
+      "passage_name": "passage 3",
+      "options": [
+        "A) It is natural.",
+        "B) It is instrumental.",
+        "C) It is personal.",
+        "D) It is vital."
+      ],
+      "answer": "A",
+      "key_sentence": "Conflict is natural.",
+      "explanation": "文章在引言部分就定下了基调，指出在人际交往和思想碰撞的过程中，产生分歧和冲突是一种极为自然且普遍存在的现象。"
+    },
+    {
+      "question_no": 23,
+      "category": "职场生活",
+      "subcategory": "团队协作与冲突管理",
+      "passage_name": "passage 3",
+      "options": [
+        "A) To guard against being perceived negatively.",
+        "B) To prevent themselves from being isolated.",
+        "C) To conceal personality preferences.",
+        "D) To maintain workplace harmony."
+      ],
+      "answer": "D",
+      "key_sentence": "But too often we get caught in this place where conflict is perceived to be negative something we want to avoid so that we can maintain the harmony of our workplace.",
+      "explanation": "人们在职场中总是刻意回避冲突，主要是因为大家通常把冲突看作是坏事，认为只有避开争执才能保住团队表面上的和睦与宁静。"
+    },
+    {
+      "question_no": 24,
+      "category": "职场生活",
+      "subcategory": "团队协作与冲突管理",
+      "passage_name": "passage 3",
+      "options": [
+        "A) It helps to enhance team spirit.",
+        "B) It stimulates innovative ideas.",
+        "C) It helps to resolve problems.",
+        "D) It facilitates policy-making."
+      ],
+      "answer": "B",
+      "key_sentence": "Without conflict, we're often stuck in this artificial harmony where people don't express potentially innovative ideas for fear that they may start conflict with others.",
+      "explanation": "文章剖析了良性冲突的价值，指出如果一味追求“虚假的和谐”，团队成员就会因为顾忌而闭口不言。相反，富有建设性的冲突往往能够打破僵局，催生出富有创意的新点子。"
+    },
+    {
+      "question_no": 25,
+      "category": "职场生活",
+      "subcategory": "团队协作与冲突管理",
+      "passage_name": "passage 3",
+      "options": [
+        "A) An innovative mind.",
+        "B) Corporate culture.",
+        "C) Mutual trust.",
+        "D) A healthy mentality."
+      ],
+      "answer": "C",
+      "key_sentence": "But if you're in a place where you have a basis of trust, conflict can be extremely productive.",
+      "explanation": "要想让职场中的冲突转化为推动工作前进的积极力量，文章在结尾点明了一个不可或缺的前提：团队成员之间必须建立起坚实的互信基础。"
+    }
+  ],
+  "passages": [
+    {
+      "id": 0,
+      "name": "news report 1",
+      "audio_file": "https://cdn.jsdelivr.net/gh/gaozhiyan/cet4-audios@main/exam/202406-set2/exam-202406-set2-passage-0.mp3?v=v2",
+      "questions": [
+        {
+          "question_no": 1,
+          "category": "社会生活",
+          "subcategory": "突发事件与航空安全",
+          "passage_name": "news report 1"
+        },
+        {
+          "question_no": 2,
+          "category": "社会生活",
+          "subcategory": "突发事件与航空安全",
+          "passage_name": "news report 1"
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "name": "news report 2",
+      "audio_file": "https://cdn.jsdelivr.net/gh/gaozhiyan/cet4-audios@main/exam/202406-set2/exam-202406-set2-passage-1.mp3?v=v2",
+      "questions": [
+        {
+          "question_no": 3,
+          "category": "社会生活",
+          "subcategory": "动物趣闻与动物园",
+          "passage_name": "news report 2"
+        },
+        {
+          "question_no": 4,
+          "category": "社会生活",
+          "subcategory": "动物趣闻与动物园",
+          "passage_name": "news report 2"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "news report 3",
+      "audio_file": "https://cdn.jsdelivr.net/gh/gaozhiyan/cet4-audios@main/exam/202406-set2/exam-202406-set2-passage-2.mp3?v=v2",
+      "questions": [
+        {
+          "question_no": 5,
+          "category": "社会生活",
+          "subcategory": "交通出行与安全",
+          "passage_name": "news report 3"
+        },
+        {
+          "question_no": 6,
+          "category": "社会生活",
+          "subcategory": "交通出行与安全",
+          "passage_name": "news report 3"
+        },
+        {
+          "question_no": 7,
+          "category": "社会生活",
+          "subcategory": "交通出行与安全",
+          "passage_name": "news report 3"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "conversation 1",
+      "audio_file": "https://cdn.jsdelivr.net/gh/gaozhiyan/cet4-audios@main/exam/202406-set2/exam-202406-set2-passage-3.mp3?v=v2",
+      "questions": [
+        {
+          "question_no": 8,
+          "category": "家庭生活",
+          "subcategory": "亲子教育与财商培养",
+          "passage_name": "conversation 1"
+        },
+        {
+          "question_no": 9,
+          "category": "家庭生活",
+          "subcategory": "亲子教育与财商培养",
+          "passage_name": "conversation 1"
+        },
+        {
+          "question_no": 10,
+          "category": "家庭生活",
+          "subcategory": "亲子教育与财商培养",
+          "passage_name": "conversation 1"
+        },
+        {
+          "question_no": 11,
+          "category": "家庭生活",
+          "subcategory": "亲子教育与财商培养",
+          "passage_name": "conversation 1"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "conversation 2",
+      "audio_file": "https://cdn.jsdelivr.net/gh/gaozhiyan/cet4-audios@main/exam/202406-set2/exam-202406-set2-passage-4.mp3?v=v2",
+      "questions": [
+        {
+          "question_no": 12,
+          "category": "教育访谈",
+          "subcategory": "图书出版与教育改革",
+          "passage_name": "conversation 2"
+        },
+        {
+          "question_no": 13,
+          "category": "教育访谈",
+          "subcategory": "图书出版与教育改革",
+          "passage_name": "conversation 2"
+        },
+        {
+          "question_no": 14,
+          "category": "教育访谈",
+          "subcategory": "图书出版与教育改革",
+          "passage_name": "conversation 2"
+        },
+        {
+          "question_no": 15,
+          "category": "教育访谈",
+          "subcategory": "图书出版与教育改革",
+          "passage_name": "conversation 2"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "passage 1",
+      "audio_file": "https://cdn.jsdelivr.net/gh/gaozhiyan/cet4-audios@main/exam/202406-set2/exam-202406-set2-passage-5.mp3?v=v2",
+      "questions": [
+        {
+          "question_no": 16,
+          "category": "心理健康",
+          "subcategory": "社交沟通与生活态度",
+          "passage_name": "passage 1"
+        },
+        {
+          "question_no": 17,
+          "category": "心理健康",
+          "subcategory": "社交沟通与生活态度",
+          "passage_name": "passage 1"
+        },
+        {
+          "question_no": 18,
+          "category": "心理健康",
+          "subcategory": "社交沟通与生活态度",
+          "passage_name": "passage 1"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "passage 2",
+      "audio_file": "https://cdn.jsdelivr.net/gh/gaozhiyan/cet4-audios@main/exam/202406-set2/exam-202406-set2-passage-6.mp3?v=v2",
+      "questions": [
+        {
+          "question_no": 19,
+          "category": "体育休闲",
+          "subcategory": "极限运动与身心挑战",
+          "passage_name": "passage 2"
+        },
+        {
+          "question_no": 20,
+          "category": "体育休闲",
+          "subcategory": "极限运动与身心挑战",
+          "passage_name": "passage 2"
+        },
+        {
+          "question_no": 21,
+          "category": "体育休闲",
+          "subcategory": "极限运动与身心挑战",
+          "passage_name": "passage 2"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "passage 3",
+      "audio_file": "https://cdn.jsdelivr.net/gh/gaozhiyan/cet4-audios@main/exam/202406-set2/exam-202406-set2-passage-7.mp3?v=v2",
+      "questions": [
+        {
+          "question_no": 22,
+          "category": "职场生活",
+          "subcategory": "团队协作与冲突管理",
+          "passage_name": "passage 3"
+        },
+        {
+          "question_no": 23,
+          "category": "职场生活",
+          "subcategory": "团队协作与冲突管理",
+          "passage_name": "passage 3"
+        },
+        {
+          "question_no": 24,
+          "category": "职场生活",
+          "subcategory": "团队协作与冲突管理",
+          "passage_name": "passage 3"
+        },
+        {
+          "question_no": 25,
+          "category": "职场生活",
+          "subcategory": "团队协作与冲突管理",
+          "passage_name": "passage 3"
+        }
+      ]
+    }
+  ]
+}

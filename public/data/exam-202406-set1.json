@@ -1,0 +1,614 @@
+{
+  "exam_type": "CET-4 Listening",
+  "test_set": "202406set1",
+  "questions": [
+    {
+      "question_no": 1,
+      "category": "社会生活",
+      "subcategory": "突发事件与事故处理",
+      "passage_name": "news report 1",
+      "audio_script": "Why did the six residents have to find another place to stay?",
+      "options": [
+        "A) Due to a fire alarm in their apartments.",
+        "B) Because of the smoke and heat damage.",
+        "C) Due to the water used to extinguish the flames.",
+        "D) Because of the collapse of the three-story building."
+      ],
+      "answer": "B",
+      "key_sentence": "Due to smoke and heat damage, the four apartments were declared uninhabitable, and the six residents had to move to another place, officials said. [cite: 1]",
+      "explanation": "事实细节题。新闻提到，由于烟雾和高温造成的损坏，公寓被宣布为不宜居住，导致居民必须搬离。 [cite: 1]"
+    },
+    {
+      "question_no": 2,
+      "category": "社会生活",
+      "subcategory": "突发事件与事故处理",
+      "passage_name": "news report 1",
+      "audio_script": "What does the news report say the Norwalk Fire Marshal is doing?",
+      "options": [
+        "A) Investigating the cause of the incident.",
+        "B) Helping search for the suspect of the crime.",
+        "C) Rescuing the businessmen trapped in the building.",
+        "D) Checking town records for the property developer."
+      ],
+      "answer": "A",
+      "key_sentence": "The Norwalk Fire Marshal is investigating the cause and origin of the fire. [cite: 1]",
+      "explanation": "事实细节题。新闻最后一句明确指出，消防局局长正在调查火灾的原因和源头。 [cite: 1]"
+    },
+    {
+      "question_no": 3,
+      "category": "医疗健康",
+      "subcategory": "医学研究与心理健康",
+      "passage_name": "news report 2",
+      "audio_script": "What have a number of past studies found about season of birth?",
+      "options": [
+        "A) It plays a less important role in one's health than nutrient intake.",
+        "B) It impacts people's health to a lesser degree than sun exposure.",
+        "C) It is associated with people's mental health conditions.",
+        "D) It is linked with older adults' symptoms of depression."
+      ],
+      "answer": "C",
+      "key_sentence": "A number of past studies have found the link between season of birth and mental health diagnoses. [cite: 1]",
+      "explanation": "事实细节题。文中提到，过去的一些研究发现了出生季节与精神健康诊断之间的联系。 [cite: 1]"
+    },
+    {
+      "question_no": 4,
+      "category": "医疗健康",
+      "subcategory": "医学研究与心理健康",
+      "passage_name": "news report 2",
+      "audio_script": "What did the new study find about the relationship between participants' month of birth and symptoms of depression?",
+      "options": [
+        "A) It was indefinite.",
+        "B) It was systematic.",
+        "C) It was straightforward.",
+        "D) It was insignificant."
+      ],
+      "answer": "D",
+      "key_sentence": "Overall, the new study found no significant relationship between participants' month of birth and symptoms of depression or anxiety. [cite: 1]",
+      "explanation": "事实细节题。新研究发现，出生月份与抑郁或焦虑症状之间没有显著关系（no significant），对应 D 项（微不足道的）。 [cite: 1]"
+    },
+    {
+      "question_no": 5,
+      "category": "科普科技",
+      "subcategory": "生物技术与职业犬培育",
+      "passage_name": "news report 3",
+      "audio_script": "What do the researchers' tests show about the cloned dog?",
+      "options": [
+        "A) It has helped solve several murder cases.",
+        "B) It has become a star police dog in Beijing.",
+        "C) It has surpassed its mother in performance.",
+        "D) It has done better than naturally born dogs."
+      ],
+      "answer": "D",
+      "key_sentence": "The clone has already performed better than traditionally bred dogs on several tests. [cite: 1]",
+      "explanation": "事实细节题。测试显示，克隆犬的表现已经优于传统饲养（即自然出生）的警犬。 [cite: 1]"
+    },
+    {
+      "question_no": 6,
+      "category": "科普科技",
+      "subcategory": "生物技术与职业犬培育",
+      "passage_name": "news report 3",
+      "audio_script": "What is the scientists' purpose in cloning police dogs?",
+      "options": [
+        "A) To speed up investigation into criminal cases.",
+        "B) To test the feasibility of cloning technology.",
+        "C) To cut down training expenses.",
+        "D) To reduce their training time."
+      ],
+      "answer": "D",
+      "key_sentence": "If the clone continues to perform as well as expected, it could mean a huge reduction in the training time for police dogs, which usually takes about five years. [cite: 1]",
+      "explanation": "目的理解题。科学家克隆警犬是为了缩短原本长达五年的训练时间。 [cite: 1]"
+    },
+    {
+      "question_no": 7,
+      "category": "科普科技",
+      "subcategory": "生物技术与职业犬培育",
+      "passage_name": "news report 3",
+      "audio_script": "Why does the news report say the scientists' goal is not yet possible?",
+      "options": [
+        "A) Cloning is too complicated a process.",
+        "B) The technology is yet to be accepted.",
+        "C) Cloning is ethically controversial.",
+        "D) The technology is too expensive."
+      ],
+      "answer": "D",
+      "key_sentence": "However, this goal is not yet possible due to the current costs of the technology. [cite: 1]",
+      "explanation": "原因分析题。新闻提到，由于目前技术成本（costs）过高，缩短训练时间的目标尚无法实现。 [cite: 1]"
+    },
+    {
+      "question_no": 8,
+      "category": "文化休闲",
+      "subcategory": "影视文学与学术生活",
+      "passage_name": "conversation 1",
+      "audio_script": "How did the man get to know about the book The Three Body Problem?",
+      "options": [
+        "A) He read it somewhere online.",
+        "B) He heard about it from a coworker.",
+        "C) He read an article reviewing it.",
+        "D) He watched a TV series based on it."
+      ],
+      "answer": "B",
+      "key_sentence": "A colleague mentioned the book, but I've been so busy writing my thesis that I haven't been able to read for pleasure in months. [cite: 1]",
+      "explanation": "细节获取题。男士提到是一位同事（colleague）向他提到了这本书。 [cite: 1]"
+    },
+    {
+      "question_no": 9,
+      "category": "文化休闲",
+      "subcategory": "影视文学与学术生活",
+      "passage_name": "conversation 1",
+      "audio_script": "What does the woman say she can't remember about the book's author?",
+      "options": [
+        "A) His publications.",
+        "B) His first book.",
+        "C) His address.",
+        "D) His name."
+      ],
+      "answer": "D",
+      "key_sentence": "I can't remember his name, but he's written three books in all, and The Three Body Problem is the first in the series. [cite: 1]",
+      "explanation": "细节记忆题。女士明确表示她不记得作者的名字（name）了。 [cite: 1]"
+    },
+    {
+      "question_no": 10,
+      "category": "文化休闲",
+      "subcategory": "影视文学与学术生活",
+      "passage_name": "conversation 1",
+      "audio_script": "What does the man have to do to finish his thesis?",
+      "options": [
+        "A) Collect a lot more data.",
+        "B) Relax a bit less often.",
+        "C) Clarify many new concepts.",
+        "D) Read more reference books."
+      ],
+      "answer": "A",
+      "key_sentence": "I'm a bit overwhelmed with the amount of data I still need to collect to finish my thesis. [cite: 1]",
+      "explanation": "任务理解题。男士提到他还需要收集大量数据（data）来完成论文。 [cite: 1]"
+    },
+    {
+      "question_no": 11,
+      "category": "文化休闲",
+      "subcategory": "影视文学与学术生活",
+      "passage_name": "conversation 1",
+      "audio_script": "What will the man most probably do first after the conversation?",
+      "options": [
+        "A) Find out the show's most interesting episodes.",
+        "B) Watch the series together with the woman.",
+        "C) Get an e-copy of the book to read.",
+        "D) Check to see when the show starts."
+      ],
+      "answer": "C",
+      "key_sentence": "Well, maybe you could download an electronic copy of the book and try to read it before the show starts. [cite: 1]",
+      "explanation": "行动预测题。女士建议他下载电子书阅读，男士认为这是个好主意。 [cite: 1]"
+    },
+    {
+      "question_no": 12,
+      "category": "社会生活",
+      "subcategory": "社区活动与商业合作",
+      "passage_name": "conversation 2",
+      "audio_script": "Why does the woman call the man?",
+      "options": [
+        "A) To check the prices of his farm produce.",
+        "B) To ask the way to the Newcastle City Hall.",
+        "C) To inquire about the vegetarian food festival.",
+        "D) To seek the man's help with her work on the farm."
+      ],
+      "answer": "C",
+      "key_sentence": "I have an inquiry to make. It's about the vegetarian food festival you are holding on the 19th of August at the Newcastle City Hall. [cite: 1]",
+      "explanation": "目的识别题。女士致电是咨询关于即将举办的素食节（vegetarian food festival）的情况。 [cite: 1]"
+    },
+    {
+      "question_no": 13,
+      "category": "社会生活",
+      "subcategory": "社区活动与商业合作",
+      "passage_name": "conversation 2",
+      "audio_script": "What is the man still looking for?",
+      "options": [
+        "A) Bakers.",
+        "B) Vendors.",
+        "C) Vegetarians.",
+        "D) Organisers."
+      ],
+      "answer": "B",
+      "key_sentence": "It says on your website that you are still looking for vendors, and I grow organic vegetables on my farm, as well as doing my own home baking. [cite: 1]",
+      "explanation": "需求定位题。女士提到网站显示还在招募供应商（vendors）。 [cite: 1]"
+    },
+    {
+      "question_no": 14,
+      "category": "社会生活",
+      "subcategory": "社区活动与商业合作",
+      "passage_name": "conversation 2",
+      "audio_script": "What does the man say they are getting close to?",
+      "options": [
+        "A) The issuing of certificates to vendors.",
+        "B) The completion of the baking task.",
+        "C) The festival they are organising.",
+        "D) The deadline for application."
+      ],
+      "answer": "D",
+      "key_sentence": "We're getting close to the deadline, however. [cite: 1]",
+      "explanation": "时效提醒题。男士提醒申请截止日期（deadline）快到了。 [cite: 1]"
+    },
+    {
+      "question_no": 15,
+      "category": "社会生活",
+      "subcategory": "社区活动与商业合作",
+      "passage_name": "conversation 2",
+      "audio_script": "What does the man finally ask the woman to remember?",
+      "options": [
+        "A) The closing date of submission.",
+        "B) The website of his company.",
+        "C) The details of the ceremony.",
+        "D) The organiser's address."
+      ],
+      "answer": "A",
+      "key_sentence": "Remember that the closing date is next Tuesday, the 28th of June. [cite: 1]",
+      "explanation": "关键点强调题。男士最后特别叮嘱女士记住提交申请的截止日期（closing date）。 [cite: 1]"
+    },
+    {
+      "question_no": 16,
+      "category": "社会生活",
+      "subcategory": "户外旅游与生态保护",
+      "passage_name": "passage 1",
+      "audio_script": "Why has wild camping become popular in the UK?",
+      "options": [
+        "A) Most scenic sites have been closed.",
+        "B) Access to official campsites is limited.",
+        "C) Health experts advise going outdoors.",
+        "D) People have more time during the summer."
+      ],
+      "answer": "B",
+      "key_sentence": "In part, this reflects the fact that official campsites have been wholly or partially closed, or are overflowing in a summer when fewer people are going abroad. [cite: 1]",
+      "explanation": "原因归纳题。文中提到，官方露营地（official campsites）的部分关闭是露营流行的原因之一。 [cite: 1]"
+    },
+    {
+      "question_no": 17,
+      "category": "社会生活",
+      "subcategory": "户外旅游与生态保护",
+      "passage_name": "passage 1",
+      "audio_script": "Why is camping banned for part of the summer in public parks?",
+      "options": [
+        "A) It is strongly opposed by nearby residents.",
+        "B) It leads to much waste of public money.",
+        "C) It has caused environmental concerns.",
+        "D) It has created conflicts among campers."
+      ],
+      "answer": "C",
+      "explanation": "细节理解题。公园颁布禁令是因为露营者乱扔垃圾和排泄物，引发了环境担忧。 [cite: 1]",
+      "key_sentence": "Camping in public parks has now been banned for August and the early part of September because campers dump litter, human waste, and even their tents on the grassland. [cite: 1]"
+    },
+    {
+      "question_no": 18,
+      "category": "社会生活",
+      "subcategory": "户外旅游与生态保护",
+      "passage_name": "passage 1",
+      "audio_script": "What does the speaker suggest campers do?",
+      "options": [
+        "A) Look for open land in Scotland.",
+        "B) Leave no trace of their camping.",
+        "C) Avoid getting close to wilderness.",
+        "D) Ask for permission from authorities."
+      ],
+      "answer": "B",
+      "key_sentence": "It would be common sense for people to use small tents and leave no trace of their visit. [cite: 1]",
+      "explanation": "建议理解题。说话者建议露营者做到“不留痕迹”（leave no trace）。 [cite: 1]"
+    },
+    {
+      "question_no": 19,
+      "category": "自然地理",
+      "subcategory": "野生动物保护与生态系统",
+      "passage_name": "passage 2",
+      "audio_script": "What does the passage say about pink dolphins?",
+      "options": [
+        "A) They outcompete mythical creatures.",
+        "B) They usually mind their own business.",
+        "C) They truly exist in the Amazon region.",
+        "D) They resemble alarmingly large snakes."
+      ],
+      "answer": "C",
+      "key_sentence": "While this may seem like a mythical creature, pink dolphins do exist in the Amazon region. [cite: 1]",
+      "explanation": "事实确认题。文章明确指出，粉红河豚确实存在于亚马逊地区。 [cite: 1]"
+    },
+    {
+      "question_no": 20,
+      "category": "自然地理",
+      "subcategory": "野生动物保护与生态系统",
+      "passage_name": "passage 2",
+      "audio_script": "What is the unusual coloring of pink dolphins believed to originate in?",
+      "options": [
+        "A) Scar tissue from dolphins' fighting.",
+        "B) Skin infection from water pollution.",
+        "C) Unhealed wounds from snake bites.",
+        "D) Swimming along in seasonal floods."
+      ],
+      "answer": "A",
+      "key_sentence": "Their unusual coloring is believed to be the result of scar tissue from dolphin fights whether playfighting or a serious bid for a mate. [cite: 1]",
+      "explanation": "成因探究题。这种不寻常的颜色被认为是打斗留下的疤痕组织（scar tissue）。 [cite: 1]"
+    },
+    {
+      "question_no": 21,
+      "category": "自然地理",
+      "subcategory": "野生动物保护与生态系统",
+      "passage_name": "passage 2",
+      "audio_script": "What has become of the Amazon wetland system since 2018?",
+      "options": [
+        "A) It has been shrinking at an astonishing pace.",
+        "B) It has been placed under international protection.",
+        "C) It has been appealing to both freshwater and sea dolphins.",
+        "D) It has been abandoned as a battleground for male dolphins."
+      ],
+      "answer": "B",
+      "key_sentence": "The Amazon wetland system, fed by the Amazon River, is a crucial place for pink dolphins to breed, and since 2018 has been granted internationally protected status. [cite: 1]",
+      "explanation": "事实细节题。自 2018 年起，亚马逊湿地系统已被授予国际保护地位（protected status）。 [cite: 1]"
+    },
+    {
+      "question_no": 22,
+      "category": "社会生活",
+      "subcategory": "家庭教育与经济独立",
+      "passage_name": "passage 3",
+      "audio_script": "What do we learn from a new survey by Merrill Lynch/Age Wave?",
+      "options": [
+        "A) About 58% of young adults call parental support the new normal.",
+        "B) Most adult children enjoy increasing sources of financial support.",
+        "C) A full 70% of the young adults cannot afford to buy a car by themselves.",
+        "D) Most early adults cannot sustain their lifestyles without parental support."
+      ],
+      "answer": "D",
+      "key_sentence": "In a new Merrill Lynch/Age Wave survey, a full 70% of the early adults said they received financial support from their parents in the past year and 58% said they couldn't afford their current lifestyles without it. [cite: 1]",
+      "explanation": "数据理解题。调查显示 58% 的受访者表示没有父母支持无法维持目前的生活方式。 [cite: 1]"
+    },
+    {
+      "question_no": 23,
+      "category": "社会生活",
+      "subcategory": "家庭教育与经济独立",
+      "passage_name": "passage 3",
+      "audio_script": "Why did most young adults in the survey say financial support to children aged 25 to 34 is a bad thing?",
+      "options": [
+        "A) It renders them dependent.",
+        "B) It causes them to lose dignity.",
+        "C) It makes them mentally immature.",
+        "D) It hinders them from getting ahead."
+      ],
+      "answer": "A",
+      "key_sentence": "But 64% of the young adults surveyed said parents' financial support to children age 25 to 34 is \"a bad thing\", because it makes those kids dependent. [cite: 1]",
+      "explanation": "观点理解题。受访者认为对 25-34 岁子女的资助会让其产生依赖性（dependent）。 [cite: 1]"
+    },
+    {
+      "question_no": 24,
+      "category": "社会生活",
+      "subcategory": "家庭教育与经济独立",
+      "passage_name": "passage 3",
+      "audio_script": "What did the respondents in the survey say regarding financial independence?",
+      "options": [
+        "A) It challenges one's willpower.",
+        "B) It results from education.",
+        "C) It calls for due assistance.",
+        "D) It defines adulthood."
+      ],
+      "answer": "D",
+      "key_sentence": "In fact, the respondents said, financial independence defines adulthood. [cite: 1]",
+      "explanation": "定义识别题。文中明确指出，受访者认为经济独立定义了成年（defines adulthood）。 [cite: 1]"
+    },
+    {
+      "question_no": 25,
+      "category": "社会生活",
+      "subcategory": "家庭教育与经济独立",
+      "passage_name": "passage 3",
+      "audio_script": "What is one big reason young adults are struggling?",
+      "options": [
+        "A) Current lifestyles.",
+        "B) Poor budgeting.",
+        "C) College loans.",
+        "D) Emergency expenses."
+      ],
+      "answer": "C",
+      "key_sentence": "One big reason they're struggling is attributed to college loans, of which the average amounts to $37,000. [cite: 1]",
+      "explanation": "根源探究题。助学贷款（college loans）是年轻人奋斗挣扎的主要原因之一。 [cite: 1]"
+    }
+  ],
+  "passages": [
+    {
+      "id": 0,
+      "name": "news report 1",
+      "audio_file": "https://cdn.jsdelivr.net/gh/gaozhiyan/cet4-audios@main/exam/202406set1/exam-202406-set1-passage-0.mp3?v=v2",
+      "questions": [
+        {
+          "question_no": 1,
+          "category": "社会生活",
+          "subcategory": "突发事件与事故处理",
+          "passage_name": "news report 1"
+        },
+        {
+          "question_no": 2,
+          "category": "社会生活",
+          "subcategory": "突发事件与事故处理",
+          "passage_name": "news report 1"
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "name": "news report 2",
+      "audio_file": "https://cdn.jsdelivr.net/gh/gaozhiyan/cet4-audios@main/exam/202406set1/exam-202406-set1-passage-1.mp3?v=v2",
+      "questions": [
+        {
+          "question_no": 3,
+          "category": "医疗健康",
+          "subcategory": "医学研究与心理健康",
+          "passage_name": "news report 2"
+        },
+        {
+          "question_no": 4,
+          "category": "医疗健康",
+          "subcategory": "医学研究与心理健康",
+          "passage_name": "news report 2"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "news report 3",
+      "audio_file": "https://cdn.jsdelivr.net/gh/gaozhiyan/cet4-audios@main/exam/202406set1/exam-202406-set1-passage-2.mp3?v=v2",
+      "questions": [
+        {
+          "question_no": 5,
+          "category": "科普科技",
+          "subcategory": "生物技术与职业犬培育",
+          "passage_name": "news report 3"
+        },
+        {
+          "question_no": 6,
+          "category": "科普科技",
+          "subcategory": "生物技术与职业犬培育",
+          "passage_name": "news report 3"
+        },
+        {
+          "question_no": 7,
+          "category": "科普科技",
+          "subcategory": "生物技术与职业犬培育",
+          "passage_name": "news report 3"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "conversation 1",
+      "audio_file": "https://cdn.jsdelivr.net/gh/gaozhiyan/cet4-audios@main/exam/202406set1/exam-202406-set1-passage-3.mp3?v=v2",
+      "questions": [
+        {
+          "question_no": 8,
+          "category": "文化休闲",
+          "subcategory": "影视文学与学术生活",
+          "passage_name": "conversation 1"
+        },
+        {
+          "question_no": 9,
+          "category": "文化休闲",
+          "subcategory": "影视文学与学术生活",
+          "passage_name": "conversation 1"
+        },
+        {
+          "question_no": 10,
+          "category": "文化休闲",
+          "subcategory": "影视文学与学术生活",
+          "passage_name": "conversation 1"
+        },
+        {
+          "question_no": 11,
+          "category": "文化休闲",
+          "subcategory": "影视文学与学术生活",
+          "passage_name": "conversation 1"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "conversation 2",
+      "audio_file": "https://cdn.jsdelivr.net/gh/gaozhiyan/cet4-audios@main/exam/202406set1/exam-202406-set1-passage-4.mp3?v=v2",
+      "questions": [
+        {
+          "question_no": 12,
+          "category": "社会生活",
+          "subcategory": "社区活动与商业合作",
+          "passage_name": "conversation 2"
+        },
+        {
+          "question_no": 13,
+          "category": "社会生活",
+          "subcategory": "社区活动与商业合作",
+          "passage_name": "conversation 2"
+        },
+        {
+          "question_no": 14,
+          "category": "社会生活",
+          "subcategory": "社区活动与商业合作",
+          "passage_name": "conversation 2"
+        },
+        {
+          "question_no": 15,
+          "category": "社会生活",
+          "subcategory": "社区活动与商业合作",
+          "passage_name": "conversation 2"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "passage 1",
+      "audio_file": "https://cdn.jsdelivr.net/gh/gaozhiyan/cet4-audios@main/exam/202406set1/exam-202406-set1-passage-5.mp3?v=v2",
+      "questions": [
+        {
+          "question_no": 16,
+          "category": "社会生活",
+          "subcategory": "户外旅游与生态保护",
+          "passage_name": "passage 1"
+        },
+        {
+          "question_no": 17,
+          "category": "社会生活",
+          "subcategory": "户外旅游与生态保护",
+          "passage_name": "passage 1"
+        },
+        {
+          "question_no": 18,
+          "category": "社会生活",
+          "subcategory": "户外旅游与生态保护",
+          "passage_name": "passage 1"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "passage 2",
+      "audio_file": "https://cdn.jsdelivr.net/gh/gaozhiyan/cet4-audios@main/exam/202406set1/exam-202406-set1-passage-6.mp3?v=v2",
+      "questions": [
+        {
+          "question_no": 19,
+          "category": "自然地理",
+          "subcategory": "野生动物保护与生态系统",
+          "passage_name": "passage 2"
+        },
+        {
+          "question_no": 20,
+          "category": "自然地理",
+          "subcategory": "野生动物保护与生态系统",
+          "passage_name": "passage 2"
+        },
+        {
+          "question_no": 21,
+          "category": "自然地理",
+          "subcategory": "野生动物保护与生态系统",
+          "passage_name": "passage 2"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "passage 3",
+      "audio_file": "https://cdn.jsdelivr.net/gh/gaozhiyan/cet4-audios@main/exam/202406set1/exam-202406-set1-passage-7.mp3?v=v2",
+      "questions": [
+        {
+          "question_no": 22,
+          "category": "社会生活",
+          "subcategory": "家庭教育与经济独立",
+          "passage_name": "passage 3"
+        },
+        {
+          "question_no": 23,
+          "category": "社会生活",
+          "subcategory": "家庭教育与经济独立",
+          "passage_name": "passage 3"
+        },
+        {
+          "question_no": 24,
+          "category": "社会生活",
+          "subcategory": "家庭教育与经济独立",
+          "passage_name": "passage 3"
+        },
+        {
+          "question_no": 25,
+          "category": "社会生活",
+          "subcategory": "家庭教育与经济独立",
+          "passage_name": "passage 3"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+  }
+
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  }
+}
+
+@layer components {
+  /* 自定义 Markdown 容器样式，替代 @tailwindcss/typography */
+  .markdown-container {
+    @apply space-y-4;
+  }
+  .markdown-container p {
+    @apply mb-4 leading-7 text-slate-700;
+  }
+  .markdown-container p:last-child {
+    @apply mb-0;
+  }
+  .markdown-container h1, 
+  .markdown-container h2, 
+  .markdown-container h3, 
+  .markdown-container h4 {
+    @apply font-bold text-indigo-900 mt-6 mb-3;
+  }
+  .markdown-container h1 { @apply text-2xl; }
+  .markdown-container h2 { @apply text-xl; }
+  .markdown-container h3 { @apply text-lg; }
+  
+  .markdown-container ul {
+    @apply list-disc pl-6 mb-4 space-y-2;
+  }
+  .markdown-container ol {
+    @apply list-decimal pl-6 mb-4 space-y-2;
+  }
+  .markdown-container li {
+    @apply text-slate-700 pl-1;
+  }
+  .markdown-container strong {
+    @apply font-bold text-indigo-700;
+  }
+  .markdown-container em {
+    @apply italic text-slate-600;
+  }
+  .markdown-container code {
+    @apply bg-indigo-50 text-indigo-600 px-1.5 py-0.5 rounded text-sm font-mono border border-indigo-100;
+  }
+  .markdown-container blockquote {
+    @apply border-l-4 border-indigo-300 pl-4 italic text-slate-500 my-4 bg-indigo-50/50 py-2 rounded-r-lg;
+  }
+}
