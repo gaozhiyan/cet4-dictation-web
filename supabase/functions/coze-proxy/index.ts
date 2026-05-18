@@ -16,7 +16,7 @@ serve(async (req: Request) => {
   }
 
   try {
-    const { wrongAnswers, userId, promptType, sentenceData } = await req.json()
+    const { wrongAnswers, userId, promptType, sentenceData, customPrompt } = await req.json()
 
     // 从环境变量中获取 Token 和 Bot ID（如果没有设置，则使用提供的默认值）
     // 注意：改用 COZE_API_TOKEN_V2 避免读取到旧的无效密钥
@@ -56,6 +56,8 @@ ${JSON.stringify(sentenceData, null, 2)}
 3. 根据高频错题的具体文本，推测出学生共同的听音盲区（如特定单词不认识、连读弱读未掌握、或者长难句切分能力弱），并给出针对整个班级的下一步教学重点或复习建议。
 4. 语言精炼，排版美观（使用 Markdown 列表和粗体），控制在 350 字以内。
 `;
+    } else if (promptType === 'custom' && customPrompt) {
+      promptText = customPrompt;
     } else {
       // 检查是否有错题
       if (!wrongAnswers || wrongAnswers.length === 0) {

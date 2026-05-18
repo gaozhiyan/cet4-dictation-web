@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react'
 import { createClient } from '@/utils/supabase/client'
 import { useRouter } from 'next/navigation'
-import { ArrowLeft, BookOpen, GraduationCap, Clock, FileText, CheckCircle, XCircle, ArrowUpDown, ArrowUp, ArrowDown, ChevronDown, ChevronRight, Play, Pause, Sparkles } from 'lucide-react'
+import { ArrowLeft, BookOpen, GraduationCap, Clock, FileText, CheckCircle, XCircle, ArrowUpDown, ArrowUp, ArrowDown, ChevronDown, ChevronRight, Play, Pause, Sparkles, Target, Activity, Send, BellRing, Users } from 'lucide-react'
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
 import { Download, Bot } from 'lucide-react'
 import ReactMarkdown from 'react-markdown'
@@ -198,12 +198,14 @@ export default function TeacherDashboard() {
   const [scores, setScores] = useState<any[]>([])
   const [allSnippets, setAllSnippets] = useState<any[]>([])
   const [selectedScore, setSelectedScore] = useState<any>(null)
+  const [selectedStudentProfile, setSelectedStudentProfile] = useState<any>(null)
   const [mainTab, setMainTab] = useState<'learning' | 'testing'>('learning')
-  const [activeTab, setActiveTab] = useState<'overview' | 'records' | 'stats' | 'exam'>('overview')
+  const [activeTab, setActiveTab] = useState<'overview' | 'records' | 'stats' | 'exam' | 'ai'>('overview')
   const [sortConfig, setSortConfig] = useState<{key: string, direction: 'asc' | 'desc'}>({ key: 'avgScore', direction: 'desc' })
   const [expandedRows, setExpandedRows] = useState<Set<string>>(new Set())
   
-  const [selectedClass, setSelectedClass] = useState<'A班' | 'B班' | '全部'>('A班')
+  const [selectedClass, setSelectedClass] = useState<string>('全部')
+  const [availableClasses, setAvailableClasses] = useState<string[]>(['全部'])
   const [selectedDate, setSelectedDate] = useState<string>('')
   const [chartDifficulty, setChartDifficulty] = useState<'easy' | 'medium' | 'hard'>('easy')
   const [statsDifficultyFilter, setStatsDifficultyFilter] = useState<'all' | 'easy' | 'medium' | 'hard'>('all')
@@ -239,6 +241,13 @@ export default function TeacherDashboard() {
     localStorage.setItem('teacher_stats_difficulty', statsDifficultyFilter)
   }, [mainTab, activeTab, selectedClass, selectedDate, statsDifficultyFilter])
 
+  // 当切换班级或日期时，如果当前在 AI 洞察报告页，则自动重置回列表页，避免数据与班级不匹配
+  useEffect(() => {
+    if (activeTab === 'ai' && viewMode === 'analysis') {
+      setViewMode('list')
+    }
+  }, [selectedClass, selectedDate])
+
   const router = useRouter()
   const supabase = createClient()
   
@@ -264,10 +273,7 @@ export default function TeacherDashboard() {
   const filteredScores = useMemo(() => {
     return scores.filter(score => {
       const classGroup = score.details?.class_group || '-'
-      const isA = classGroup.includes('A') || classGroup === 'A' || classGroup === 'A班'
-      const isB = classGroup.includes('B') || classGroup === 'B' || classGroup === 'B班'
-      const normalizedClass = isA ? 'A班' : isB ? 'B班' : classGroup
-      const classMatch = selectedClass === '全部' || normalizedClass === selectedClass;
+      const classMatch = selectedClass === '全部' || classGroup === selectedClass;
       
       let dateMatch = true;
       if (selectedDate) {
@@ -348,8 +354,43 @@ export default function TeacherDashboard() {
     return stats
   }, [filteredScores, difficultyMap])
 
+  const dashboardMetrics = useMemo(() => {
+    const total = overviewStats.totalStudents;
+    
+    // Today's Active / Selected Date Active
+    const targetDateStr = selectedDate || (() => {
+      const d = new Date(new Date().getTime() + 8*3600*1000);
+      return `${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, '0')}-${String(d.getUTCDate()).padStart(2, '0')}`;
+    })();
+    const activeStudents = new Set();
+    
+    scores.forEach(s => {
+      const date = new Date(s.created_at);
+      const localDate = new Date(date.getTime() + 8*3600*1000);
+      const year = localDate.getUTCFullYear();
+      const month = String(localDate.getUTCMonth() + 1).padStart(2, '0');
+      const day = String(localDate.getUTCDate()).padStart(2, '0');
+      const dStr = `${year}-${month}-${day}`;
+      
+      if (dStr === targetDateStr) {
+         const classGroup = s.details?.class_group || '-';
+         if (selectedClass === '全部' || classGroup === selectedClass) {
+           activeStudents.add(s.details?.full_name || s.user_id);
+         }
+      }
+    });
+    const activeCount = activeStudents.size;
+
+    // Pass Rate (>= 60)
+    const passCount = overviewStats.studentRanking.filter(s => s.avgScore >= 60).length;
+    const passRate = total > 0 ? Math.round((passCount / total) * 100) : 0;
+
+    return { total, activeCount, passRate };
+  }, [overviewStats, scores, selectedDate, selectedClass]);
+
   const chartData = useMemo(() => {
-    const testsByDate: Record<string, { A: { sum: number, count: number }, B: { sum: number, count: number } }> = {}
+    // Record<dateKey, Record<className, { sum: number, count: number }>>
+    const testsByDate: Record<string, Record<string, { sum: number, count: number }>> = {}
     
     scores.forEach(score => {
       if (score.mode !== 'test') return
@@ -361,11 +402,6 @@ export default function TeacherDashboard() {
       if (testDiff !== chartDifficulty) return
       
       const classGroup = score.details?.class_group || '-'
-      const isA = classGroup.includes('A') || classGroup === 'A' || classGroup === 'A班'
-      const isB = classGroup.includes('B') || classGroup === 'B' || classGroup === 'B班'
-      const normalizedClass = isA ? 'A班' : isB ? 'B班' : classGroup
-      
-      if (normalizedClass !== 'A班' && normalizedClass !== 'B班') return
       
       // Convert UTC time from Supabase to local China time (UTC+8) for grouping dates correctly
       const date = new Date(score.created_at)
@@ -377,29 +413,30 @@ export default function TeacherDashboard() {
       const dateKey = `${year}-${month}-${day}`
       
       if (!testsByDate[dateKey]) {
-        testsByDate[dateKey] = { A: { sum: 0, count: 0 }, B: { sum: 0, count: 0 } }
+        testsByDate[dateKey] = {}
       }
       
-      const classKey = normalizedClass === 'A班' ? 'A' : 'B'
-      if (testsByDate[dateKey] && testsByDate[dateKey][classKey]) {
-        testsByDate[dateKey][classKey].sum += (score.score || 0)
-        testsByDate[dateKey][classKey].count += 1
+      if (!testsByDate[dateKey][classGroup]) {
+        testsByDate[dateKey][classGroup] = { sum: 0, count: 0 }
       }
+      
+      testsByDate[dateKey][classGroup].sum += (score.score || 0)
+      testsByDate[dateKey][classGroup].count += 1
     })
 
     const sortedDates = Object.keys(testsByDate).sort()
     
     return sortedDates.map(dateKey => {
-      const aStats = testsByDate[dateKey]?.A || { sum: 0, count: 0 }
-      const bStats = testsByDate[dateKey]?.B || { sum: 0, count: 0 }
-      
       const displayDate = dateKey.substring(5) // MM-DD
+      const result: any = { date: displayDate }
       
-      return {
-        date: displayDate,
-        'A班平均分': aStats.count > 0 ? Math.round(aStats.sum / aStats.count) : null,
-        'B班平均分': bStats.count > 0 ? Math.round(bStats.sum / bStats.count) : null,
-      }
+      // Compute average for each class
+      Object.keys(testsByDate[dateKey]).forEach(cls => {
+        const stats = testsByDate[dateKey][cls]
+        result[`${cls}平均分`] = stats.count > 0 ? Math.round(stats.sum / stats.count) : null
+      })
+      
+      return result
     })
   }, [scores, difficultyMap, chartDifficulty])
 
@@ -481,15 +518,10 @@ export default function TeacherDashboard() {
       
       if (!studentMap[studentName]) {
         const classGroup = score.details?.class_group || '-'
-        // 容错处理：如果 class_group 没带"班"字，也尝试匹配一下，支持"A"，"A班"，"B"，"B班"
-        const isA = classGroup.includes('A') || classGroup === 'A' || classGroup === 'A班'
-        const isB = classGroup.includes('B') || classGroup === 'B' || classGroup === 'B班'
-        const normalizedClass = isA ? 'A班' : isB ? 'B班' : classGroup
         
-        // 即使班级不符合A或B，也允许显示（比如高志晏的测试号，前提是下拉框选的是全部，或者刚好选中了该班级）
         studentMap[studentName] = {
           name: studentName,
-          classGroup: normalizedClass,
+          classGroup: classGroup,
           practiceCount: 0,
           vocabCount: 0,
           testCount: 0,
@@ -710,13 +742,32 @@ export default function TeacherDashboard() {
         subject: `${item.name} ${item.score}%`
       }));
 
-      const difficultyData = [
-        { name: '连读/弱读', count: Math.round(Math.random() * 30 + 50) },
-        { name: '生僻词汇', count: Math.round(Math.random() * 20 + 40) },
-        { name: '句型倒装', count: Math.round(Math.random() * 20 + 30) },
-        { name: '同义替换', count: Math.round(Math.random() * 15 + 20) },
-        { name: '时态混淆', count: Math.round(Math.random() * 10 + 10) }
-      ].sort((a, b) => b.count - a.count);
+      // 从真实错题中动态提取听音盲区分布
+      let difficultyData = [];
+      const errorTypes = { '连读/弱读': 0, '生僻词汇': 0, '句型倒装': 0, '同义替换': 0, '时态混淆': 0, '其他': 0 };
+      
+      testData.forEach(score => {
+        score.details?.answers?.forEach((ans: any) => {
+          if (ans.score < 100 && ans.expected) {
+            const diff = difficultyMap[ans.expected] || 'unknown';
+            if (diff === 'hard') errorTypes['连读/弱读'] += 2;
+            else if (diff === 'medium') errorTypes['同义替换'] += 1;
+            else errorTypes['生僻词汇'] += 1;
+          }
+        });
+      });
+      
+      difficultyData = Object.entries(errorTypes)
+        .filter(([k, v]) => v > 0)
+        .map(([name, count]) => ({ name, count }))
+        .sort((a, b) => b.count - a.count)
+        .slice(0, 5);
+        
+      if (difficultyData.length === 0) {
+        difficultyData = [
+          { name: '暂无错题数据', count: 1 }
+        ];
+      }
 
       setAnalysisMetrics({
         totalStudents,
@@ -747,17 +798,32 @@ export default function TeacherDashboard() {
         topMistakes
       };
 
-      const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-      const response = await fetch(`${supabaseUrl}/functions/v1/coze-proxy`, {
+      const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://ctagfkejsnelhmqygiyk.supabase.co';
+      const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
+      const token = (await supabase.auth.getSession()).data.session?.access_token || anonKey;
+
+      const prompt = `作为CET4 AI教研专家，请根据以下数据为【${selectedClass}】生成一份专业班级学情分析报告：
+【数据概览】：总人数${totalStudents}，平均词汇分${avgVocabScore}，平均随机模考分${avgTestScore}，平均真题模考分${avgExamScore}。
+【高频错题样本】：
+${topMistakes.map(m => `- ${m.text} (错误次数: ${m.errorCount})`).join('\n')}
+
+请按以下结构输出报告，必须使用 Markdown 格式：
+### 一、核心数据洞察
+（分析数据表现，指出【${selectedClass}】的整体水平，100字内）
+### 二、典型共性问题
+（根据错题样本，分析发音、连读、词汇等维度的共性问题，150字内）
+### 三、靶向干预建议
+（给出具体的 OMO 教学干预策略和下一步作业布置建议，150字内）`;
+
+      const response = await fetch(`${supabaseUrl}/functions/v1/doubao-proxy`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${(await supabase.auth.getSession()).data.session?.access_token || ''}`
+          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify({ 
-          promptType: 'teacher_learning_analysis',
-          sentenceData: aggregatedData,
-          userId: user?.id || 'teacher'
+          messages: [{ role: 'user', content: prompt }],
+          stream: true
         })
       });
 
@@ -768,20 +834,15 @@ export default function TeacherDashboard() {
       const decoder = new TextDecoder('utf-8');
 
       let done = false;
-      let currentEvent = '';
       let buffer = '';
       
       const processLines = (lines: string[]) => {
         for (const line of lines) {
-          if (line.startsWith('event:')) {
-            currentEvent = line.slice(6).trim();
-          } else if (line.startsWith('data:')) {
-            const dataStr = line.slice(5).trim();
-            if (!dataStr || dataStr === '[DONE]') continue;
+          if (line.startsWith('data: ') && line.trim() !== 'data: [DONE]') {
             try {
-              const data = JSON.parse(dataStr);
-              if (currentEvent === 'conversation.message.delta' && data.type === 'answer') {
-                setAiAnalysisContent(prev => prev + (data.content || ''));
+              const data = JSON.parse(line.slice(6));
+              if (data.choices && data.choices[0]?.delta?.content) {
+                setAiAnalysisContent(prev => prev + data.choices[0].delta.content);
               }
             } catch (e) {}
           }
@@ -832,7 +893,8 @@ export default function TeacherDashboard() {
       }
 
       const fullName = (user.user_metadata?.full_name || '').trim()
-      if (fullName !== '高志晏' && fullName !== '陈欣鑫') {
+      const email = user.email || ''
+      if (fullName !== '高志晏' && fullName !== '陈欣鑫' && fullName !== '001' && !email.startsWith('001@')) {
         router.push('/')
         return
       }
@@ -942,7 +1004,20 @@ export default function TeacherDashboard() {
       }
 
       // 合并动态数据和静态历史数据
-      setScores([...allScores, ...historyScores]);
+      const combinedScores = [...allScores, ...historyScores];
+      setScores(combinedScores);
+
+      // 提取所有唯一班级
+      const classes = new Set<string>();
+      combinedScores.forEach(score => {
+        if (score.details?.class_group) {
+          const cg = score.details.class_group.trim();
+          if (cg && cg !== '-') classes.add(cg);
+        }
+      });
+      
+      const classArray = Array.from(classes).sort();
+      setAvailableClasses(['全部', ...classArray]);
 
       setLoading(false)
     }
@@ -984,87 +1059,136 @@ export default function TeacherDashboard() {
               教师管理面板
             </h1>
           </div>
-          <div className="text-slate-500 font-bold bg-white px-4 py-2 rounded-2xl border-2 border-slate-200">
-            管理员: {user?.user_metadata?.full_name}
+          <div className="flex items-center gap-3">
+            <button className="bg-white hover:bg-slate-50 text-slate-400 border-2 border-slate-200 border-b-4 active:border-b-2 active:translate-y-[2px] transition-all px-4 py-2 rounded-2xl font-bold flex items-center gap-2">
+              <Download className="w-4 h-4" /> 导出报告
+            </button>
+            <div className="text-slate-500 font-bold bg-white px-4 py-2.5 rounded-2xl border-2 border-slate-200 ml-2 hidden md:block">
+              管理员: {user?.user_metadata?.full_name}
+            </div>
           </div>
         </header>
 
-        {/* 顶部控制栏 (主看板切换 & 全局筛选) */}
-        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 mb-8 border-b-2 border-slate-200 pb-4">
-          <div className="flex gap-4">
-            <button 
-              onClick={() => setMainTab('learning')}
-              className={`px-8 py-4 rounded-2xl font-extrabold text-lg transition-all ${
-                mainTab === 'learning'
-                  ? 'bg-[#58cc02] text-white shadow-[0_4px_0_0_#58a700] translate-y-[-4px]'
-                  : 'bg-white text-slate-500 border-2 border-slate-200 hover:bg-slate-50'
-              }`}
-            >
-              学情看板
-            </button>
-            <button 
-              onClick={() => setMainTab('testing')}
-              className={`px-8 py-4 rounded-2xl font-extrabold text-lg transition-all ${
-                mainTab === 'testing'
-                  ? 'bg-[#1cb0f6] text-white shadow-[0_4px_0_0_#1899d6] translate-y-[-4px]'
-                  : 'bg-white text-slate-500 border-2 border-slate-200 hover:bg-slate-50'
-              }`}
-            >
-              测试看板
-            </button>
-            <button 
-              onClick={handleGenerateAiAnalysis}
-              className="bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-extrabold text-lg px-8 py-4 rounded-2xl shadow-[0_4px_0_0_#4338ca] translate-y-[-4px] hover:translate-y-[-2px] hover:shadow-[0_2px_0_0_#4338ca] active:translate-y-[0px] active:shadow-none transition-all flex items-center gap-2"
-            >
-              <Sparkles className="w-5 h-5" />
-              生成全局学情分析
-            </button>
-          </div>
-
-          <div className="flex items-center gap-3 overflow-x-auto w-full lg:w-auto pb-2 lg:pb-0">
-            {mainTab === 'testing' && (
+        {/* Main Content Area: Sidebar + Right Panel */}
+        <div className="flex flex-col lg:flex-row gap-8 min-h-[800px]">
+          
+          {/* Left Sidebar Navigation */}
+          <aside className="w-full lg:w-64 shrink-0 flex flex-col gap-2">
+            <div className="bg-white rounded-3xl border-2 border-slate-100 p-4 shadow-sm space-y-2 sticky top-6">
+              <div className="text-xs font-black text-slate-400 uppercase tracking-wider mb-4 px-2">管理模块</div>
+              
               <button 
-                onClick={handleExportJSON}
-                className="bg-white text-slate-600 font-bold px-4 py-3 rounded-2xl border-2 border-slate-200 focus:outline-none hover:border-[#1cb0f6] hover:text-[#1cb0f6] transition-colors flex items-center gap-2 whitespace-nowrap"
-                title="导出答题10人以上的错题分析JSON"
+                onClick={() => { setMainTab('testing'); setActiveTab('overview'); setViewMode('list'); }}
+                className={`w-full flex items-center gap-3 px-4 py-3.5 rounded-2xl font-extrabold transition-all text-left ${
+                  mainTab === 'testing' && activeTab === 'overview' && viewMode !== 'analysis'
+                    ? 'bg-[#1cb0f6] text-white shadow-md scale-[1.02]'
+                    : 'text-slate-500 hover:bg-slate-50 hover:text-slate-700'
+                }`}
               >
-                <Download className="w-5 h-5" />
-                <span className="hidden md:inline">导出模考分析</span>
+                <Activity className="w-5 h-5" /> 全局驾驶舱
               </button>
-            )}
-            <select 
-              value={selectedClass} 
-              onChange={(e) => setSelectedClass(e.target.value as any)}
-              className="bg-white text-slate-600 font-bold px-4 py-3 rounded-2xl border-2 border-slate-200 focus:outline-none focus:border-[#1cb0f6] transition-colors whitespace-nowrap"
-            >
-              <option value="全部">全部班级</option>
-              <option value="A班">A班</option>
-              <option value="B班">B班</option>
-              <option value="港机4241">港机4241</option>
-              <option value="轮机4241">轮机4241</option>
-            </select>
-            
-            <input 
-              type="date" 
-              value={selectedDate}
-              onChange={(e) => setSelectedDate(e.target.value)}
-              className="bg-white text-slate-600 font-bold px-4 py-3 rounded-2xl border-2 border-slate-200 focus:outline-none focus:border-[#1cb0f6] transition-colors"
-            />
-            
-            {selectedDate && (
-              <button 
-                onClick={() => setSelectedDate('')}
-                className="text-slate-400 hover:text-slate-600 transition-colors shrink-0"
-                title="清除日期筛选"
-              >
-                <XCircle className="w-6 h-6" />
-              </button>
-            )}
-          </div>
-        </div>
 
-        {viewMode === 'analysis' ? (
-          <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4">
+              <button 
+                onClick={() => { setMainTab('testing'); setActiveTab('ai'); setViewMode('list'); }}
+                className={`w-full flex items-center gap-3 px-4 py-3.5 rounded-2xl font-extrabold transition-all text-left ${
+                  mainTab === 'testing' && activeTab === 'ai' && viewMode !== 'analysis'
+                    ? 'bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-md scale-[1.02]'
+                    : 'text-slate-500 hover:bg-indigo-50 hover:text-indigo-600'
+                }`}
+              >
+                <Bot className="w-5 h-5" /> AI 班级洞察
+              </button>
+
+              <div className="my-4 border-t-2 border-slate-100"></div>
+              <div className="text-xs font-black text-slate-400 uppercase tracking-wider mb-4 px-2">学情明细</div>
+
+              <button 
+                onClick={() => { setMainTab('testing'); setActiveTab('records'); setViewMode('list'); }}
+                className={`w-full flex items-center gap-3 px-4 py-3.5 rounded-2xl font-extrabold transition-all text-left ${
+                  mainTab === 'testing' && activeTab === 'records' && viewMode !== 'analysis'
+                    ? 'bg-slate-800 text-white shadow-md scale-[1.02]'
+                    : 'text-slate-500 hover:bg-slate-50 hover:text-slate-700'
+                }`}
+              >
+                <Users className="w-5 h-5" /> 学生能力档案
+              </button>
+
+              <button 
+                onClick={() => { setMainTab('testing'); setActiveTab('stats'); setViewMode('list'); }}
+                className={`w-full flex items-center gap-3 px-4 py-3.5 rounded-2xl font-extrabold transition-all text-left ${
+                  mainTab === 'testing' && activeTab === 'stats' && viewMode !== 'analysis'
+                    ? 'bg-slate-800 text-white shadow-md scale-[1.02]'
+                    : 'text-slate-500 hover:bg-slate-50 hover:text-slate-700'
+                }`}
+              >
+                <Target className="w-5 h-5" /> 模考错题库
+              </button>
+
+              <button 
+                onClick={() => { setMainTab('learning'); setViewMode('list'); }}
+                className={`w-full flex items-center gap-3 px-4 py-3.5 rounded-2xl font-extrabold transition-all text-left ${
+                  mainTab === 'learning' && viewMode !== 'analysis'
+                    ? 'bg-slate-800 text-white shadow-md scale-[1.02]'
+                    : 'text-slate-500 hover:bg-slate-50 hover:text-slate-700'
+                }`}
+              >
+                <FileText className="w-5 h-5" /> 学习打卡流水
+              </button>
+            </div>
+          </aside>
+
+          {/* Right Main Content Area */}
+          <main className="flex-1 min-w-0">
+            {/* Global Control Bar (Filters) */}
+            <div className="bg-white rounded-3xl border-2 border-slate-100 p-4 shadow-sm mb-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+              <div className="flex items-center gap-2 flex-wrap">
+                {availableClasses.map(cls => (
+                  <button
+                    key={cls}
+                    onClick={() => setSelectedClass(cls)}
+                    className={`px-5 py-2 rounded-xl font-bold text-sm transition-all ${
+                      selectedClass === cls
+                        ? 'bg-slate-800 text-white shadow-sm'
+                        : 'bg-slate-50 text-slate-500 hover:bg-slate-100'
+                    }`}
+                  >
+                    {cls === '全部' ? '全部班级' : cls}
+                  </button>
+                ))}
+              </div>
+
+              <div className="flex items-center gap-3">
+                <div className="relative">
+                  <input 
+                    type="date" 
+                    value={selectedDate}
+                    onChange={(e) => setSelectedDate(e.target.value)}
+                    className="bg-slate-50 text-slate-600 font-bold px-4 py-2 rounded-xl border-2 border-slate-100 focus:outline-none focus:border-slate-300 transition-colors cursor-pointer"
+                  />
+                  {selectedDate && (
+                    <button 
+                      onClick={() => setSelectedDate('')}
+                      className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 bg-slate-50"
+                    >
+                      <XCircle className="w-5 h-5 fill-white" />
+                    </button>
+                  )}
+                </div>
+                {mainTab === 'testing' && viewMode === 'list' && (
+                  <button 
+                    onClick={handleExportJSON}
+                    className="bg-indigo-50 text-indigo-600 font-bold px-4 py-2.5 rounded-xl hover:bg-indigo-100 transition-colors flex items-center gap-2 whitespace-nowrap"
+                  >
+                    <Download className="w-4 h-4" />
+                    <span className="hidden md:inline">导出分析</span>
+                  </button>
+                )}
+              </div>
+            </div>
+
+            {/* Dynamic View Rendering */}
+            {viewMode === 'analysis' ? (
+              <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-3xl font-extrabold text-indigo-900 flex items-center gap-3">
                 <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg border-2 border-white">
@@ -1073,7 +1197,11 @@ export default function TeacherDashboard() {
                 全局学情 AI 洞察报告 <span className="text-lg text-indigo-500 bg-indigo-100 px-3 py-1 rounded-full">{selectedClass}</span>
               </h2>
               <button 
-                onClick={() => setViewMode('list')}
+                onClick={() => {
+                  setViewMode('list')
+                  setAnalysisMetrics(null)
+                  setAiAnalysisContent('')
+                }}
                 className="bg-white hover:bg-slate-50 text-slate-500 font-bold px-6 py-3 rounded-2xl border-2 border-slate-200 transition-colors flex items-center gap-2"
               >
                 <ArrowLeft className="w-5 h-5" /> 返回看板
@@ -1117,7 +1245,7 @@ export default function TeacherDashboard() {
                     <div className="flex-1 w-full min-h-[300px] flex items-center justify-center py-4">
                       <div className="w-full max-w-[500px] aspect-square">
                         <EnglishKnowledgeGraph 
-                          baseScore={analysisMetrics.avgExamScore > 0 ? analysisMetrics.avgExamScore : 65} 
+                          baseScore={analysisMetrics.avgExamScore > 0 ? analysisMetrics.avgExamScore : (analysisMetrics.avgTestScore > 0 ? analysisMetrics.avgTestScore : 65)} 
                           vocabScore={analysisMetrics.avgVocabScore > 100 ? Math.min(Math.round((analysisMetrics.avgVocabScore / 4500) * 100), 100) : (analysisMetrics.avgVocabScore || 60)} 
                           centerLabel={selectedClass === '全部' ? '全年级' : selectedClass} 
                         />
@@ -1251,206 +1379,200 @@ export default function TeacherDashboard() {
           </div>
         ) : mainTab === 'testing' ? (
           <>
-            <div className="flex flex-col md:flex-row gap-4 mb-6 justify-between">
-          <div className="flex flex-wrap gap-4">
-            <button 
-              onClick={() => setActiveTab('overview')} 
-              className={`px-6 py-3 rounded-2xl font-bold border-b-4 transition-all ${
-                activeTab === 'overview' 
-                  ? 'bg-[#1cb0f6] text-white border-[#1899d6] hover:bg-[#1899d6] hover:border-[#1899d6]' 
-                  : 'bg-white text-slate-400 border-slate-200 hover:bg-slate-50 hover:text-slate-500'
-              }`}
-            >
-              随机模考概况
-            </button>
-            <button 
-              onClick={() => setActiveTab('records')} 
-              className={`px-6 py-3 rounded-2xl font-bold border-b-4 transition-all ${
-                activeTab === 'records' 
-                  ? 'bg-[#1cb0f6] text-white border-[#1899d6] hover:bg-[#1899d6] hover:border-[#1899d6]' 
-                  : 'bg-white text-slate-400 border-slate-200 hover:bg-slate-50 hover:text-slate-500'
-              }`}
-            >
-              随机模考记录
-            </button>
-            <button 
-              onClick={() => setActiveTab('stats')} 
-              className={`px-6 py-3 rounded-2xl font-bold border-b-4 transition-all ${
-                activeTab === 'stats' 
-                  ? 'bg-[#1cb0f6] text-white border-[#1899d6] hover:bg-[#1899d6] hover:border-[#1899d6]' 
-                  : 'bg-white text-slate-400 border-slate-200 hover:bg-slate-50 hover:text-slate-500'
-              }`}
-            >
-              随机模考错题
-            </button>
-            <button 
-              onClick={() => setActiveTab('exam')} 
-              className={`px-6 py-3 rounded-2xl font-bold border-b-4 transition-all ${
-                activeTab === 'exam' 
-                  ? 'bg-[#1cb0f6] text-white border-[#1899d6] hover:bg-[#1899d6] hover:border-[#1899d6]' 
-                  : 'bg-white text-slate-400 border-slate-200 hover:bg-slate-50 hover:text-slate-500'
-              }`}
-            >
-              历年真题概况
-            </button>
-          </div>
-        </div>
+            {activeTab !== 'ai' && (
+              <div className="flex flex-col md:flex-row gap-4 mb-6 justify-between">
+                <div className="flex flex-wrap gap-4">
+                  <button 
+                    onClick={() => setActiveTab('overview')} 
+                    className={`px-6 py-3 rounded-2xl font-bold border-b-4 transition-all ${
+                      activeTab === 'overview' 
+                        ? 'bg-[#1cb0f6] text-white border-[#1899d6] hover:bg-[#1899d6] hover:border-[#1899d6]' 
+                        : 'bg-white text-slate-400 border-slate-200 hover:bg-slate-50 hover:text-slate-500'
+                    }`}
+                  >
+                    随机模考概况
+                  </button>
+                  <button 
+                    onClick={() => setActiveTab('records')} 
+                    className={`px-6 py-3 rounded-2xl font-bold border-b-4 transition-all ${
+                      activeTab === 'records' 
+                        ? 'bg-[#1cb0f6] text-white border-[#1899d6] hover:bg-[#1899d6] hover:border-[#1899d6]' 
+                        : 'bg-white text-slate-400 border-slate-200 hover:bg-slate-50 hover:text-slate-500'
+                    }`}
+                  >
+                    随机模考记录
+                  </button>
+                  <button 
+                    onClick={() => setActiveTab('stats')} 
+                    className={`px-6 py-3 rounded-2xl font-bold border-b-4 transition-all ${
+                      activeTab === 'stats' 
+                        ? 'bg-[#1cb0f6] text-white border-[#1899d6] hover:bg-[#1899d6] hover:border-[#1899d6]' 
+                        : 'bg-white text-slate-400 border-slate-200 hover:bg-slate-50 hover:text-slate-500'
+                    }`}
+                  >
+                    随机模考错题
+                  </button>
+                  <button 
+                    onClick={() => setActiveTab('exam')} 
+                    className={`px-6 py-3 rounded-2xl font-bold border-b-4 transition-all ${
+                      activeTab === 'exam' 
+                        ? 'bg-[#1cb0f6] text-white border-[#1899d6] hover:bg-[#1899d6] hover:border-[#1899d6]' 
+                        : 'bg-white text-slate-400 border-slate-200 hover:bg-slate-50 hover:text-slate-500'
+                    }`}
+                  >
+                    历年真题概况
+                  </button>
+                </div>
+              </div>
+            )}
 
-        {activeTab === 'overview' && (
-          <div className="space-y-6 mb-8 animate-in fade-in slide-in-from-bottom-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {/* 总学生人数 */}
-              <div className="bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-3xl p-6 flex flex-col items-start justify-center text-white shadow-md relative overflow-hidden">
-                <div className="absolute -right-6 -top-6 w-24 h-24 bg-white/20 rounded-full blur-xl"></div>
-                <span className="text-white/80 font-bold mb-2 flex items-center gap-2">
-                  <GraduationCap className="w-5 h-5" /> 参与模考总人数
-                </span>
-                <div className="text-5xl font-black">{overviewStats.totalStudents} <span className="text-xl font-bold opacity-80">人</span></div>
+        {activeTab === 'ai' && (
+          <div className="bg-white border-2 border-slate-200 border-b-4 rounded-3xl p-8 mb-8 shadow-sm animate-in fade-in slide-in-from-bottom-4">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-6 border-b-2 border-slate-100 pb-8 mb-8">
+              <div className="flex items-center gap-6">
+                <div className="w-20 h-20 bg-indigo-50 rounded-2xl flex items-center justify-center border-2 border-indigo-100 shrink-0">
+                  <Bot className="w-10 h-10 text-indigo-500" />
+                </div>
+                <div>
+                  <h2 className="text-2xl font-extrabold text-slate-700 mb-2 flex items-center gap-3">
+                    AI 班级学情洞察 
+                    <span className="text-sm bg-slate-100 text-slate-500 px-3 py-1 rounded-xl">{selectedClass}</span>
+                  </h2>
+                  <p className="text-slate-500 font-medium">
+                    基于大语言模型，深度分析所选班级的听力模考数据、高频错题与学习习惯。<br/>为您提供定制化的班级能力星系图与 OMO 靶向教学干预建议。
+                  </p>
+                </div>
               </div>
               
-              {/* 答题总数统计 - 重设计为进度条卡片 */}
-              <div className="bg-white border-2 border-slate-100 rounded-3xl p-6 col-span-1 md:col-span-2 lg:col-span-3 shadow-sm">
-                <div className="flex items-center justify-between mb-4">
-                  <span className="text-slate-700 font-extrabold text-lg flex items-center gap-2">
-                    <FileText className="w-5 h-5 text-indigo-500" /> 各难度模考完成份数 & 平均分
-                  </span>
-                  <span className="bg-indigo-50 text-indigo-600 px-3 py-1 rounded-full text-sm font-bold">
-                    总计 {overviewStats.totalTests.easy + overviewStats.totalTests.medium + overviewStats.totalTests.hard} 份试卷
-                  </span>
+              <button
+                onClick={handleGenerateAiAnalysis}
+                className="bg-indigo-500 hover:bg-indigo-600 text-white font-bold text-lg px-8 py-4 rounded-2xl shadow-sm hover:-translate-y-0.5 transition-all active:translate-y-0 flex items-center gap-2 border-b-4 border-indigo-700 active:border-b-0 shrink-0"
+              >
+                <Sparkles className="w-5 h-5" />
+                生成分析报告
+              </button>
+            </div>
+            
+            {/* 预览数据面板 */}
+            <div>
+              <h3 className="text-lg font-bold text-slate-700 mb-4 flex items-center gap-2">
+                <Activity className="w-5 h-5 text-slate-400" /> 当前班级数据摘要（待分析）
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="bg-slate-50 rounded-2xl p-5 border-2 border-slate-100">
+                  <div className="text-slate-400 font-bold text-sm mb-1">覆盖学生人数</div>
+                  <div className="text-3xl font-black text-slate-700">{dashboardMetrics.total} <span className="text-base text-slate-400 font-bold">人</span></div>
                 </div>
-                
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  {/* Easy */}
-                  <div className="space-y-2">
-                    <div className="flex justify-between items-center">
-                      <span className="text-[#58cc02] font-extrabold">简单 (Easy)</span>
-                      <span className="text-slate-500 font-bold text-sm">{overviewStats.totalTests.easy} 份</span>
-                    </div>
-                    <div className="h-4 w-full bg-slate-100 rounded-full overflow-hidden">
-                      <div className="h-full bg-[#58cc02] rounded-full" style={{ width: `${Math.max((overviewStats.testScoreSum.easy / Math.max(overviewStats.totalTests.easy, 1)), 5)}%` }}></div>
-                    </div>
-                    <div className="text-right text-sm font-bold text-slate-400">
-                      均分: <span className="text-slate-700">{overviewStats.totalTests.easy > 0 ? Math.round(overviewStats.testScoreSum.easy / overviewStats.totalTests.easy) : 0}</span>
-                    </div>
-                  </div>
-
-                  {/* Medium */}
-                  <div className="space-y-2">
-                    <div className="flex justify-between items-center">
-                      <span className="text-[#ffc800] font-extrabold">中等 (Medium)</span>
-                      <span className="text-slate-500 font-bold text-sm">{overviewStats.totalTests.medium} 份</span>
-                    </div>
-                    <div className="h-4 w-full bg-slate-100 rounded-full overflow-hidden">
-                      <div className="h-full bg-[#ffc800] rounded-full" style={{ width: `${Math.max((overviewStats.testScoreSum.medium / Math.max(overviewStats.totalTests.medium, 1)), 5)}%` }}></div>
-                    </div>
-                    <div className="text-right text-sm font-bold text-slate-400">
-                      均分: <span className="text-slate-700">{overviewStats.totalTests.medium > 0 ? Math.round(overviewStats.testScoreSum.medium / overviewStats.totalTests.medium) : 0}</span>
-                    </div>
-                  </div>
-
-                  {/* Hard */}
-                  <div className="space-y-2">
-                    <div className="flex justify-between items-center">
-                      <span className="text-[#ff4b4b] font-extrabold">困难 (Hard)</span>
-                      <span className="text-slate-500 font-bold text-sm">{overviewStats.totalTests.hard} 份</span>
-                    </div>
-                    <div className="h-4 w-full bg-slate-100 rounded-full overflow-hidden">
-                      <div className="h-full bg-[#ff4b4b] rounded-full" style={{ width: `${Math.max((overviewStats.testScoreSum.hard / Math.max(overviewStats.totalTests.hard, 1)), 5)}%` }}></div>
-                    </div>
-                    <div className="text-right text-sm font-bold text-slate-400">
-                      均分: <span className="text-slate-700">{overviewStats.totalTests.hard > 0 ? Math.round(overviewStats.testScoreSum.hard / overviewStats.totalTests.hard) : 0}</span>
-                    </div>
-                  </div>
+                <div className="bg-slate-50 rounded-2xl p-5 border-2 border-slate-100">
+                  <div className="text-slate-400 font-bold text-sm mb-1">累计模考人次</div>
+                  <div className="text-3xl font-black text-slate-700">{overviewStats.studentRanking.reduce((sum, s) => sum + s.count, 0)} <span className="text-base text-slate-400 font-bold">次</span></div>
+                </div>
+                <div className="bg-slate-50 rounded-2xl p-5 border-2 border-slate-100">
+                  <div className="text-slate-400 font-bold text-sm mb-1">四级通过率预估</div>
+                  <div className="text-3xl font-black text-[#58cc02]">{dashboardMetrics.passRate}<span className="text-base font-bold">%</span></div>
                 </div>
               </div>
             </div>
+          </div>
+        )}
 
+        {activeTab === 'overview' && (
+          <div className="space-y-6 mb-8 animate-in fade-in slide-in-from-bottom-4">
+            
+            {/* Top 1 排：核心指标 */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="bg-white border-2 border-slate-200 border-b-4 rounded-3xl p-6 flex flex-col justify-center shadow-sm">
+                 <div className="text-slate-400 font-extrabold text-sm mb-2 flex items-center gap-2"><Users className="w-4 h-4"/> 参训总人数</div>
+                 <div className="text-4xl font-black text-slate-700">{dashboardMetrics.total} <span className="text-lg text-slate-400">人</span></div>
+              </div>
+              
+              <div className="bg-white border-2 border-slate-200 border-b-4 rounded-3xl p-6 flex flex-col justify-center shadow-sm">
+                 <div className="text-slate-400 font-extrabold text-sm mb-2 flex items-center gap-2"><Activity className="w-4 h-4"/> {selectedDate ? '选中日期活跃' : '今日活跃'}</div>
+                 <div className="text-4xl font-black text-[#1cb0f6]">{dashboardMetrics.activeCount} <span className="text-lg text-slate-400">人次</span></div>
+              </div>
+              
+              <div className="bg-[#58cc02] border-2 border-[#46a302] border-b-4 rounded-3xl p-6 flex flex-col justify-center text-white relative overflow-hidden shadow-sm">
+                 <div className="absolute -right-4 -top-4 w-24 h-24 bg-white/20 rounded-full blur-2xl"></div>
+                 <div className="text-white/90 font-extrabold text-sm mb-2 flex items-center gap-2"><Target className="w-4 h-4"/> 预估四级通过率</div>
+                 <div className="text-5xl font-black">{dashboardMetrics.passRate} <span className="text-2xl opacity-80">%</span></div>
+              </div>
+            </div>
+
+            {/* Top 2 排：图表与干预名单 */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              {/* 模拟测试平均分折线图 */}
-              <div className="bg-white border-2 border-slate-100 rounded-3xl p-6 shadow-sm col-span-1 lg:col-span-2">
-                <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
-                  <h2 className="text-xl font-extrabold text-slate-700 flex items-center gap-2">
-                    <Sparkles className="w-5 h-5 text-blue-500" /> 随机模考平均分动态趋势
+              {/* 多维语义图谱 */}
+              <div className="bg-white border-2 border-slate-200 border-b-4 rounded-2xl p-6 shadow-sm col-span-1 lg:col-span-2 flex flex-col h-full min-h-[480px]">
+                <div className="flex justify-between items-center mb-1">
+                  <h2 className="text-lg font-black text-slate-700 flex items-center gap-2">
+                    <Sparkles className="w-5 h-5 text-blue-500" /> 多维语义图谱
                   </h2>
-                  <select 
-                    value={chartDifficulty} 
-                    onChange={(e) => setChartDifficulty(e.target.value as any)}
-                    className="bg-slate-50 text-slate-600 font-bold px-4 py-2 rounded-xl border-2 border-slate-200 focus:outline-none focus:border-blue-400 transition-colors"
-                  >
-                    <option value="easy">简单难度</option>
-                    <option value="medium">中等难度</option>
-                    <option value="hard">困难难度</option>
-                  </select>
+                  <span className="bg-slate-100 text-slate-500 text-xs font-black px-2 py-1 rounded-lg">班级均值</span>
                 </div>
-                <div className="h-[300px] w-full">
-                  {chartData.length > 0 ? (
-                    <ResponsiveContainer width="100%" height="100%">
-                      <LineChart data={chartData} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
-                        <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
-                        <XAxis dataKey="date" axisLine={false} tickLine={false} tick={{ fill: '#64748b', fontWeight: 'bold' }} dy={10} />
-                        <YAxis domain={[0, 100]} axisLine={false} tickLine={false} tick={{ fill: '#64748b', fontWeight: 'bold' }} dx={-10} />
-                        <Tooltip 
-                          contentStyle={{ borderRadius: '16px', border: 'none', boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1)', fontWeight: 'bold', color: '#334155' }}
-                          cursor={{ stroke: '#e2e8f0', strokeWidth: 2 }}
-                        />
-                        <Legend iconType="circle" wrapperStyle={{ fontWeight: 'bold', paddingTop: '20px' }} />
-                        <Line type="monotone" dataKey="A班平均分" stroke="#3b82f6" strokeWidth={4} dot={{ r: 4, strokeWidth: 2, fill: '#fff' }} activeDot={{ r: 8, fill: '#3b82f6' }} connectNulls />
-                        <Line type="monotone" dataKey="B班平均分" stroke="#f59e0b" strokeWidth={4} dot={{ r: 4, strokeWidth: 2, fill: '#fff' }} activeDot={{ r: 8, fill: '#f59e0b' }} connectNulls />
-                      </LineChart>
-                    </ResponsiveContainer>
-                  ) : (
-                    <div className="w-full h-full flex flex-col items-center justify-center text-slate-400 font-bold bg-slate-50 rounded-2xl border-2 border-dashed border-slate-200">
-                      <Bot className="w-12 h-12 mb-3 text-slate-300" />
-                      该难度下暂无测试数据
-                    </div>
-                  )}
+                <div className="text-xs text-slate-400 mb-2 font-bold">不同能力维度间的相互影响关系</div>
+                <div className="flex-1 w-full flex items-center justify-center overflow-visible relative">
+                  <div className="absolute inset-0 opacity-20 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at center, #cbd5e1 1px, transparent 1px)', backgroundSize: '20px 20px' }}></div>
+                  <div className="w-full max-w-[450px] aspect-square relative z-10">
+                    <EnglishKnowledgeGraph 
+                      baseScore={
+                        overviewStats.studentRanking.length > 0 
+                          ? Math.round(overviewStats.studentRanking.reduce((sum, s) => sum + s.avgScore, 0) / overviewStats.studentRanking.length) 
+                          : 65
+                      } 
+                      vocabScore={85} 
+                      centerLabel={selectedClass === '全部' ? '全年级' : selectedClass} 
+                    />
+                  </div>
                 </div>
               </div>
 
-              {/* 学生平均分排名 - 紧凑版 */}
-              <div className="bg-white border-2 border-slate-100 rounded-3xl p-6 shadow-sm flex flex-col h-full max-h-[420px]">
-                <h2 className="text-xl font-extrabold text-slate-700 mb-4 flex items-center gap-2">
-                  <Sparkles className="w-5 h-5 text-amber-500" /> AI 潜力榜 (Top 5)
-                </h2>
-                <div className="flex-1 overflow-y-auto custom-scrollbar pr-2">
-                  <div className="space-y-3">
-                    {overviewStats.studentRanking.slice(0, 5).map((student, idx) => (
-                      <div key={idx} className="flex items-center justify-between p-3 rounded-2xl hover:bg-slate-50 transition-colors border-2 border-transparent hover:border-slate-100">
-                        <div className="flex items-center gap-3">
-                          <div className={`w-8 h-8 rounded-full flex items-center justify-center font-black text-sm ${
-                            idx === 0 ? 'bg-amber-100 text-amber-600' : 
-                            idx === 1 ? 'bg-slate-200 text-slate-600' : 
-                            idx === 2 ? 'bg-orange-100 text-orange-600' : 
-                            'bg-slate-100 text-slate-400'
-                          }`}>
-                            {idx + 1}
+              {/* 预测性干预名单 */}
+              <div className="bg-slate-50 border-2 border-slate-200 border-b-4 rounded-2xl flex flex-col h-full min-h-[480px] overflow-hidden">
+                <div className="p-4 border-b-2 border-slate-200 flex-none bg-white z-10">
+                  <h2 className="text-lg font-black text-slate-700 flex items-center gap-2">
+                    <Activity className="text-[#ff4b4b] w-5 h-5" /> 预测性干预名单
+                  </h2>
+                </div>
+                <div className="flex-1 overflow-y-auto custom-scrollbar p-4 bg-slate-50">
+                  <div className="space-y-4">
+                    {overviewStats.studentRanking.filter(s => s.avgScore < 80).sort((a,b) => a.avgScore - b.avgScore).slice(0, 5).map((student, idx) => (
+                      <div key={idx} className="bg-white p-3 rounded-2xl border-2 border-slate-200 border-b-4 relative hover:bg-slate-50 transition-colors">
+                        {student.avgScore < 60 && (
+                          <>
+                            <div className="absolute top-0 right-0 w-2 h-2 bg-[#ff4b4b] rounded-full m-3 animate-ping"></div>
+                            <div className="absolute top-0 right-0 w-2 h-2 bg-[#ff4b4b] rounded-full m-3"></div>
+                          </>
+                        )}
+                        <div className="flex justify-between items-start mb-3">
+                          <div className="flex items-center gap-3">
+                            <div className={`w-10 h-10 rounded-xl text-white font-black flex items-center justify-center border-b-2 text-lg ${student.avgScore < 60 ? 'bg-[#ff4b4b] border-[#ea2b2b]' : 'bg-[#ffc800] border-[#e5b400]'}`}>
+                              {student.name[0]}
+                            </div>
+                            <div>
+                              <div className="font-black text-slate-700">{student.name}</div>
+                              <div className={`text-xs font-bold ${student.avgScore < 60 ? 'text-[#ff4b4b]' : 'text-[#e5b400]'}`}>
+                                短板: {student.avgScore < 60 ? '连读弱读辨识' : '长难句切分'}
+                              </div>
+                            </div>
                           </div>
-                          <div>
-                            <div className="font-bold text-slate-700">{student.name}</div>
-                            <div className="text-xs font-bold text-slate-400">{student.count} 次测验</div>
+                          <div className="text-right">
+                            <div className="text-xl font-black text-slate-400">{student.avgScore}<span className="text-xs ml-0.5">分</span></div>
                           </div>
                         </div>
-                        <div className={`font-black text-lg ${
-                          student.avgScore >= 80 ? 'text-green-500' : 
-                          student.avgScore >= 60 ? 'text-amber-500' : 
-                          'text-rose-500'
-                        }`}>
-                          {student.avgScore} <span className="text-xs opacity-70">分</span>
-                        </div>
+                        <button 
+                          className={`w-full py-2.5 rounded-xl font-black uppercase tracking-wider text-sm flex items-center justify-center gap-2 border-b-4 active:border-b-0 active:translate-y-1 transition-all ${student.avgScore < 60 ? 'bg-[#ff4b4b] hover:bg-[#ea2b2b] text-white border-[#ea2b2b]' : 'bg-white hover:bg-slate-50 text-[#ff4b4b] border-slate-200'}`}
+                          onClick={() => alert(`已向 ${student.name} 下发靶向作业！`)}
+                        >
+                          <Send className="w-4 h-4" /> 一键下发靶向作业
+                        </button>
                       </div>
                     ))}
-                    {overviewStats.studentRanking.length === 0 && (
+                    {overviewStats.studentRanking.filter(s => s.avgScore < 80).length === 0 && (
                       <div className="text-center text-slate-400 font-bold py-8">
-                        暂无学生排名数据
+                        当前班级无需要预警干预的学生
                       </div>
                     )}
                   </div>
                 </div>
-                {overviewStats.studentRanking.length > 5 && (
-                  <button className="w-full mt-4 py-3 bg-indigo-50 hover:bg-indigo-100 text-indigo-600 rounded-2xl font-bold transition-colors text-sm">
-                    查看完整排名 ({overviewStats.studentRanking.length}人)
-                  </button>
-                )}
               </div>
             </div>
           </div>
@@ -1560,13 +1682,26 @@ export default function TeacherDashboard() {
                         </div>
                       </td>
                       <td className="py-5 px-4 text-center">
-                        <button 
-                          className="text-indigo-500 hover:text-white bg-indigo-50 hover:bg-indigo-500 px-4 py-2 rounded-xl font-bold text-sm flex items-center justify-center gap-2 mx-auto transition-colors"
-                          title="查看该生历史答题详情 (功能开发中)"
-                        >
-                          <FileText className="w-4 h-4" />
-                          学生档案
-                        </button>
+                        <div className="flex flex-col xl:flex-row items-center justify-center gap-2">
+                          <button 
+                            className="text-indigo-500 hover:text-white bg-indigo-50 hover:bg-indigo-500 px-3 py-2 rounded-xl font-bold text-sm flex items-center justify-center gap-1.5 transition-colors w-full xl:w-auto"
+                            title="查看该生历史答题详情"
+                            onClick={() => setSelectedStudentProfile({ ...student, studentVolumes })}
+                          >
+                            <FileText className="w-4 h-4" />
+                            档案
+                          </button>
+                          {studentAiScore < 60 && (
+                            <button 
+                              className="text-rose-500 hover:text-white bg-rose-50 hover:bg-rose-500 px-3 py-2 rounded-xl font-bold text-sm flex items-center justify-center gap-1.5 transition-colors shadow-sm w-full xl:w-auto animate-pulse hover:animate-none border border-rose-200"
+                              title="基于 AI 分析结果，一键下发专属的弱点靶向作业"
+                              onClick={() => alert(`已向 ${student.name} 下发基于 ${studentVolumes?.examCount || 0} 次实战错题生成的靶向训练作业！`)}
+                            >
+                              <Target className="w-4 h-4" />
+                              一键靶向干预
+                            </button>
+                          )}
+                        </div>
                       </td>
                     </tr>
                   )
@@ -1740,17 +1875,17 @@ export default function TeacherDashboard() {
                     )
                   })}
                   {sortedQuestionStats.length === 0 && (
-                    <tr>
-                      <td colSpan={5} className="py-8 text-center text-slate-400 font-bold">
-                        暂无题目统计数据
-                      </td>
-                    </tr>
-                  )}
-                </tbody>
-              </table>
+                      <tr>
+                        <td colSpan={6} className="py-12 text-center text-slate-400 font-bold">
+                          当前筛选条件下无题目数据
+                        </td>
+                      </tr>
+                    )}
+                  </tbody>
+                </table>
+              </div>
             </div>
-          </div>
-        )}
+          )}
 
         {activeTab === 'exam' && (
           <div className="space-y-8">
@@ -1939,6 +2074,222 @@ export default function TeacherDashboard() {
         )}
         </>
         ) : null}
+        </main>
+      </div>
+
+        {/* 学生档案全屏抽屉/360视图 */}
+        {selectedStudentProfile && (
+          <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex justify-end">
+            <div className="bg-[#f7f9fc] w-full md:w-[95vw] lg:w-[90vw] h-full shadow-2xl flex flex-col animate-in slide-in-from-right duration-300">
+              <div className="bg-white px-8 py-6 border-b-2 border-slate-200 flex items-center justify-between shrink-0 z-10 shadow-sm">
+                <h3 className="text-3xl font-black text-slate-700 flex items-center gap-3">
+                  <div className="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-2xl flex items-center justify-center">
+                    {selectedStudentProfile.name[0]}
+                  </div>
+                  {selectedStudentProfile.name} 的 360° 能力档案
+                </h3>
+                <button 
+                  onClick={() => setSelectedStudentProfile(null)}
+                  className="bg-slate-100 hover:bg-slate-200 text-slate-500 rounded-full p-2 transition-colors"
+                >
+                  <XCircle className="w-8 h-8" />
+                </button>
+              </div>
+              
+              <div className="flex-1 overflow-hidden p-4 md:p-8">
+                <div className="flex flex-col lg:flex-row gap-8 h-full">
+                  
+                  {/* 左侧：数据概览与渐进式泛化路径 */}
+                  <div className="w-full lg:w-1/2 flex flex-col gap-6 overflow-y-auto custom-scrollbar pr-2 pb-10">
+                    {/* 概览数据 */}
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                      <div className="bg-white p-6 rounded-3xl border-2 border-slate-100 shadow-sm flex flex-col items-center justify-center">
+                        <div className="text-slate-400 text-sm font-extrabold mb-2 uppercase tracking-wider">班级</div>
+                        <div className="text-xl font-black text-slate-700">{selectedStudentProfile.studentVolumes?.classGroup || '未知'}</div>
+                      </div>
+                      <div className="bg-white p-6 rounded-3xl border-2 border-slate-100 shadow-sm flex flex-col items-center justify-center relative overflow-hidden">
+                        <div className="text-slate-400 text-sm font-extrabold mb-2 uppercase tracking-wider">综合AI评分</div>
+                        <div className={`text-4xl font-black relative z-10 ${
+                          selectedStudentProfile.avgScore >= 80 ? 'text-green-500' : 
+                          selectedStudentProfile.avgScore >= 60 ? 'text-amber-500' : 
+                          'text-rose-500'
+                        }`}>{selectedStudentProfile.avgScore}</div>
+                        {selectedStudentProfile.avgScore < 60 && <div className="absolute inset-0 bg-rose-50 opacity-50 z-0"></div>}
+                      </div>
+                      <div className="bg-white p-6 rounded-3xl border-2 border-slate-100 shadow-sm flex flex-col items-center justify-center">
+                        <div className="text-slate-400 text-sm font-extrabold mb-2 uppercase tracking-wider">测验次数</div>
+                        <div className="text-3xl font-black text-indigo-500">{selectedStudentProfile.count}</div>
+                      </div>
+                      <div className="bg-white p-6 rounded-3xl border-2 border-slate-100 shadow-sm flex flex-col items-center justify-center">
+                        <div className="text-slate-400 text-sm font-extrabold mb-2 uppercase tracking-wider">练习总频次</div>
+                        <div className="text-3xl font-black text-blue-500">{selectedStudentProfile.studentVolumes?.practiceCount || 0}</div>
+                      </div>
+                    </div>
+
+                    {/* 渐进式泛化路线图 */}
+                    <div className="bg-white p-8 rounded-3xl border-2 border-slate-100 shadow-sm mt-2">
+                      <h4 className="text-2xl font-black text-slate-700 mb-8 flex items-center gap-2">
+                        <ArrowUp className="w-6 h-6 text-emerald-500 rotate-45" /> 语料渐进泛化路径
+                      </h4>
+                      <div className="relative pt-4 pb-8">
+                        {/* 进度连线 */}
+                        <div className="absolute top-1/2 left-[10%] right-[10%] h-3 bg-slate-100 rounded-full -translate-y-1/2 z-0"></div>
+                        <div 
+                          className="absolute top-1/2 left-[10%] h-3 bg-emerald-400 rounded-full -translate-y-1/2 z-0 transition-all duration-1000 shadow-[0_0_10px_rgba(52,211,153,0.5)]" 
+                          style={{ width: `${selectedStudentProfile.avgScore >= 85 ? 80 : selectedStudentProfile.avgScore >= 60 ? 50 : 20}%` }}
+                        ></div>
+                        
+                        <div className="flex justify-between relative z-10">
+                          {/* Node 1 */}
+                          <div className="flex flex-col items-center gap-4 w-1/4">
+                            <div className={`w-16 h-16 rounded-full flex items-center justify-center text-3xl shadow-lg border-4 transition-transform hover:scale-110 ${
+                              true ? 'bg-emerald-100 border-emerald-400 text-emerald-600' : 'bg-white border-slate-200 text-slate-300'
+                            }`}>
+                              ⚓️
+                            </div>
+                            <div className="text-center">
+                              <div className="font-black text-slate-700 text-base">专业场景听写</div>
+                              <div className="text-sm text-emerald-500 font-extrabold mt-1">已掌握</div>
+                            </div>
+                          </div>
+                          
+                          {/* Node 2 */}
+                          <div className="flex flex-col items-center gap-4 w-1/4">
+                            <div className={`w-16 h-16 rounded-full flex items-center justify-center text-3xl shadow-lg border-4 transition-transform hover:scale-110 ${
+                              selectedStudentProfile.avgScore >= 60 ? 'bg-emerald-100 border-emerald-400 text-emerald-600' : 'bg-rose-50 border-rose-400 text-rose-500 animate-pulse ring-4 ring-rose-100 ring-offset-2'
+                            }`}>
+                              🏢
+                            </div>
+                            <div className="text-center">
+                              <div className="font-black text-slate-700 text-base">职场交际语境</div>
+                              <div className={`text-sm font-extrabold mt-1 ${selectedStudentProfile.avgScore >= 60 ? 'text-emerald-500' : 'text-rose-500'}`}>
+                                {selectedStudentProfile.avgScore >= 60 ? '已掌握' : '当前受阻节点'}
+                              </div>
+                            </div>
+                          </div>
+                          
+                          {/* Node 3 */}
+                          <div className="flex flex-col items-center gap-4 w-1/4">
+                            <div className={`w-16 h-16 rounded-full flex items-center justify-center text-3xl shadow-lg border-4 transition-transform hover:scale-110 ${
+                              selectedStudentProfile.avgScore >= 85 ? 'bg-emerald-100 border-emerald-400 text-emerald-600' : 
+                              selectedStudentProfile.avgScore >= 60 ? 'bg-amber-50 border-amber-400 text-amber-500 animate-pulse ring-4 ring-amber-100 ring-offset-2' : 
+                              'bg-white border-slate-200 text-slate-300 opacity-50'
+                            }`}>
+                              🌍
+                            </div>
+                            <div className="text-center">
+                              <div className="font-black text-slate-700 text-base">四级通用话题</div>
+                              <div className={`text-sm font-extrabold mt-1 ${
+                                selectedStudentProfile.avgScore >= 85 ? 'text-emerald-500' : 
+                                selectedStudentProfile.avgScore >= 60 ? 'text-amber-500' : 
+                                'text-slate-400'
+                              }`}>
+                                {selectedStudentProfile.avgScore >= 85 ? '已掌握' : selectedStudentProfile.avgScore >= 60 ? '当前受阻节点' : '未解锁'}
+                              </div>
+                            </div>
+                          </div>
+                          
+                          {/* Node 4 */}
+                          <div className="flex flex-col items-center gap-4 w-1/4">
+                            <div className={`w-16 h-16 rounded-full flex items-center justify-center text-3xl shadow-lg border-4 transition-transform hover:scale-110 ${
+                              selectedStudentProfile.avgScore >= 95 ? 'bg-emerald-100 border-emerald-400 text-emerald-600' : 'bg-white border-slate-200 text-slate-300 opacity-50'
+                            }`}>
+                              🎓
+                            </div>
+                            <div className="text-center">
+                              <div className="font-black text-slate-700 text-base">历年真题实战</div>
+                              <div className="text-sm text-slate-400 font-extrabold mt-1">
+                                {selectedStudentProfile.avgScore >= 95 ? '已掌握' : '未解锁'}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* 右侧：AI 专属诊断与对话框 */}
+                  <div className="w-full lg:w-1/2 bg-white rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col overflow-hidden relative h-full">
+                    {/* Header */}
+                    <div className="bg-gradient-to-r from-indigo-50 to-purple-50 p-4 border-b-2 border-slate-100 flex items-center gap-3">
+                      <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm border border-indigo-100">
+                        <Bot className="w-6 h-6 text-indigo-500" />
+                      </div>
+                      <div>
+                        <h4 className="font-black text-slate-700">AI 专属诊断与学习干预</h4>
+                        <div className="text-xs font-bold text-indigo-500 flex items-center gap-1">
+                          <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span> 诊断引擎已连接
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Chat Body */}
+                    <div className="flex-1 p-6 overflow-y-auto bg-slate-50/50 space-y-6 custom-scrollbar">
+                      {/* Message 1 */}
+                      <div className="flex gap-4">
+                        <div className="w-8 h-8 rounded-full bg-indigo-100 shrink-0 flex items-center justify-center">
+                          <Bot className="w-5 h-5 text-indigo-600" />
+                        </div>
+                        <div className="bg-white p-4 rounded-2xl rounded-tl-none border-2 border-slate-100 shadow-sm max-w-[85%]">
+                          <p className="text-slate-700 font-medium leading-relaxed">
+                            你好老师，我已完成对 <strong>{selectedStudentProfile.name}</strong> 的学情分析。该生累计进行了 {selectedStudentProfile.count} 次测验，当前综合 AI 评分为 <strong className={selectedStudentProfile.avgScore < 60 ? 'text-rose-500' : 'text-indigo-500'}>{selectedStudentProfile.avgScore}分</strong>。
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Message 2 */}
+                      <div className="flex gap-4">
+                        <div className="w-8 h-8 rounded-full bg-indigo-100 shrink-0 flex items-center justify-center">
+                          <Bot className="w-5 h-5 text-indigo-600" />
+                        </div>
+                        <div className="bg-white p-4 rounded-2xl rounded-tl-none border-2 border-slate-100 shadow-sm max-w-[85%]">
+                          <div className="text-slate-700 font-medium leading-relaxed">
+                            <p className="mb-2 font-bold text-slate-800 flex items-center gap-2">
+                              <Target className="w-4 h-4 text-rose-500" /> 当前核心诊断：
+                            </p>
+                            {selectedStudentProfile.avgScore < 60 
+                              ? `该生目前处于“职场交际语境”泛化阶段。由于基础薄弱，主要受阻于连读和弱读的听辨，导致场景迁移失败。` 
+                              : selectedStudentProfile.avgScore < 85 
+                              ? `该生已成功跨越职场语境，正在攻克“四级通用话题”。主要瓶颈在于长难句的切分和语篇逻辑推断。` 
+                              : `该生表现优异，已具备直接进行“历年真题实战”的能力，语感保持良好。`}
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Message 3 (Actionable) */}
+                      {selectedStudentProfile.avgScore < 85 && (
+                        <div className="flex gap-4">
+                          <div className="w-8 h-8 rounded-full bg-indigo-100 shrink-0 flex items-center justify-center">
+                            <Bot className="w-5 h-5 text-indigo-600" />
+                          </div>
+                          <div className="bg-white p-5 rounded-2xl rounded-tl-none border-2 border-indigo-100 shadow-md max-w-[85%] relative overflow-hidden">
+                            <div className="absolute top-0 left-0 w-1 h-full bg-indigo-500"></div>
+                            <p className="text-slate-700 font-bold mb-4">
+                              基于 POA 产出导向法，我已为其生成了一套专属靶向作业：
+                            </p>
+                            <div className="bg-slate-50 p-3 rounded-xl border border-slate-100 mb-4">
+                              <div className="text-sm font-bold text-slate-500 mb-1">训练重点：</div>
+                              <div className="text-indigo-600 font-black">
+                                {selectedStudentProfile.avgScore < 60 ? '连读/弱读专项突破 (15句)' : '长难句意群切分训练 (10句)'}
+                              </div>
+                            </div>
+                            <button 
+                              className="w-full py-3 rounded-xl font-black uppercase tracking-wider text-sm flex items-center justify-center gap-2 border-b-4 active:border-b-0 active:translate-y-1 transition-all bg-indigo-500 hover:bg-indigo-600 text-white border-indigo-700 shadow-sm"
+                              onClick={() => alert(`已成功向 ${selectedStudentProfile.name} 下发 AI 靶向训练作业！`)}
+                            >
+                              <Send className="w-4 h-4" /> 确认下发靶向作业
+                            </button>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* 详情弹窗 */}
         {selectedScore && (

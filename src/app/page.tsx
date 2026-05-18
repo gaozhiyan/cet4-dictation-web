@@ -1,10 +1,10 @@
 "use client"
 
-import { useState, useEffect, useRef, useCallback } from 'react'
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react'
 // Client side component
 import { createClient } from '@/utils/supabase/client'
 import { useRouter } from 'next/navigation'
-import { Play, Pause, X, Check, BookOpen, GraduationCap, LogOut, Trophy, ChevronRight, BarChart3, Shield, BrainCircuit, ArrowLeft, Target, Flame, Share2, Medal, Lightbulb, Compass, Headphones, Sparkles, Wand2 } from 'lucide-react'
+import { Play, Pause, X, Check, BookOpen, GraduationCap, LogOut, Trophy, ChevronRight, BarChart3, Shield, BrainCircuit, ArrowLeft, Target, Flame, Share2, Medal, Lightbulb, Compass, Headphones, Sparkles, Wand2, Bot } from 'lucide-react'
 import html2canvas from 'html2canvas'
 
 interface Snippet {
@@ -225,6 +225,149 @@ const RichSentence = ({ text, isCorrect, defaultColorClass = 'text-slate-700' }:
   )
 }
 
+const EnglishKnowledgeGraph = ({ baseScore, vocabScore, centerLabel }: { baseScore: number, vocabScore: number, centerLabel: string }) => {
+  const [hoveredNode, setHoveredNode] = useState<string | null>(null);
+
+  const s = (score: number) => Math.min(Math.max(Math.round(score), 0), 100);
+
+  const nodes = useMemo(() => [
+    { id: 'core', label: centerLabel + '综合听力', score: s(baseScore), x: 300, y: 300, r: 38, type: 'core' },
+    { id: 'vocab', label: '词汇语料', score: s(vocabScore), x: 300, y: 160, r: 30, type: 'domain' },
+    { id: 'grammar', label: '语法结构', score: s(baseScore + 10), x: 440, y: 300, r: 30, type: 'domain' },
+    { id: 'sound', label: '语音解码', score: s(baseScore - 15), x: 300, y: 440, r: 30, type: 'domain' },
+    { id: 'comp', label: '逻辑推断', score: s(baseScore), x: 160, y: 300, r: 30, type: 'domain' },
+    { id: 'v1', label: '高频场景词', score: s(vocabScore + 5), x: 180, y: 80, r: 22, type: 'skill' },
+    { id: 'v2', label: '同义替换', score: s(vocabScore - 10), x: 300, y: 50, r: 22, type: 'skill' },
+    { id: 'v3', label: '固定搭配', score: s(vocabScore), x: 420, y: 80, r: 22, type: 'skill' },
+    { id: 'g1', label: '长难句切分', score: s(baseScore - 10), x: 530, y: 180, r: 22, type: 'skill' },
+    { id: 'g2', label: '时态语态', score: s(baseScore + 15), x: 560, y: 300, r: 22, type: 'skill' },
+    { id: 'g3', label: '虚拟/倒装', score: s(baseScore - 5), x: 530, y: 420, r: 22, type: 'skill' },
+    { id: 's1', label: '连读弱读', score: s(baseScore - 20), x: 420, y: 520, r: 22, type: 'skill' },
+    { id: 's2', label: '失去爆破', score: s(baseScore - 10), x: 300, y: 550, r: 22, type: 'skill' },
+    { id: 's3', label: '意群停顿', score: s(baseScore), x: 180, y: 520, r: 22, type: 'skill' },
+    { id: 'c1', label: '细节捕获', score: s(baseScore + 5), x: 70, y: 420, r: 22, type: 'skill' },
+    { id: 'c2', label: '主旨归纳', score: s(baseScore - 5), x: 40, y: 300, r: 22, type: 'skill' },
+    { id: 'c3', label: '态度/推断', score: s(baseScore - 15), x: 70, y: 180, r: 22, type: 'skill' },
+  ], [baseScore, vocabScore, centerLabel]);
+
+  const links = useMemo(() => [
+    { source: 'core', target: 'vocab' }, { source: 'core', target: 'grammar' },
+    { source: 'core', target: 'sound' }, { source: 'core', target: 'comp' },
+    { source: 'vocab', target: 'v1' }, { source: 'vocab', target: 'v2' }, { source: 'vocab', target: 'v3' },
+    { source: 'grammar', target: 'g1' }, { source: 'grammar', target: 'g2' }, { source: 'grammar', target: 'g3' },
+    { source: 'sound', target: 's1' }, { source: 'sound', target: 's2' }, { source: 'sound', target: 's3' },
+    { source: 'comp', target: 'c1' }, { source: 'comp', target: 'c2' }, { source: 'comp', target: 'c3' },
+    { source: 'v2', target: 'c1' }, { source: 's1', target: 'v3' },
+    { source: 'g1', target: 'c2' }, { source: 's3', target: 'g1' },
+    { source: 'v1', target: 'c3' }, { source: 'grammar', target: 'comp' },
+    { source: 'sound', target: 'vocab' },
+  ], []);
+
+  const adj = useMemo(() => {
+    const map: Record<string, Set<string>> = {};
+    nodes.forEach(n => map[n.id] = new Set());
+    links.forEach(l => {
+      map[l.source].add(l.target);
+      map[l.target].add(l.source);
+    });
+    return map;
+  }, [nodes, links]);
+
+  const getColor = (score: number) => {
+    if (score >= 80) return { fill: '#1cb0f6', border: '#1899d6', text: 'white', shadow: 'rgba(28,176,246,0.6)' };
+    if (score >= 60) return { fill: '#ffc800', border: '#e5b400', text: 'white', shadow: 'rgba(255,200,0,0.6)' };
+    return { fill: '#ff4b4b', border: '#ea2b2b', text: 'white', shadow: 'rgba(255,75,75,0.6)' };
+  };
+
+  const isHoveredOrNeighbor = (id: string) => {
+    if (!hoveredNode) return true;
+    if (hoveredNode === id) return true;
+    return adj[hoveredNode].has(id);
+  };
+
+  const isLinkActive = (source: string, target: string) => {
+    if (!hoveredNode) return false;
+    return source === hoveredNode || target === hoveredNode;
+  };
+
+  return (
+    <svg viewBox="0 0 600 600" className="w-full h-full overflow-visible font-sans">
+      <style>{`
+        @keyframes edge-flow { from { stroke-dashoffset: 24; } to { stroke-dashoffset: 0; } }
+        .graph-flow-active { stroke-dasharray: 8 4; animation: edge-flow 1s linear infinite; stroke: #1cb0f6; stroke-width: 3; }
+        .graph-flow-idle { stroke: #e2e8f0; stroke-width: 2; }
+      `}</style>
+      
+      {links.map((link, i) => {
+        const sourceNode = nodes.find(n => n.id === link.source)!;
+        const targetNode = nodes.find(n => n.id === link.target)!;
+        const active = isLinkActive(link.source, link.target);
+        const visible = hoveredNode ? active : true;
+        
+        return (
+          <line
+            key={`link-${i}`}
+            x1={sourceNode.x} y1={sourceNode.y}
+            x2={targetNode.x} y2={targetNode.y}
+            className={`transition-all duration-300 ${active ? 'graph-flow-active' : 'graph-flow-idle'}`}
+            style={{ opacity: visible ? (active ? 0.9 : 0.4) : 0.1 }}
+          />
+        );
+      })}
+
+      {nodes.map(node => {
+        const colors = getColor(node.score);
+        const active = isHoveredOrNeighbor(node.id);
+        const hovered = hoveredNode === node.id;
+        
+        return (
+          <g 
+            key={node.id} 
+            className="cursor-pointer transition-all duration-500 ease-out"
+            style={{ 
+              opacity: active ? 1 : 0.2,
+              transform: hovered ? 'scale(1.15)' : 'scale(1)',
+              transformOrigin: `${node.x}px ${node.y}px`
+            }}
+            onMouseEnter={() => setHoveredNode(node.id)}
+            onMouseLeave={() => setHoveredNode(null)}
+          >
+            <circle 
+              cx={node.x} cy={node.y} r={node.r} 
+              fill={colors.fill} 
+              stroke={colors.border} 
+              strokeWidth={hovered ? 4 : 3}
+              className="transition-all duration-300"
+              style={{ filter: active ? `drop-shadow(0 0 10px ${colors.shadow})` : 'none' }}
+            />
+            <text 
+              x={node.x} y={node.y} 
+              textAnchor="middle" dy=".35em" 
+              fill="white" fontSize={node.type === 'core' ? 18 : 13} fontWeight="900"
+            >
+              {node.score}%
+            </text>
+            <rect 
+              x={node.x - 35} y={node.y + node.r + 4} 
+              width="70" height="20" rx="6" 
+              fill="white" fillOpacity="0.9"
+              className="pointer-events-none border border-slate-200"
+            />
+            <text 
+              x={node.x} y={node.y + node.r + 18} 
+              textAnchor="middle" 
+              fill="#64748b" fontSize="12" fontWeight="bold"
+              className="pointer-events-none"
+            >
+              {node.label}
+            </text>
+          </g>
+        );
+      })}
+    </svg>
+  );
+}
+
 export default function DictationPage() {
   const [allSnippets, setAllSnippets] = useState<Snippet[]>([])
   const [activeSnippets, setActiveSnippets] = useState<Snippet[]>([])
@@ -267,6 +410,8 @@ export default function DictationPage() {
   // AI Stats Analysis State
   const [aiReport, setAiReport] = useState<string | null>(null)
   const [isGeneratingReport, setIsGeneratingReport] = useState(false)
+  const [reportLoadingPhase, setReportLoadingPhase] = useState(0)
+  const [lastTestCount, setLastTestCount] = useState<number>(0)
 
   const [timeLeft, setTimeLeft] = useState<number | null>(null)
 
@@ -290,6 +435,56 @@ export default function DictationPage() {
   const vanityCardRef = useRef<HTMLDivElement>(null)
 
   const AUDIO_BASE_URL = "https://cdn.jsdelivr.net/gh/gaozhiyan/cet4-audios@main"
+
+  const loadFullStats = useCallback(async (userId: string) => {
+    try {
+      const { data, error } = await supabase
+        .from('scores')
+        .select('*')
+        .eq('user_id', userId)
+        .order('created_at', { ascending: false })
+        
+      if (data && !error) {
+        let totalQuestions = 0;
+        let successCount = 0;
+        let almostCount = 0;
+        let failedCount = 0;
+        
+        const validTests = data.filter(test => test.mode === 'test');
+        
+        let latestAiReport: any = null;
+        data.forEach(test => {
+          if (test.mode === 'ai_report' && !latestAiReport) {
+            latestAiReport = test.details;
+          }
+        });
+
+        validTests.forEach(test => {
+          const detailsArr = Array.isArray(test.details) ? test.details : (test.details?.answers || []);
+          if (Array.isArray(detailsArr)) {
+            detailsArr.forEach((d: any) => {
+              totalQuestions++;
+              if (d.score >= 90) successCount++;
+              else if (d.score >= 80) almostCount++;
+              else failedCount++;
+            })
+          }
+        })
+        
+        setStats({
+          totalQuestions,
+          successCount,
+          almostCount,
+          failedCount,
+          tests: validTests,
+          latestAiReport
+        })
+        setLastTestCount(validTests.length);
+      }
+    } catch (err) {
+      console.error("加载战绩失败:", err)
+    }
+  }, [supabase])
 
   const fetchDashboardStats = useCallback(async (userId: string) => {
     try {
@@ -340,6 +535,7 @@ export default function DictationPage() {
       } else {
         setUser(session.user)
         fetchDashboardStats(session.user.id)
+        loadFullStats(session.user.id)
       }
     }
     checkUser()
@@ -417,9 +613,9 @@ export default function DictationPage() {
             
             if (mistakeTexts.size > 0) {
               setCtaConfig({
-                label: `消灭 ${mistakeTexts.size} 道错题`,
-                icon: <Target className="w-6 h-6 text-white" />,
-                colorClass: 'bg-[#ff9600] hover:bg-[#e58700] border-[#e58700]',
+                label: `靶向错题 Boss战 (${mistakeTexts.size}题)`,
+                icon: <Flame className="w-6 h-6 text-white" />,
+                colorClass: 'bg-[#ff4b4b] hover:bg-[#ea2b2b] border-[#ea2b2b]',
                 action: startReviewSession
               });
               return;
@@ -870,7 +1066,7 @@ export default function DictationPage() {
 
       if (reviewSnippets.length > 0) {
         const testSnippets = reviewSnippets.sort(() => 0.5 - Math.random()).slice(0, 20);
-        setMode('test')
+        setMode('practice')
         setDifficulty('medium')
         setActiveSnippets(testSnippets)
         setCurrentIndex(0)
@@ -888,45 +1084,8 @@ export default function DictationPage() {
   const viewStats = async () => {
     setMode('stats')
     setLoadingStats(true)
-    if (user) {
-      try {
-        const { data, error } = await supabase
-          .from('scores')
-          .select('*')
-          .eq('user_id', user.id)
-          .order('created_at', { ascending: false })
-          
-        if (data && !error) {
-          let totalQuestions = 0;
-          let successCount = 0;
-          let almostCount = 0;
-          let failedCount = 0;
-          
-          const validTests = data.filter(test => test.mode === 'test');
-
-          validTests.forEach(test => {
-            const detailsArr = Array.isArray(test.details) ? test.details : (test.details?.answers || []);
-            if (Array.isArray(detailsArr)) {
-              detailsArr.forEach((d: any) => {
-                totalQuestions++;
-                if (d.score >= 90) successCount++;
-                else if (d.score >= 80) almostCount++;
-                else failedCount++;
-              })
-            }
-          })
-          
-          setStats({
-            totalQuestions,
-            successCount,
-            almostCount,
-            failedCount,
-            tests: validTests
-          })
-        }
-      } catch (err) {
-        console.error("加载战绩失败:", err)
-      }
+    if (user && !stats) {
+      await loadFullStats(user.id)
     }
     setLoadingStats(false)
   }
@@ -962,23 +1121,99 @@ export default function DictationPage() {
       return;
     }
 
-    const prompt = `你是一位专业的英语听力老师。以下是该学生最近在听写练习中的错误数据：\n\n${mistakes.map(m => `- 标准答案: "${m.expected}"\n  学生拼写: "${m.actual}"`).join('\n')}\n\n请你简明扼要地分析该学生的【主要薄弱点】（控制在50字以内，分析发音、连读或词汇拼写问题），并给出2条具体的【练习推荐】（控制在50字以内）。请用亲切、鼓励的口吻输出。无需寒暄，直接输出正文即可。`;
+    // 检查缓存
+    // 缓存失效条件：按月缓存，并且从 Supabase 获取
+    const currentMonth = `${new Date().getFullYear()}-${new Date().getMonth() + 1}`;
+    
+    const weaknessTemplates = [
+      "当前主要瓶颈在于 **{weakness}**。",
+      "分析发现，你最近在 **{weakness}** 上失分较多。",
+      "你的基础不错，但 **{weakness}** 拖了后腿。",
+      "系统定位到你的核心盲区是：**{weakness}**。"
+    ];
 
+    const planTemplates = [
+      "建议接下来的重点是：**{plan}**。",
+      "为你定制的突破策略：**{plan}**，坚持下去。",
+      "破局的关键在于：**{plan}**。",
+      "下一步的靶向训练目标：**{plan}**。"
+    ];
+
+    const encouragementTemplates = [
+      "相信自己，量变引起质变！",
+      "不要灰心，你已经比昨天更进步了！",
+      "保持这个势头，四级稳稳拿下！",
+      "突破瓶颈就在眼前，加油！"
+    ];
+
+    const renderTemplate = (data: { weakness: string, plan: string, emotion: string }) => {
+      const getRandom = (arr: string[]) => arr[Math.floor(Math.random() * arr.length)];
+      const wText = getRandom(weaknessTemplates).replace('{weakness}', data.weakness);
+      const pText = getRandom(planTemplates).replace('{plan}', data.plan);
+      const eText = getRandom(encouragementTemplates); // Ignoring emotion for simplicity, using random encouragement
+      
+      return `【当前薄弱点】：${wText}\n【下一步学习规划】：${pText}\n${eText}`;
+    };
+
+    if (stats.latestAiReport && stats.latestAiReport.report_month === currentMonth) {
+      try {
+        const cachedData = stats.latestAiReport;
+        const newReport = renderTemplate(cachedData);
+        
+        // 模拟加载动画与流式输出
+        setIsGeneratingReport(true);
+        let phase = 0;
+        setReportLoadingPhase(0);
+        
+        const phaseInterval = setInterval(() => {
+          phase++;
+          if (phase > 2) {
+            clearInterval(phaseInterval);
+            // 开始打字机效果
+            let charIndex = 0;
+            const chars = newReport.split('');
+            const typeInterval = setInterval(() => {
+              if (charIndex < chars.length) {
+                setAiReport(prev => (prev || "") + chars[charIndex]);
+                charIndex++;
+              } else {
+                clearInterval(typeInterval);
+                setIsGeneratingReport(false);
+              }
+            }, 30); // 30ms per char
+          } else {
+            setReportLoadingPhase(phase);
+          }
+        }, 1666);
+        return;
+      } catch (e) {
+        console.error("Failed to render cached JSON report", e);
+      }
+    }
+
+    const prompt = `你是一位专业的英语听力老师。以下是该学生最近在听写练习中的错误数据：\n\n${mistakes.map(m => `- 标准答案: "${m.expected}"\n  学生拼写: "${m.actual}"`).join('\n')}\n\n请你简明扼要地分析该学生的错题数据。你的回复**必须是一个合法的 JSON 对象**，并且只能包含以下三个字段，不要输出任何其他多余的文字或 Markdown 代码块：\n{\n  "weakness": "（控制在20字以内，提取最核心的发音、连读或词汇拼写问题）",\n  "plan": "（控制在20字以内，给出最具体的练习推荐动作）",\n  "emotion": "positive"\n}`;
+
+    let phaseInterval: NodeJS.Timeout | null = null;
     try {
+      setIsGeneratingReport(true);
+      setReportLoadingPhase(0);
+      phaseInterval = setInterval(() => {
+        setReportLoadingPhase(prev => (prev + 1) % 3);
+      }, 1666);
       const { data: { session } } = await supabase.auth.getSession()
       const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://ctagfkejsnelhmqygiyk.supabase.co'
       const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
       const token = session?.access_token || anonKey
 
-      const response = await fetch(`${supabaseUrl}/functions/v1/coze-proxy`, {
+      const response = await fetch(`${supabaseUrl}/functions/v1/doubao-proxy`, {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify({
-          promptType: 'custom',
-          customPrompt: prompt
+          messages: [{ role: 'user', content: prompt }],
+          stream: true
         })
       });
 
@@ -991,13 +1226,15 @@ export default function DictationPage() {
         // Setup typing queue
         const charQueue: string[] = [];
         let isTyping = false;
+        let fullReport = "";
 
         const processQueue = () => {
           if (charQueue.length > 0) {
             isTyping = true;
             const char = charQueue.shift()!;
-            setAiReport(prev => (prev || "") + char);
-            setTimeout(processQueue, 30);
+            fullReport += char;
+            // Don't setAiReport here during the initial API call, wait for JSON parsing
+            setTimeout(processQueue, 10);
           } else {
             isTyping = false;
           }
@@ -1011,12 +1248,24 @@ export default function DictationPage() {
           const lines = chunk.split('\n');
           
           for (const line of lines) {
-            if (line.startsWith('data:')) {
+            if (line.startsWith('data: ') && line.trim() !== 'data: [DONE]') {
               try {
-                const data = JSON.parse(line.slice(5));
-                if (data.event === 'message' && data.message?.content) {
+                const data = JSON.parse(line.slice(6));
+                // Handle OpenAI standard chunk format
+                if (data.choices && data.choices[0]?.delta?.content) {
+                  charQueue.push(...data.choices[0].delta.content.split(''));
+                  if (!isTyping) {
+                    if (phaseInterval) clearInterval(phaseInterval);
+                    processQueue();
+                  }
+                } 
+                // Fallback for old coze format
+                else if (data.event === 'message' && data.message?.content) {
                   charQueue.push(...data.message.content.split(''));
-                  if (!isTyping) processQueue();
+                  if (!isTyping) {
+                    if (phaseInterval) clearInterval(phaseInterval);
+                    processQueue();
+                  }
                 }
               } catch (e) {
                 // Ignore parse errors for incomplete chunks
@@ -1029,8 +1278,50 @@ export default function DictationPage() {
         while (isTyping || charQueue.length > 0) {
           await new Promise(r => setTimeout(r, 100));
         }
+        
+        // Save to cache - parse the accumulated JSON string
+        if (fullReport) {
+          try {
+            // Clean up the string if the model wrapped it in markdown code blocks
+            const cleanJsonStr = fullReport.replace(/```json/g, '').replace(/```/g, '').trim();
+            const parsedData = JSON.parse(cleanJsonStr);
+            if (parsedData.weakness && parsedData.plan) {
+              const detailsToSave = {
+                report_month: currentMonth,
+                weakness: parsedData.weakness,
+                plan: parsedData.plan,
+                emotion: parsedData.emotion || 'positive'
+              };
+
+              // Save to Supabase
+              if (user) {
+                await supabase.from('scores').insert([{
+                  user_id: user.id,
+                  score: 0,
+                  mode: 'ai_report',
+                  details: detailsToSave
+                }]);
+              }
+
+              // Update local state to prevent refetching
+              setStats((prev: any) => ({
+                ...prev,
+                latestAiReport: detailsToSave
+              }));
+
+              // Immediately render the first time using the template
+              setAiReport(renderTemplate(parsedData));
+            } else {
+              setAiReport("分析完成，但数据格式有误。");
+            }
+          } catch (e) {
+            console.error("Failed to parse AI response as JSON", e, fullReport);
+            setAiReport("抱歉，AI 返回的格式无法解析。");
+          }
+        }
       }
     } catch (err) {
+      if (phaseInterval) clearInterval(phaseInterval);
       console.error("AI 诊断生成失败:", err);
       setAiReport("抱歉，AI 诊断生成失败，请稍后再试。");
     } finally {
@@ -1419,6 +1710,8 @@ export default function DictationPage() {
           console.error("成绩保存失败:", error)
         } else {
           console.log("成绩保存成功")
+          fetchDashboardStats(user.id)
+          loadFullStats(user.id)
         }
       } catch (err) {
         console.error("记录成绩时发生异常:", err)
@@ -1538,8 +1831,8 @@ export default function DictationPage() {
           </div>
 
           <div className="flex flex-col items-center gap-12 py-8 relative">
-            {/* The winding path line */}
-            <div className="absolute top-0 bottom-0 w-2 bg-slate-200 left-1/2 -translate-x-1/2 -z-10"></div>
+            {/* The winding path line with generalization gradient */}
+            <div className="absolute top-0 bottom-0 w-2 bg-gradient-to-b from-rose-200 via-indigo-200 to-sky-200 left-1/2 -translate-x-1/2 -z-10 rounded-full"></div>
             
             {Array.from({ length: totalGroups }).map((_, groupIdx) => {
               const groupKey = `${difficulty}-group${groupIdx}`;
@@ -1549,9 +1842,11 @@ export default function DictationPage() {
               // We render 3 nodes per group (Stage 1, Stage 2, Stage 3)
               return (
                 <div id={`group-${groupIdx}`} key={groupIdx} className="flex flex-col gap-12 relative w-full items-center">
-                  <div className={`text-sm font-bold tracking-wider uppercase px-5 py-2 rounded-full flex items-center gap-2 z-10 transition-colors duration-500 ${isGroupCompleted ? 'bg-[#ffc800] text-white shadow-[0_4px_0_0_#e5b400]' : 'bg-slate-50 text-slate-400 border-2 border-slate-200'}`}>
-                    <span>单元 {groupIdx + 1}</span>
-                    {isGroupCompleted && <Trophy className="w-5 h-5 fill-current" />}
+                  <div className="flex flex-col items-center gap-2 z-10">
+                    <div className={`text-sm font-bold tracking-wider uppercase px-5 py-2 rounded-full flex items-center gap-2 transition-colors duration-500 ${isGroupCompleted ? 'bg-[#ffc800] text-white shadow-[0_4px_0_0_#e5b400]' : 'bg-white text-slate-400 border-2 border-slate-200 shadow-[0_4px_0_0_#e2e8f0]'}`}>
+                      <span>单元 {groupIdx + 1}</span>
+                      {isGroupCompleted && <Trophy className="w-5 h-5 fill-current" />}
+                    </div>
                   </div>
                   
                   {[1, 2, 3].map((stageNum) => {
@@ -1797,7 +2092,7 @@ export default function DictationPage() {
         <div className="max-w-3xl mx-auto">
           <header className="flex justify-between items-center mb-10 pb-4 border-b-2 border-slate-100">
             <h1 className="text-3xl font-extrabold text-[#58cc02] flex items-center gap-2">
-              CET-4 听力专项训练
+              航院英语-听力特训
             </h1>
             <div className="flex items-center gap-4">
               <button 
@@ -1816,17 +2111,14 @@ export default function DictationPage() {
                 <Flame className="w-6 h-6 fill-current" />
                 <span className="text-lg">{streakCount}</span>
               </button>
-              <span className="font-bold text-slate-400 hidden md:inline-block">
-                {user.user_metadata?.full_name || '同学'}
-              </span>
-              {(user?.user_metadata?.full_name?.trim() === '高志晏' || user?.user_metadata?.full_name?.trim() === '陈欣鑫') && (
+              {(user?.user_metadata?.full_name?.trim() === '高志晏' || user?.user_metadata?.full_name?.trim() === '陈欣鑫' || user?.user_metadata?.full_name?.trim() === '001' || user?.email?.startsWith('001@')) && (
                 <>
                   <button 
                     onClick={() => router.push('/teacher')}
-                    className="text-slate-400 hover:text-[#58cc02] transition-colors"
+                    className="flex items-center gap-2 text-slate-400 hover:text-[#58cc02] transition-colors font-bold"
                     title="教师管理面板"
                   >
-                    <Shield className="w-6 h-6" />
+                    <span className="hidden sm:inline">教师管理面板</span>
                   </button>
                 </>
               )}
@@ -1843,7 +2135,65 @@ export default function DictationPage() {
             <div className="space-y-4">
               {/* 紧凑的个人看板 Dashboard */}
               {user && (
-                <div className="px-2">
+                <div className="px-2 mb-6">
+                  {/* Dashboard AI Report Move up */}
+                  {stats && stats.tests && stats.tests.length > 0 && (
+                    <div className="bg-gradient-to-br from-[#f3e5f5] to-[#e1bee7] rounded-2xl p-6 shadow-sm border-b-4 border-[#ce93d8] mb-6">
+                      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
+                        <h2 className="text-xl font-extrabold text-[#4a148c] flex items-center gap-2">
+                          <Sparkles className="w-6 h-6 text-[#9c27b0]" /> AI 导师诊断
+                        </h2>
+                        {!aiReport && !isGeneratingReport && (
+                          <button 
+                            onClick={generateAiReport}
+                            className="bg-[#9c27b0] hover:bg-[#7b1fa2] text-white text-sm font-bold px-4 py-2 rounded-xl transition-colors shadow-sm active:scale-95"
+                          >
+                            生成专属学情报告
+                          </button>
+                        )}
+                      </div>
+                      
+                      {isGeneratingReport && !aiReport && (
+                        <div className="flex flex-col items-center justify-center py-6 space-y-3">
+                          <div className="w-8 h-8 border-4 border-[#ce93d8] border-t-[#9c27b0] rounded-full animate-spin"></div>
+                          <div style={{ color: '#6a1b9a', fontSize: '14px', fontWeight: 400, opacity: 1, fontFamily: 'system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif' }}>
+                            {reportLoadingPhase === 0 && "正在根据您的数据进行错题分析..."}
+                            {reportLoadingPhase === 1 && "正在使用知识图谱推荐学习路径..."}
+                            {reportLoadingPhase === 2 && "正在为您生成诊断报告..."}
+                          </div>
+                        </div>
+                      )}
+
+                      {aiReport && (
+                        <div className="bg-white rounded-xl p-5 border border-white/50 mt-4 shadow-sm" style={{ transform: 'translateZ(0)' }}>
+                          <div style={{ color: '#1e293b', fontFamily: 'system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif' }}>
+                            {aiReport.split('\n').map((line, i) => {
+                              // Filter out empty lines to prevent collapsing rendering
+                              if (!line.trim()) return null;
+                              return (
+                                <div key={i} style={{ marginBottom: '8px', lineHeight: '1.625', color: '#1e293b', fontWeight: 400, transform: 'translateZ(0)', opacity: 1, visibility: 'visible', display: 'block' }}>
+                                  {line.includes('薄弱点') ? <div style={{ display: 'inline-block', color: '#f43f5e', marginRight: '4px', fontWeight: 400 }}>🔥</div> : null}
+                                  {line.includes('推荐') || line.includes('建议') || line.includes('规划') ? <div style={{ display: 'inline-block', color: '#10b981', marginRight: '4px', fontWeight: 400 }}>🎯</div> : null}
+                                  {(!line.includes('薄弱点') && !line.includes('推荐') && !line.includes('建议') && !line.includes('规划') && line.length > 5) ? <div style={{ display: 'inline-block', color: '#fbbf24', marginRight: '4px', fontWeight: 400 }}>✨</div> : null}
+                                  <div style={{ display: 'inline' }} dangerouslySetInnerHTML={{ __html: line.replace(/\*\*(.*?)\*\*/g, '<b style="color: #4a148c; font-weight: 700;">$1</b>') }} />
+                                </div>
+                              )
+                            })}
+                          </div>
+                          {isGeneratingReport && (
+                            <div style={{ display: 'inline-block', width: '8px', height: '16px', marginLeft: '4px', backgroundColor: '#9c27b0' }} className="animate-pulse"></div>
+                          )}
+                        </div>
+                      )}
+                      
+                      {!aiReport && !isGeneratingReport && (
+                        <div style={{ color: '#6a1b9a', fontSize: '14px', marginTop: '8px', fontFamily: 'system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif', fontWeight: 400, opacity: 1, transform: 'translateZ(0)' }}>
+                            基于你最近的错题记录，分析底层发音与词汇盲区，提供靶向练习建议与学习路径规划。
+                          </div>
+                      )}
+                    </div>
+                  )}
+
                   <div className="bg-white rounded-2xl border-2 border-slate-200 p-4 flex flex-col shadow-sm hover:shadow-md transition-shadow relative overflow-hidden">
                     {/* 新手空状态覆盖层 */}
                     {estimatedScore === 0 && streakCount === 0 && todayProgress === 0 && (
@@ -1930,9 +2280,9 @@ export default function DictationPage() {
                     </div>
                     <div className="text-center md:text-left">
                       <h2 className="text-2xl font-black text-slate-700 mb-2 tracking-wide">专属专业定制舱</h2>
-                      <p className="text-slate-500 font-bold text-sm leading-relaxed max-w-lg">
+                      <div style={{ color: '#475569', fontSize: '14px', lineHeight: '1.625', maxWidth: '32rem', fontFamily: 'system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif', fontWeight: 400, opacity: 1, transform: 'translateZ(0)' }}>
                         基于您的专业方向，算法智能推荐听力材料，通过“渐进式泛化”平滑过渡至全真模考，并快速定位您的提分临界点。
-                      </p>
+                      </div>
                       <div className="mt-4 inline-flex items-center gap-2 text-[#4caf50] font-black bg-[#e8f5e9] px-4 py-2 rounded-xl">
                         开启专属定制 <ChevronRight className="w-5 h-5" />
                       </div>
@@ -1948,7 +2298,7 @@ export default function DictationPage() {
                       </div>
                       <div>
                         <h2 className="text-2xl font-extrabold text-slate-700">碎片闯关</h2>
-                        <p className="text-slate-400 font-bold mt-1 text-sm">3-5 分钟单句/小段落听写</p>
+                        <div style={{ color: '#475569', fontSize: '14px', marginTop: '4px', fontFamily: 'system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif', fontWeight: 400, opacity: 1 }}>3-5 分钟单句/小段落听写</div>
                       </div>
                     </div>
                     
@@ -1980,7 +2330,7 @@ export default function DictationPage() {
                       </div>
                       <div>
                         <h2 className="text-2xl font-extrabold text-slate-700">全真模考</h2>
-                        <p className="text-slate-400 font-bold mt-1 text-sm">30-40 分钟沉浸式测试</p>
+                        <div style={{ color: '#475569', fontSize: '14px', marginTop: '4px', fontFamily: 'system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif', fontWeight: 400, opacity: 1 }}>30-40 分钟沉浸式测试</div>
                       </div>
                     </div>
                     
@@ -2043,40 +2393,46 @@ export default function DictationPage() {
                 </DuoCard>
               </div>
 
-              <DuoCard className="flex flex-row items-center justify-between cursor-pointer hover:bg-slate-50 hover:-translate-y-1 hover:shadow-md active:translate-y-0 active:shadow-sm transition-all mb-6" onClick={() => router.push('/chat')}>
+              <DuoCard className="flex flex-row items-center justify-between cursor-pointer hover:bg-slate-50 hover:-translate-y-1 hover:shadow-md active:translate-y-0 active:shadow-sm transition-all mb-6 relative overflow-hidden" onClick={() => router.push('/chat')}>
                 <div className="flex items-center gap-4">
                   <div className="w-16 h-16 bg-[#ff4b4b] rounded-2xl flex items-center justify-center border-b-4 border-[#ea2b2b]">
                     <Sparkles className="w-8 h-8 text-white" />
                   </div>
                   <div>
-                    <h2 className="text-2xl font-extrabold text-slate-700">口语场景模拟</h2>
-                    <p className="text-slate-400 font-bold mt-1">进入场景大厅，与 AI 角色进行真实对话</p>
+                    <h2 className="text-2xl font-extrabold text-slate-700 flex items-center gap-2">
+                      口语场景模拟
+                    </h2>
+                    <div style={{ color: '#475569', fontSize: '14px', marginTop: '4px', fontFamily: 'system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif', fontWeight: 400, opacity: 1, transform: 'translateZ(0)' }}>进入场景大厅，与 AI 角色进行真实对话</div>
                   </div>
                 </div>
                 <ChevronRight className="w-8 h-8 text-slate-300" />
               </DuoCard>
 
-              <DuoCard className="flex flex-row items-center justify-between cursor-pointer hover:bg-slate-50 hover:-translate-y-1 hover:shadow-md active:translate-y-0 active:shadow-sm transition-all mb-6" onClick={() => router.push('/custom')}>
+              <DuoCard className="flex flex-row items-center justify-between cursor-pointer hover:bg-slate-50 hover:-translate-y-1 hover:shadow-md active:translate-y-0 active:shadow-sm transition-all mb-6 relative overflow-hidden" onClick={() => router.push('/custom-dictation')}>
                 <div className="flex items-center gap-4">
                   <div className="w-16 h-16 bg-[#00bcd4] rounded-2xl flex items-center justify-center border-b-4 border-[#0097a7]">
                     <Wand2 className="w-8 h-8 text-white" />
                   </div>
                   <div>
-                    <h2 className="text-2xl font-extrabold text-slate-700">AI 自定义听写</h2>
-                    <p className="text-slate-400 font-bold mt-1">上传任意英文材料，一键生成考场级听写任务</p>
+                    <h2 className="text-2xl font-extrabold text-slate-700 flex items-center gap-2">
+                      AI 自定义听写
+                    </h2>
+                    <div style={{ color: '#94a3b8', fontSize: '14px', marginTop: '4px', fontFamily: 'system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif', fontWeight: 700, opacity: 1, transform: 'translateZ(0)' }}>上传任意英文材料，一键生成考场级听写任务</div>
                   </div>
                 </div>
                 <ChevronRight className="w-8 h-8 text-slate-300" />
               </DuoCard>
 
-              <DuoCard className="flex flex-row items-center justify-between cursor-pointer hover:bg-slate-50 hover:-translate-y-1 hover:shadow-md active:translate-y-0 active:shadow-sm transition-all" onClick={() => router.push('/vocab')}>
+              <DuoCard className="flex flex-row items-center justify-between cursor-pointer hover:bg-slate-50 hover:-translate-y-1 hover:shadow-md active:translate-y-0 active:shadow-sm transition-all relative overflow-hidden" onClick={() => router.push('/vocab-test')}>
                 <div className="flex items-center gap-4">
                   <div className="w-16 h-16 bg-[#ff9600] rounded-2xl flex items-center justify-center border-b-4 border-[#e58700]">
                     <BrainCircuit className="w-8 h-8 text-white" />
                   </div>
                   <div>
-                    <h2 className="text-2xl font-extrabold text-slate-700">词汇水平</h2>
-                    <p className="text-slate-400 font-bold mt-1">5分钟精准定位你的真实词汇水平</p>
+                    <h2 className="text-2xl font-extrabold text-slate-700 flex items-center gap-2">
+                      词汇水平
+                    </h2>
+                    <div style={{ color: '#94a3b8', fontSize: '14px', marginTop: '4px', fontFamily: 'system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif', fontWeight: 700, opacity: 1, transform: 'translateZ(0)' }}>5分钟精准定位你的真实词汇水平</div>
                   </div>
                 </div>
                 <ChevronRight className="w-8 h-8 text-slate-300" />
@@ -2096,7 +2452,7 @@ export default function DictationPage() {
                   </div>
                   <div>
                     <h2 className="text-2xl font-extrabold text-slate-700">我的战绩</h2>
-                    <p className="text-slate-400 font-bold mt-1">查看历史得分与数据统计</p>
+                    <div style={{ color: '#94a3b8', fontSize: '14px', marginTop: '4px', fontFamily: 'system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif', fontWeight: 700, opacity: 1, transform: 'translateZ(0)' }}>查看历史得分与数据统计</div>
                   </div>
                 </div>
                 <ChevronRight className="w-8 h-8 text-slate-300" />
@@ -2110,7 +2466,7 @@ export default function DictationPage() {
                     </div>
                     <div>
                       <h2 className="text-xl font-extrabold text-slate-700">英雄榜</h2>
-                      <p className="text-slate-400 font-bold mt-1 text-sm">打卡排行榜</p>
+                      <div style={{ color: '#94a3b8', fontSize: '14px', marginTop: '4px', fontFamily: 'system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif', fontWeight: 700, opacity: 1, transform: 'translateZ(0)' }}>打卡排行榜</div>
                     </div>
                   </div>
                   <ChevronRight className="w-6 h-6 text-slate-300" />
@@ -2123,7 +2479,7 @@ export default function DictationPage() {
                     </div>
                     <div>
                       <h2 className="text-xl font-extrabold text-slate-700">打卡海报</h2>
-                      <p className="text-slate-400 font-bold mt-1 text-sm">分享到朋友圈</p>
+                      <div style={{ color: '#94a3b8', fontSize: '14px', marginTop: '4px', fontFamily: 'system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif', fontWeight: 700, opacity: 1, transform: 'translateZ(0)' }}>分享到朋友圈</div>
                     </div>
                   </div>
                   <ChevronRight className="w-6 h-6 text-slate-300" />
@@ -2175,58 +2531,38 @@ export default function DictationPage() {
                 </DuoCard>
               </div>
 
-              {/* AI Tutor Diagnosis Section */}
-              <div className="bg-gradient-to-br from-[#f3e5f5] to-[#e1bee7] rounded-2xl p-6 shadow-sm border-b-4 border-[#ce93d8]">
-                <div className="flex items-center justify-between mb-4">
-                  <h2 className="text-xl font-extrabold text-[#4a148c] flex items-center gap-2">
-                    <Sparkles className="w-6 h-6 text-[#9c27b0]" /> AI 导师诊断
-                  </h2>
-                  {!aiReport && !isGeneratingReport && stats.tests.length > 0 && (
-                    <button 
-                      onClick={generateAiReport}
-                      className="bg-[#9c27b0] hover:bg-[#7b1fa2] text-white text-sm font-bold px-4 py-2 rounded-xl transition-colors shadow-sm active:scale-95"
-                    >
-                      生成专属学情报告
-                    </button>
-                  )}
+              {/* Multidimensional Semantic Graph */}
+              <div className="bg-slate-50 rounded-2xl p-6 shadow-inner border-2 border-slate-100 flex flex-col md:flex-row gap-6 items-center">
+                <div className="flex-1 w-full max-w-md aspect-square relative bg-slate-800 rounded-2xl overflow-hidden shadow-xl border-4 border-slate-700">
+                  <div className="absolute inset-0 opacity-20 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at center, #ffffff 1px, transparent 1px)', backgroundSize: '20px 20px' }}></div>
+                  <EnglishKnowledgeGraph 
+                    baseScore={stats.tests.length > 0 ? Math.round(stats.tests.reduce((acc: number, t: any) => acc + t.score, 0) / stats.tests.length) : 0} 
+                    vocabScore={stats.totalQuestions > 0 ? Math.min(100, Math.round((stats.successCount / stats.totalQuestions) * 100) + 15) : 0} 
+                    centerLabel="四级" 
+                  />
                 </div>
-                
-                {isGeneratingReport && !aiReport && (
-                  <div className="flex flex-col items-center justify-center py-6 space-y-3">
-                    <div className="w-8 h-8 border-4 border-[#ce93d8] border-t-[#9c27b0] rounded-full animate-spin"></div>
-                    <p className="text-[#6a1b9a] font-bold text-sm animate-pulse">正在深度分析你最近的 20 道错题记录...</p>
+                <div className="flex-1 space-y-4">
+                  <h3 className="text-xl font-extrabold text-slate-700 flex items-center gap-2">
+                    <BrainCircuit className="w-6 h-6 text-[#1cb0f6]" /> 
+                    多维语义图谱
+                  </h3>
+                  <div style={{ color: '#64748b', fontSize: '14px', lineHeight: '1.625', fontFamily: 'system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif', fontWeight: 700, opacity: 1 }}>
+                    基于你的历史听写数据与模拟测试表现，系统为你构建了多维度的英语能力模型。从核心综合听力出发，向下拆解到词汇、语法、语音与逻辑推断。
                   </div>
-                )}
-
-                {aiReport && (
-                  <div className="bg-white/60 backdrop-blur-sm rounded-xl p-5 border border-white/50">
-                    <div className="prose prose-sm prose-p:text-slate-700 prose-strong:text-[#4a148c] max-w-none">
-                      {aiReport.split('\n').map((line, i) => (
-                        <p key={i} className="mb-2 last:mb-0 leading-relaxed">
-                          {line.includes('薄弱点') ? <span className="text-rose-500 font-bold mr-1">🔥</span> : null}
-                          {line.includes('推荐') || line.includes('建议') ? <span className="text-emerald-500 font-bold mr-1">🎯</span> : null}
-                          <span dangerouslySetInnerHTML={{ __html: line.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
-                        </p>
-                      ))}
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between p-3 bg-white rounded-xl border-2 border-slate-100">
+                      <span className="font-bold text-slate-600">综合听力预估</span>
+                      <span className="font-black text-[#1cb0f6]">{stats.tests.length > 0 ? Math.round(stats.tests.reduce((acc: number, t: any) => acc + t.score, 0) / stats.tests.length) : 0}%</span>
                     </div>
-                    {isGeneratingReport && (
-                      <span className="inline-block w-2 h-4 ml-1 bg-[#9c27b0] animate-pulse"></span>
-                    )}
+                    <div className="flex items-center justify-between p-3 bg-white rounded-xl border-2 border-slate-100">
+                      <span className="font-bold text-slate-600">词汇语料掌握</span>
+                      <span className="font-black text-[#58cc02]">{stats.totalQuestions > 0 ? Math.min(100, Math.round((stats.successCount / stats.totalQuestions) * 100) + 15) : 0}%</span>
+                    </div>
                   </div>
-                )}
-                
-                {!aiReport && !isGeneratingReport && stats.tests.length === 0 && (
-                  <p className="text-[#6a1b9a]/70 text-sm font-bold text-center py-4">
-                    需要完成至少一次测试才能生成诊断报告哦
-                  </p>
-                )}
-                
-                {!aiReport && !isGeneratingReport && stats.tests.length > 0 && (
-                  <p className="text-[#6a1b9a]/70 text-sm font-bold mt-2">
-                    基于你最近的错题记录，分析底层发音与词汇盲区，提供靶向练习建议。
-                  </p>
-                )}
+                </div>
               </div>
+
+              {/* AI Tutor Diagnosis Section Removed */}
 
               <div>
                 <h2 className="text-2xl font-extrabold text-slate-700 mb-4">历史测试</h2>
@@ -2473,11 +2809,12 @@ export default function DictationPage() {
         <button onClick={backToMenu} className="text-slate-300 hover:text-slate-400 transition-colors">
           <X className="w-8 h-8 stroke-[3]" />
         </button>
-        <div className="flex-1 h-4 bg-slate-200 rounded-full overflow-hidden">
+        <div className="flex-1 h-4 bg-slate-200 rounded-full overflow-hidden relative">
           <div 
             className="h-full bg-[#58cc02] rounded-full transition-all duration-500 ease-out"
             style={{ width: `${progress}%` }}
           />
+          <div className="absolute top-1 left-3 w-1/2 h-1 bg-white/30 rounded-full"></div>
         </div>
         {mode === 'test' && timeLeft !== null && (
           <div className={`font-extrabold text-lg px-3 py-1 rounded-xl ${timeLeft < 300 ? 'bg-red-100 text-red-500 animate-pulse' : 'bg-slate-100 text-slate-500'}`}>
@@ -2487,9 +2824,21 @@ export default function DictationPage() {
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 max-w-3xl mx-auto w-full px-4 flex flex-col pt-4 md:pt-10 pb-40">
-        <h2 className="text-2xl md:text-3xl font-extrabold text-slate-700 mb-2 text-center">
-          {mode === 'practice' ? '请听写你听到的句子' : '模拟测试进行中'}
+      <div className={`flex-1 max-w-3xl mx-auto w-full px-4 flex flex-col pt-4 md:pt-10 pb-40 ${isReviewSession ? 'bg-rose-50/30' : ''}`}>
+        {/* Professional Tag Display */}
+        {(currentSnippet.tags && currentSnippet.tags.length > 0) && (
+          <div className="flex justify-center mb-6">
+            <div className="flex flex-wrap justify-center gap-2">
+              {currentSnippet.tags.map((tag, idx) => (
+                <span key={idx} className="text-xs font-black px-3 py-1 rounded-xl border-2 text-sky-600 bg-sky-50 border-sky-200 shadow-[2px_2px_0px_#bae6fd]">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+        <h2 className={`text-2xl md:text-3xl font-extrabold mb-2 text-center flex items-center justify-center gap-2 ${isReviewSession ? 'text-rose-600 animate-pulse' : 'text-slate-700'}`}>
+          {isReviewSession ? <><Flame className="w-8 h-8 fill-current" /> 靶向错题 Boss战</> : mode === 'practice' ? '请听写你听到的句子' : '模拟测试进行中'}
         </h2>
         {currentSnippet.source && (
           <p className="text-center text-slate-400 font-bold mb-8">
@@ -2497,8 +2846,8 @@ export default function DictationPage() {
           </p>
         )}
 
-        {/* Big Play Button */}
-        <div className="flex flex-col items-center justify-center mb-12 space-y-4">
+        {/* Big Play Button - Redesigned */}
+        <div className="flex flex-col items-center justify-center mb-12 space-y-4 w-full">
           {mode === 'practice' ? (
             <>
               <audio 
@@ -2517,10 +2866,42 @@ export default function DictationPage() {
                     audioRef.current.playbackRate = playbackRate;
                   }
                 }}
-                controls
-                controlsList="nodownload"
-                className="w-full max-w-md h-12 rounded-full shadow-sm"
+                className="hidden"
               />
+              <div className="flex items-center gap-4 md:gap-6 w-full max-w-lg mb-2">
+                <button 
+                  onClick={() => {
+                    if (audioRef.current) {
+                      if (isPlaying) {
+                        audioRef.current.pause();
+                      } else {
+                        audioRef.current.play();
+                      }
+                    }
+                  }}
+                  className="w-16 h-16 rounded-2xl bg-[#1cb0f6] text-white flex items-center justify-center border-b-4 border-[#1899d6] hover:bg-[#1899d6] transition-all active:translate-y-1 active:border-b-0 flex-none shadow-sm"
+                >
+                  {isPlaying ? <Pause className="w-8 h-8 fill-current" /> : <Play className="w-8 h-8 fill-current ml-1" />}
+                </button>
+                <div className="bg-white border-2 border-slate-200 border-b-4 rounded-2xl px-6 py-3 flex-1 flex items-center justify-between shadow-sm h-16">
+                  <div className="flex items-center gap-[4px] h-6">
+                    {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map(i => (
+                      <div 
+                        key={i} 
+                        className={`w-1 bg-[#1cb0f6] rounded-full transition-all duration-300 ${isPlaying ? 'animate-pulse' : ''}`} 
+                        style={{ 
+                          height: isPlaying ? `${40 + Math.random() * 60}%` : '20%',
+                          animationDelay: `${i * 0.1}s`,
+                          animationDuration: '0.8s'
+                        }}
+                      ></div>
+                    ))}
+                  </div>
+                  <span className="text-slate-400 font-bold text-sm tracking-wider">
+                    {isPlaying ? 'PLAYING...' : 'READY'}
+                  </span>
+                </div>
+              </div>
               <div className="flex gap-3">
                 {[0.5, 1, 1.5].map(rate => (
                   <button
@@ -2551,7 +2932,7 @@ export default function DictationPage() {
               />
               <button
                 onClick={handlePlayPause}
-                className="w-24 h-24 bg-[#1cb0f6] hover:bg-[#1899d6] rounded-full flex items-center justify-center shadow-[0_6px_0_0_#1899d6] active:shadow-[0_0px_0_0_#1899d6] active:translate-y-[6px] transition-all"
+                className="w-24 h-24 bg-[#1cb0f6] hover:bg-[#1899d6] rounded-3xl flex items-center justify-center border-b-[6px] border-[#1899d6] active:border-b-0 active:translate-y-[6px] transition-all flex-none shadow-sm"
               >
                 {isPlaying ? (
                   <Pause className="w-10 h-10 text-white fill-current" />
@@ -2593,7 +2974,7 @@ export default function DictationPage() {
         {mode === 'practice' && currentStage === 1 ? (
           <div className="w-full flex flex-col gap-6">
             {/* Selected Words Area */}
-            <div className={`w-full bg-white border-2 rounded-2xl p-4 min-h-[120px] transition-all shadow-[0_4px_0_0_rgba(226,232,240,1)] flex flex-wrap content-start gap-2 ${showAnswer ? 'bg-slate-50 border-slate-200' : 'border-slate-200'}`}>
+            <div className={`w-full bg-white border-2 border-b-4 rounded-2xl p-4 min-h-[120px] transition-all flex flex-wrap content-start gap-2 ${showAnswer ? 'bg-slate-50 border-slate-200' : 'border-slate-200'}`}>
               {((answers[currentIndex] as number[]) || []).map((id, idx) => {
                 const wordObj = getScrambledWords(currentSnippet.text).find(w => w.id === id);
                 if (!wordObj) return null;
@@ -2639,7 +3020,7 @@ export default function DictationPage() {
             </div>
           </div>
         ) : mode === 'practice' && currentStage === 2 ? (
-          <div className={`w-full bg-white border-2 rounded-2xl p-6 text-xl font-bold outline-none min-h-[160px] transition-all shadow-[0_4px_0_0_rgba(226,232,240,1)] ${showAnswer ? 'bg-slate-50 border-slate-200' : 'border-slate-200'}`}>
+          <div className={`w-full bg-white border-2 border-b-4 rounded-2xl p-6 text-xl font-bold outline-none min-h-[160px] transition-all ${showAnswer ? 'bg-slate-50 border-slate-200' : 'border-slate-200'}`}>
             <div className="flex flex-wrap items-center gap-y-6 gap-x-4 leading-loose">
               {getMaskedStructure(currentSnippet.text).map((item, idx) => {
                 if (item.type === 'text') {
@@ -2658,10 +3039,10 @@ export default function DictationPage() {
                     <input
                       type="text"
                       data-input-idx={item.id}
-                      className={`border-b-2 bg-transparent text-center font-bold outline-none transition-colors px-1 tracking-wider
+                      className={`text-center font-black outline-none transition-colors px-1 tracking-wider rounded-t-lg mx-1
                         ${showAnswer 
-                          ? isCorrectWord ? 'border-[#58cc02] text-[#58cc02]' : 'border-[#ea2b2b] text-[#ea2b2b]' 
-                          : 'border-slate-300 focus:border-[#1cb0f6] text-[#1cb0f6]'}`}
+                          ? isCorrectWord ? 'border-b-2 border-dashed border-[#58cc02] text-[#58cc02] bg-transparent' : 'border-b-4 border-[#ea2b2b] text-[#ea2b2b] bg-red-50' 
+                          : 'border-b-4 border-slate-300 bg-slate-50 focus:border-[#1cb0f6] text-[#1cb0f6]'}`}
                       style={{ width: `calc(${Math.max((item.coreWord || '').length, currentVal.length, 2)}ch + 4px)` }}
                       value={showAnswer ? item.coreWord : currentVal}
                       disabled={showAnswer}
@@ -2696,8 +3077,8 @@ export default function DictationPage() {
           </div>
         ) : (
           <textarea
-            className={`w-full bg-white border-2 rounded-2xl p-6 text-xl font-bold text-slate-700 outline-none resize-none min-h-[160px] transition-all shadow-[0_4px_0_0_rgba(226,232,240,1)]
-              ${showAnswer ? 'bg-slate-50 border-slate-200 text-slate-500 shadow-none' : 'border-slate-200 focus:border-[#1cb0f6] focus:bg-white'}`}
+            className={`w-full bg-white border-2 border-b-4 rounded-2xl p-6 text-xl font-bold text-slate-700 outline-none resize-none min-h-[160px] transition-all
+              ${showAnswer ? 'bg-slate-50 border-slate-200 text-slate-500' : 'border-slate-200 focus:border-[#1cb0f6] focus:bg-white'}`}
             placeholder="在这里输入..."
             value={typeof answers[currentIndex] === 'string' ? answers[currentIndex] : ''}
             onChange={(e) => handleInput(e.target.value)}
@@ -2734,8 +3115,16 @@ export default function DictationPage() {
               )}
             </div>
           ) : (
-            <div className="flex-1 w-full md:w-auto">
-              <div className="hidden md:block"></div>
+            <div className="flex-1 w-full md:w-auto flex items-center justify-start">
+              {!showAnswer && mode === 'practice' && (
+                <button 
+                  onClick={() => alert('AI 伴随指导正在启动...')}
+                  className="hidden md:flex items-center gap-2 font-extrabold text-slate-400 bg-white border-2 border-slate-200 border-b-4 px-6 py-3 rounded-2xl hover:bg-slate-50 transition-all active:translate-y-1 active:border-b-0 uppercase tracking-widest text-sm"
+                >
+                  <Bot className="w-6 h-6 text-[#1cb0f6]" />
+                  <span>AI 伴随指导</span>
+                </button>
+              )}
             </div>
           )}
 
