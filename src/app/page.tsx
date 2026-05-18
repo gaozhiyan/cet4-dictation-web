@@ -2137,7 +2137,7 @@ export default function DictationPage() {
               {user && (
                 <div className="px-2 mb-6">
                   {/* Dashboard AI Report Move up */}
-                  {stats && stats.tests && stats.tests.length > 0 && (
+                  {(
                     <div className="bg-gradient-to-br from-[#f3e5f5] to-[#e1bee7] rounded-2xl p-6 shadow-sm border-b-4 border-[#ce93d8] mb-6">
                       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
                         <h2 className="text-xl font-extrabold text-[#4a148c] flex items-center gap-2">
@@ -2145,7 +2145,13 @@ export default function DictationPage() {
                         </h2>
                         {!aiReport && !isGeneratingReport && (
                           <button 
-                            onClick={generateAiReport}
+                            onClick={() => {
+                              if (!stats || !stats.tests || stats.tests.length === 0) {
+                                setAiReport("您暂时还没有答题数据，请先答题。")
+                                return
+                              }
+                              generateAiReport()
+                            }}
                             className="bg-[#9c27b0] hover:bg-[#7b1fa2] text-white text-sm font-bold px-4 py-2 rounded-xl transition-colors shadow-sm active:scale-95"
                           >
                             生成专属学情报告
