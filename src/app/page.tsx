@@ -2407,6 +2407,7 @@ export default function DictationPage() {
                   <div>
                     <h2 className="text-2xl font-extrabold text-slate-700 flex items-center gap-2">
                       口语场景模拟
+                      <span className="text-xs font-bold text-slate-500 bg-slate-100 px-2 py-1 rounded-md border border-slate-200 ml-2 tracking-normal">开发中</span>
                     </h2>
                     <div style={{ color: '#475569', fontSize: '14px', marginTop: '4px', fontFamily: 'system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif', fontWeight: 400, opacity: 1, transform: 'translateZ(0)' }}>进入场景大厅，与 AI 角色进行真实对话</div>
                   </div>
@@ -2414,7 +2415,7 @@ export default function DictationPage() {
                 <ChevronRight className="w-8 h-8 text-slate-300" />
               </DuoCard>
 
-              <DuoCard className="flex flex-row items-center justify-between cursor-pointer hover:bg-slate-50 hover:-translate-y-1 hover:shadow-md active:translate-y-0 active:shadow-sm transition-all mb-6 relative overflow-hidden" onClick={() => router.push('/custom-dictation')}>
+              <DuoCard className="flex flex-row items-center justify-between cursor-pointer hover:bg-slate-50 hover:-translate-y-1 hover:shadow-md active:translate-y-0 active:shadow-sm transition-all mb-6 relative overflow-hidden" onClick={() => router.push('/custom')}>
                 <div className="flex items-center gap-4">
                   <div className="w-16 h-16 bg-[#00bcd4] rounded-2xl flex items-center justify-center border-b-4 border-[#0097a7]">
                     <Wand2 className="w-8 h-8 text-white" />
@@ -2429,7 +2430,7 @@ export default function DictationPage() {
                 <ChevronRight className="w-8 h-8 text-slate-300" />
               </DuoCard>
 
-              <DuoCard className="flex flex-row items-center justify-between cursor-pointer hover:bg-slate-50 hover:-translate-y-1 hover:shadow-md active:translate-y-0 active:shadow-sm transition-all relative overflow-hidden" onClick={() => router.push('/vocab-test')}>
+              <DuoCard className="flex flex-row items-center justify-between cursor-pointer hover:bg-slate-50 hover:-translate-y-1 hover:shadow-md active:translate-y-0 active:shadow-sm transition-all relative overflow-hidden" onClick={() => router.push('/vocab')}>
                 <div className="flex items-center gap-4">
                   <div className="w-16 h-16 bg-[#ff9600] rounded-2xl flex items-center justify-center border-b-4 border-[#e58700]">
                     <BrainCircuit className="w-8 h-8 text-white" />
