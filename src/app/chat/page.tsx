@@ -981,6 +981,21 @@ Do not include any other text, actions, or translations. Keep the dialogue extre
             </button>
           </header>
 
+          {/* 开发中提示 Banner */}
+          <div className="px-5 mb-4 shrink-0">
+            <div className="bg-amber-100 border-2 border-amber-300 rounded-xl p-3 flex items-start gap-3">
+              <div className="mt-0.5">
+                <Coffee className="w-5 h-5 text-amber-600" />
+              </div>
+              <div>
+                <h3 className="text-amber-800 font-bold text-sm">口语模块开发中</h3>
+                <p className="text-amber-700/80 text-xs font-medium mt-0.5">
+                  我们正在全力打造基于大模型的沉浸式口语对话体验，当前界面为预览版，完整功能即将上线！
+                </p>
+              </div>
+            </div>
+          </div>
+
           {/* Hero Card */}
           <div className="px-5 mb-6 shrink-0">
             <div className="bg-gradient-to-br from-[#00BFA5] to-[#009688] rounded-[24px] p-6 text-white shadow-md relative overflow-hidden">
